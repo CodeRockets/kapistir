@@ -443,22 +443,8 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TpH-u1-Gj2" userLabel="view Right">
                                 <rect key="frame" x="188" y="0.0" width="187" height="623"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcs-Ir-LjF">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="gcs-Ir-LjF">
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="623"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdr-O7-WjC" userLabel="contentViewRight">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="623"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="jdr-O7-WjC" firstAttribute="top" secondItem="gcs-Ir-LjF" secondAttribute="top" id="0TA-PU-dlW"/>
-                                            <constraint firstAttribute="bottom" secondItem="jdr-O7-WjC" secondAttribute="bottom" id="3kr-1E-mEY"/>
-                                            <constraint firstAttribute="trailing" secondItem="jdr-O7-WjC" secondAttribute="trailing" id="I0c-bq-cC2"/>
-                                            <constraint firstItem="jdr-O7-WjC" firstAttribute="centerX" secondItem="gcs-Ir-LjF" secondAttribute="centerX" id="RLU-HE-PWF"/>
-                                            <constraint firstItem="jdr-O7-WjC" firstAttribute="centerY" secondItem="gcs-Ir-LjF" secondAttribute="centerY" id="m8b-iP-ctc"/>
-                                            <constraint firstItem="jdr-O7-WjC" firstAttribute="leading" secondItem="gcs-Ir-LjF" secondAttribute="leading" id="udM-ji-K8h"/>
-                                        </constraints>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -475,10 +461,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="73"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0to-C8-ulT">
-                                            <rect key="frame" x="331" y="29" width="36" height="36"/>
-                                            <state key="normal" image="cancel"/>
-                                        </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="raised-fist" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-hX-Awp">
                                             <rect key="frame" x="8" y="31" width="42" height="42"/>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -496,6 +478,13 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ei-zq-c1j">
+                                            <rect key="frame" x="14" y="8" width="30" height="30"/>
+                                            <state key="normal" title="-&gt;"/>
+                                            <connections>
+                                                <action selector="addRight:" destination="Rwj-YY-zko" eventType="touchUpInside" id="gZu-FK-4bo"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="uBi-hX-Awp" firstAttribute="leading" secondItem="n9D-8B-oHf" secondAttribute="leading" constant="8" id="2j4-ZP-tcz"/>
@@ -594,7 +583,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cancel" width="128" height="128"/>
         <image name="coke_logo" width="500" height="500"/>
         <image name="pepsi_logo" width="500" height="500"/>
         <image name="plus-1" width="128" height="128"/>

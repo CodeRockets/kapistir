@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     @IBAction func create() {
         
-        if let _ = FBSDKAccessToken.currentAccessToken().userID {
+        if let _ = FBSDKAccessToken.currentAccessToken()?.userID {
             self.performSegueWithIdentifier("gotoCreate", sender: self)
         }
         else{

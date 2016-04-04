@@ -9,7 +9,7 @@
 import UIKit
 import ALCameraViewController
 
-class CreateViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
     
     @IBOutlet weak var viewLeft: UIView!
     
@@ -17,13 +17,26 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBOutlet weak var imgLeft: UIImageView!
     
-    @IBOutlet weak var imgRight: UIImageView!
+    @IBOutlet weak var scrollViewRight: UIScrollView! {
+        didSet{
+            print("didiset")
+            scrollViewRight.contentSize = imageViewRight.frame.size
+            scrollViewRight.delegate = self
+            scrollViewRight.minimumZoomScale = 0.03
+            scrollViewRight.maximumZoomScale = 2.0
+        }
+    }
     
-    @IBOutlet weak var imgTapLeft: UIImageView!
+    private var imageViewRight = UIImageView()
     
-    @IBOutlet weak var imgTapRight: UIImageView!
-    
-    @IBOutlet weak var scrollViewRight: UIScrollView!
+    private var imageRight: UIImage? {
+        get { return imageViewRight.image }
+        set {
+            imageViewRight.image = newValue // change image
+            imageViewRight.sizeToFit()      // resize image with sizes
+            scrollViewRight?.contentSize = imageViewRight.frame.size
+        }
+    }
     
     @IBAction func cancel() {
         print("cancel")
@@ -35,8 +48,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBOutlet weak var imgProfile: UIImageView!
     
-    private var imageViewRight = UIImageView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,9 +58,12 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         tapRecLeft.addTarget(self, action: "tappedLeft")
         imgLeft.addGestureRecognizer(tapRecLeft)
         
-        let tapRecRight = UITapGestureRecognizer()
-        tapRecRight.addTarget(self, action: "tappedRight")
-        scrollViewRight.addGestureRecognizer(tapRecRight)
+        //let tapRecRight = UITapGestureRecognizer()
+        //tapRecRight.addTarget(self, action: "tappedRight")
+        //scrollViewRight.addGestureRecognizer(tapRecRight)
+        
+        //
+        scrollViewRight.addSubview(imageViewRight)
     }
 
     func tappedLeft(){
@@ -58,6 +72,15 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     func tappedRight(){
         self.getImage()
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        print("zooming")
+        return imageViewRight
+    }
+    
+    @IBAction func addRight(sender: UIButton) {
+        self.tappedRight()
     }
     
     func getImage() {
@@ -79,6 +102,9 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
             let cameraViewController = ALCameraViewController(croppingEnabled: true) { image in
                 // self.imageTarget.image = image
                 // scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tileableImage.png"]];
+                self.imageRight = image
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
             
             self.presentViewController(cameraViewController, animated: true, completion: nil)
@@ -88,6 +114,8 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         print("didFinishPickingImage")
+        
+        self.imageRight = image
         
         self.dismissViewControllerAnimated(true, completion:nil)
     }
