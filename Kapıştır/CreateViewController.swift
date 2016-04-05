@@ -11,19 +11,67 @@ import ALCameraViewController
 
 class CreateViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
     
+    var target = 0
+    
+    @IBAction func cancel(sender: RoundedImageButton) {
+        print("cancel")
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func add(sender: RoundedImageButton) {
+        let croppedLeft = crop(image: self.imageLeft!, targetScrollView: self.scrollViewLeft)
+        let croppedRight = crop(image: self.imageRight!, targetScrollView: self.scrollViewRight)
+
+        print("\(croppedLeft.size)")
+        print("\(croppedRight.size)")
+    }
+    
+    func crop(image originalImage: UIImage, targetScrollView: UIScrollView) -> UIImage {
+        // Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)
+        let contextImage: UIImage = UIImage(CGImage: originalImage.CGImage!)
+        
+        let posX: CGFloat
+        let posY: CGFloat
+        let width: CGFloat
+        let height: CGFloat
+        
+        posX = targetScrollView.contentOffset.x
+        posY = targetScrollView.contentOffset.y
+        width = targetScrollView.bounds.width
+        height = targetScrollView.bounds.height
+        
+        let rect: CGRect = CGRectMake(posX, posY, width, height)
+        
+        // Create bitmap image from context using the rect
+        let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, rect)!
+        
+        // Create a new image based on the imageRef and rotate back to the original orientation
+        let image: UIImage = UIImage(CGImage: imageRef, scale: originalImage.scale, orientation: originalImage.imageOrientation)
+        
+        return image
+    }
+    
     @IBOutlet weak var viewLeft: UIView!
     
     @IBOutlet weak var viewRight: UIView!
     
-    @IBOutlet weak var imgLeft: UIImageView!
+    private var imageViewLeft = UIImageView()
     
-    @IBOutlet weak var scrollViewRight: UIScrollView! {
+    private var imageLeft: UIImage? {
+        get { return imageViewLeft.image }
+        set {
+            imageViewLeft.image = newValue // change image
+            imageViewLeft.sizeToFit()      // resize image with sizes
+            scrollViewLeft?.contentSize = imageViewLeft.frame.size
+        }
+    }
+    
+    @IBOutlet weak var scrollViewLeft: UIScrollView! {
         didSet{
-            print("didiset")
-            scrollViewRight.contentSize = imageViewRight.frame.size
-            scrollViewRight.delegate = self
-            scrollViewRight.minimumZoomScale = 0.03
-            scrollViewRight.maximumZoomScale = 2.0
+            scrollViewLeft.contentSize = imageViewLeft.frame.size
+            scrollViewLeft.delegate = self
+            scrollViewLeft.minimumZoomScale = 0.03
+            scrollViewLeft.maximumZoomScale = 2.0
         }
     }
     
@@ -38,11 +86,14 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
-    @IBAction func cancel() {
-        print("cancel")
+    @IBOutlet weak var scrollViewRight: UIScrollView! {
+        didSet{
+            scrollViewRight.contentSize = imageViewRight.frame.size
+            scrollViewRight.delegate = self
+            scrollViewRight.minimumZoomScale = 0.03
+            scrollViewRight.maximumZoomScale = 2.0
+        }
     }
-    
-    @IBOutlet weak var viewHeader: UIVisualEffectView!
     
     @IBOutlet weak var lblTags: UILabel!
     
@@ -51,39 +102,38 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imgProfile.layer.cornerRadius = imgProfile.bounds.size.width / 2
-        imgProfile.clipsToBounds = true
+        self.imgProfile.layer.cornerRadius = imgProfile.bounds.size.width / 2
+        self.imgProfile.clipsToBounds = true
         
-        let tapRecLeft = UITapGestureRecognizer()
-        tapRecLeft.addTarget(self, action: "tappedLeft")
-        imgLeft.addGestureRecognizer(tapRecLeft)
+        self.scrollViewRight.addSubview(imageViewRight)
+        self.scrollViewLeft.addSubview(imageViewLeft)
         
-        //let tapRecRight = UITapGestureRecognizer()
-        //tapRecRight.addTarget(self, action: "tappedRight")
-        //scrollViewRight.addGestureRecognizer(tapRecRight)
-        
-        //
-        scrollViewRight.addSubview(imageViewRight)
+        let tapRight = UITapGestureRecognizer(target: self, action: Selector("tappedRight"))
+        let tapLeft = UITapGestureRecognizer(target: self, action: Selector("tappedLeft"))
+        self.scrollViewRight.addGestureRecognizer(tapRight)
+        self.scrollViewLeft.addGestureRecognizer(tapLeft)
     }
 
     func tappedLeft(){
+        target = 1
         self.getImage()
     }
 
     func tappedRight(){
+        target = 0
         self.getImage()
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        print("zooming")
-        return imageViewRight
-    }
-    
-    @IBAction func addRight(sender: UIButton) {
-        self.tappedRight()
+        if scrollView == self.scrollViewLeft {
+            return self.imageViewLeft
+        } else{
+            return self.imageViewRight
+        }
     }
     
     func getImage() {
+        
         #if (arch(i386) || arch(x86_64))
             
             print("simülatör getImage")
@@ -100,9 +150,12 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
             print("non-simülatör getImage")
             
             let cameraViewController = ALCameraViewController(croppingEnabled: true) { image in
-                // self.imageTarget.image = image
-                // scrollView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tileableImage.png"]];
-                self.imageRight = image
+
+                if self.target == 0 {
+                    self.imageRight = image
+                } else{
+                    self.imageLeft = image
+                }
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
@@ -115,7 +168,11 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         print("didFinishPickingImage")
         
-        self.imageRight = image
+        if target == 0 {
+            self.imageRight = image
+        } else{
+            self.imageLeft = image
+        }
         
         self.dismissViewControllerAnimated(true, completion:nil)
     }
