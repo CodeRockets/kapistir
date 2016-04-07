@@ -14,9 +14,6 @@ class MainTableViewController: UITableViewController {
     
     var questions = [Question]()
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +29,6 @@ class MainTableViewController: UITableViewController {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self.tableView.reloadData()
         }
-
     }
     
     // MARK: - Table view data source
@@ -48,24 +44,25 @@ class MainTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         /*if !onboarded && indexPath.row < 2 {
-        let cell = tableView.dequeueReusableCellWithIdentifier("OnboardingCell", forIndexPath: indexPath) as! OnboardingTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("OnboardingCell", forIndexPath: indexPath) as! OnboardingTableViewCell
         
-        // Configure the cell...
+            // Configure the cell...
         
-        cell.lblTitle.text = "Kapıştır'a Hoşgeldiniz!"
-        cell.lblText.text = indexPath.row == 0 ? "Bu ilk sayfa" : "Bu diğer sayfa"
+            cell.lblTitle.text = "Kapıştır'a Hoşgeldiniz!"
+            cell.lblText.text = indexPath.row == 0 ? "Bu ilk sayfa" : "Bu diğer sayfa"
         
-        return cell
+            return cell
         }
         else{*/
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! QuestionTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! QuestionTableViewCell
            
-        cell.question = self.questions[indexPath.row]
+            cell.question = self.questions[indexPath.row]
         
-        QuestionTableViewCell.configureTableCell(cell.question, cell: &cell)
+            QuestionTableViewCell.configureTableCell(cell.question, cell: &cell)
             
-        return cell
+            return cell
+        //}
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
