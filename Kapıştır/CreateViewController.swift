@@ -9,7 +9,15 @@
 import UIKit
 import ALCameraViewController
 
-class CreateViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
+class CreateViewController:
+    UIViewController,
+    UIImagePickerControllerDelegate,
+    UINavigationControllerDelegate,
+    UIScrollViewDelegate,
+    NSURLSessionDelegate,
+    NSURLSessionTaskDelegate,
+    NSURLSessionDataDelegate
+{
     
     var target = 0
     
@@ -24,6 +32,43 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
 
         print("\(croppedLeft.size)")
         print("\(croppedRight.size)")
+        
+        uploadImages()
+    }
+
+    func uploadImages() {
+        print("uploading")
+        
+        let imageData = UIImageJPEGRepresentation(self.imageLeft!, 1)
+
+        let uploadScriptUrl = NSURL(string: App.URLs.uploadImage)
+        let request = NSMutableURLRequest(URL: uploadScriptUrl!)
+        request.HTTPMethod = "POST"
+        request.setValue("Keep-Alive",          forHTTPHeaderField: "Connection")
+        request.setValue(App.Keys.clientId,     forHTTPHeaderField: "x-voter-client-id")
+        request.setValue(App.Keys.version,      forHTTPHeaderField: "x-voter-version")
+        request.setValue(App.Keys.installation, forHTTPHeaderField: "x-voter-installation")
+        
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+        
+        let task = session.uploadTaskWithRequest(request, fromData: imageData!)
+        task.resume()
+    }
+    
+    func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
+        print("error uploading image \(error))")
+    }
+    
+    func URLSession(session: NSURLSession, task: NSURLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
+        let uploadProgress:Float = Float(totalBytesSent) / Float(totalBytesExpectedToSend)
+        print("didSendBodyData \(uploadProgress)")
+    }
+    
+    
+    func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: (NSURLSessionResponseDisposition) -> Void) {
+        // 
+        print("response \(response)")
     }
     
     func crop(image originalImage: UIImage, targetScrollView: UIScrollView) -> UIImage {
@@ -112,6 +157,15 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         let tapLeft = UITapGestureRecognizer(target: self, action: Selector("tappedLeft"))
         self.scrollViewRight.addGestureRecognizer(tapRight)
         self.scrollViewLeft.addGestureRecognizer(tapLeft)
+        
+        self.imageLeft = UIImage(named: "tap")
+        self.imageRight = UIImage(named: "tap")
+        
+        let offsetX: CGFloat = max( (self.scrollViewLeft.bounds.size.width - self.scrollViewLeft.contentSize.width) * 0.5, 0.0)
+        let offsetY: CGFloat = max( (self.scrollViewLeft.bounds.size.height - self.scrollViewLeft.contentSize.height) * 0.5, 0.0)
+        
+        self.imageViewLeft.center = CGPointMake(self.scrollViewLeft.contentSize.width * 0.5 + offsetX, self.scrollViewLeft.contentSize.height * 0.5 + offsetY)
+        self.imageViewRight.center = CGPointMake(self.scrollViewRight.contentSize.width * 0.5 + offsetX, self.scrollViewRight.contentSize.height * 0.5 + offsetY)
     }
 
     func tappedLeft(){

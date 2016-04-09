@@ -17,6 +17,7 @@ struct App {
     struct URLs {
         static var backendEndpoint: String!
         static var getQuestionsUrl = "question/fetch/1"
+        static var uploadImage = "question/image"
     }
     
     struct Keys {
@@ -39,6 +40,7 @@ struct App {
             App.Keys.installation = installation!
             App.Keys.version = version!
             App.URLs.getQuestionsUrl = backendEndpoint! + App.URLs.getQuestionsUrl
+            App.URLs.uploadImage = backendEndpoint! + App.URLs.uploadImage
             
             print("app setting loaded \(clientId), \(installation), \(version)")
         }

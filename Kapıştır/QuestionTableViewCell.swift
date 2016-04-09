@@ -91,8 +91,8 @@ class QuestionTableViewCell: UITableViewCell {
         
         // label oluştur
         
-        let heightA = self.viewLeft.frame.size.height * CGFloat(question.ratioA) - 88
-        let heightB = self.viewRight.frame.size.height * CGFloat(question.ratioB) - 88
+        let heightA = 40 + (self.viewLeft.frame.size.height-40-88) * CGFloat(question.ratioA)
+        let heightB = 40 + (self.viewRight.frame.size.height-40-88) * CGFloat(question.ratioB)
         
         print("A: \(self.question.optionACount), B: \(self.question.optionBCount), Tot: \(question.totalAnswerCount), RatA: \(question.ratioA), RatB: \(question.ratioB), HA: \(heightA), HB: \(heightB)")
         

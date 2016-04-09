@@ -20,6 +20,11 @@ class MainViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func gotoProfile(sender: AnyObject) {
+        self.performSegueWithIdentifier("gotoProfile", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
