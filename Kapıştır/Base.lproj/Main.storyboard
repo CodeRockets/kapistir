@@ -290,37 +290,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_img" translatesAutoresizingMaskIntoConstraints="NO" id="YzO-um-tsz">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="252"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="252" id="o4o-iy-e0W"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CRx-vW-j1t">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="252"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TE3-yb-uag">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="252"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rz3-mi-pTi" customClass="RoundedImageButton" customModule="Kapıs_tır" customModuleProvider="target">
-                                            <rect key="frame" x="127" y="66" width="120" height="120"/>
+                                            <rect key="frame" x="127" y="22" width="120" height="120"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="YYr-Nq-hWx"/>
                                                 <constraint firstAttribute="height" constant="120" id="ndo-XX-hWi"/>
                                             </constraints>
                                             <state key="normal" image="profile_img"/>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evren Yortuçboylu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve0-74-65g">
-                                            <rect key="frame" x="8" y="201" width="359" height="36"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IQ-IC-Ne2" customClass="RoundedImageButton" customModule="Kapıs_tır" customModuleProvider="target">
-                                            <rect key="frame" x="335" y="20" width="32" height="32"/>
+                                            <rect key="frame" x="323" y="28" width="32" height="32"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="1YU-2z-mzL"/>
                                                 <constraint firstAttribute="height" constant="32" id="7Fh-je-xxU"/>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="w4k-Mh-a1Q"/>
                                                 <constraint firstAttribute="width" constant="32" id="xQt-1M-VF1"/>
                                             </constraints>
                                             <state key="normal" image="cancel"/>
@@ -329,21 +318,26 @@
                                                 <action selector="close:" destination="cTH-VZ-KtC" eventType="touchUpInside" id="XTp-Q2-Rew"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evren Yortuçboylu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve0-74-65g">
+                                            <rect key="frame" x="8" y="157" width="359" height="46"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="46" id="28B-Bo-yej"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="ve0-74-65g" secondAttribute="trailing" constant="8" id="84T-wM-i9O"/>
-                                        <constraint firstItem="ve0-74-65g" firstAttribute="top" secondItem="Rz3-mi-pTi" secondAttribute="bottom" constant="15" id="Ahg-Z7-TWB"/>
                                         <constraint firstItem="ve0-74-65g" firstAttribute="leading" secondItem="TE3-yb-uag" secondAttribute="leading" constant="8" id="DzO-aP-kOT"/>
                                         <constraint firstItem="Rz3-mi-pTi" firstAttribute="centerX" secondItem="TE3-yb-uag" secondAttribute="centerX" id="HAX-Ra-Twz"/>
-                                        <constraint firstAttribute="bottom" secondItem="ve0-74-65g" secondAttribute="bottom" constant="15" id="IEF-tk-Acc"/>
-                                        <constraint firstItem="7IQ-IC-Ne2" firstAttribute="top" secondItem="TE3-yb-uag" secondAttribute="top" constant="20" id="P2w-ld-hx6"/>
-                                        <constraint firstItem="Rz3-mi-pTi" firstAttribute="top" secondItem="TE3-yb-uag" secondAttribute="top" constant="66" id="fQA-39-0XY"/>
-                                        <constraint firstAttribute="trailing" secondItem="7IQ-IC-Ne2" secondAttribute="trailing" constant="8" id="ieE-wD-5rr"/>
+                                        <constraint firstItem="ve0-74-65g" firstAttribute="top" secondItem="Rz3-mi-pTi" secondAttribute="bottom" constant="15" id="IE6-Wd-TQO"/>
+                                        <constraint firstItem="7IQ-IC-Ne2" firstAttribute="top" secondItem="TE3-yb-uag" secondAttribute="top" constant="28" id="P2w-ld-hx6"/>
+                                        <constraint firstItem="Rz3-mi-pTi" firstAttribute="top" secondItem="TE3-yb-uag" secondAttribute="top" constant="22" id="fQA-39-0XY"/>
+                                        <constraint firstAttribute="trailing" secondItem="7IQ-IC-Ne2" secondAttribute="trailing" constant="20" id="ieE-wD-5rr"/>
                                     </constraints>
                                 </view>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="252" id="LWj-kd-HpU"/>
-                                </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
@@ -354,10 +348,15 @@
                             <constraint firstAttribute="trailing" secondItem="YzO-um-tsz" secondAttribute="trailing" id="QRg-To-Z1V"/>
                             <constraint firstItem="YzO-um-tsz" firstAttribute="leading" secondItem="GsM-3l-92w" secondAttribute="leading" id="Qcb-Jd-aYT"/>
                             <constraint firstItem="YzO-um-tsz" firstAttribute="top" secondItem="GsM-3l-92w" secondAttribute="top" id="RWY-u8-L8B"/>
+                            <constraint firstItem="52R-tz-yXE" firstAttribute="top" secondItem="CRx-vW-j1t" secondAttribute="bottom" id="blq-r0-awe"/>
                             <constraint firstItem="CRx-vW-j1t" firstAttribute="leading" secondItem="GsM-3l-92w" secondAttribute="leading" id="gcw-os-JVq"/>
+                            <constraint firstItem="52R-tz-yXE" firstAttribute="top" secondItem="YzO-um-tsz" secondAttribute="bottom" id="t10-OU-QvW"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="imProfileTop" destination="fQA-39-0XY" id="p54-lN-4cv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="96X-B1-pb7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
