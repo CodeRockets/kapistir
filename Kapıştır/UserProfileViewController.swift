@@ -8,25 +8,42 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController {
+class UserProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var imProfileTop: NSLayoutConstraint!
     
+    var logoutButton : FBSDKLoginButton = FBSDKLoginButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let xPos = (self.view.bounds.size.width - 200)/2
+        let yPos = self.view.bounds.size.height - 60
+        logoutButton.frame = CGRectMake(xPos, yPos, 200, 40)
+        self.view.addSubview(logoutButton)
+        logoutButton.delegate = self
     }
-    
     
     @IBAction func close(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
-       
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("user logged out")
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
-
+    func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {
+        //
+        return true
+    }
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        if error != nil {
+            //handle error
+        } else {
+            print("button result \(result)")
+        }
     }
     
     override func viewDidLayoutSubviews() {

@@ -306,8 +306,17 @@
                                             </constraints>
                                             <state key="normal" image="profile_img"/>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evren Yortuçboylu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve0-74-65g">
+                                            <rect key="frame" x="8" y="157" width="359" height="46"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="46" id="28B-Bo-yej"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7IQ-IC-Ne2" customClass="RoundedImageButton" customModule="Kapıs_tır" customModuleProvider="target">
-                                            <rect key="frame" x="323" y="28" width="32" height="32"/>
+                                            <rect key="frame" x="20" y="28" width="32" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="7Fh-je-xxU"/>
                                                 <constraint firstAttribute="width" constant="32" id="xQt-1M-VF1"/>
@@ -318,15 +327,6 @@
                                                 <action selector="close:" destination="cTH-VZ-KtC" eventType="touchUpInside" id="XTp-Q2-Rew"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evren Yortuçboylu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve0-74-65g">
-                                            <rect key="frame" x="8" y="157" width="359" height="46"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="46" id="28B-Bo-yej"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="ve0-74-65g" secondAttribute="trailing" constant="8" id="84T-wM-i9O"/>
@@ -335,7 +335,7 @@
                                         <constraint firstItem="ve0-74-65g" firstAttribute="top" secondItem="Rz3-mi-pTi" secondAttribute="bottom" constant="15" id="IE6-Wd-TQO"/>
                                         <constraint firstItem="7IQ-IC-Ne2" firstAttribute="top" secondItem="TE3-yb-uag" secondAttribute="top" constant="28" id="P2w-ld-hx6"/>
                                         <constraint firstItem="Rz3-mi-pTi" firstAttribute="top" secondItem="TE3-yb-uag" secondAttribute="top" constant="22" id="fQA-39-0XY"/>
-                                        <constraint firstAttribute="trailing" secondItem="7IQ-IC-Ne2" secondAttribute="trailing" constant="20" id="ieE-wD-5rr"/>
+                                        <constraint firstItem="7IQ-IC-Ne2" firstAttribute="leading" secondItem="TE3-yb-uag" secondAttribute="leading" constant="20" id="g4V-GA-unH"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="light"/>
@@ -469,7 +469,7 @@
         <!--Create View Controller-->
         <scene sceneID="n2K-1J-pHL">
             <objects>
-                <viewController id="Rwj-YY-zko" customClass="CreateViewController" customModule="Kapıs_tır" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateViewController" id="Rwj-YY-zko" customClass="CreateViewController" customModule="Kapıs_tır" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aoJ-2v-udk"/>
                         <viewControllerLayoutGuide type="bottom" id="neI-Ji-dZ6"/>
@@ -657,8 +657,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seni tanıyamadık." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6r8-bd-ycw">
-                                <rect key="frame" x="16" y="28" width="343" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tanıyamadım?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6r8-bd-ycw">
+                                <rect key="frame" x="16" y="86" width="343" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="TVg-7g-K9T"/>
                                 </constraints>
@@ -666,8 +666,19 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kapıştı'ınızı oluşturabilmek için giriş yapmanız gerekmektedir." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vJ-Q4-BJ0">
-                                <rect key="frame" x="16" y="77" width="343" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp4-Pu-DdY">
+                                <rect key="frame" x="172" y="280" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="eYT-sA-8Z3"/>
+                                    <constraint firstAttribute="width" constant="30" id="jTi-Au-Oqn"/>
+                                </constraints>
+                                <state key="normal" title="İptal"/>
+                                <connections>
+                                    <action selector="cancelLogin:" destination="YXB-eX-UcL" eventType="touchUpInside" id="7tb-Jp-Q09"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kapıştırma oluşturabilmek için Facebook hesabın ile giriş yap!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vJ-Q4-BJ0">
+                                <rect key="frame" x="16" y="135" width="343" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -675,12 +686,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vp4-Pu-DdY" firstAttribute="top" secondItem="1vJ-Q4-BJ0" secondAttribute="bottom" constant="104" id="7BU-Qa-UbW"/>
                             <constraint firstItem="6r8-bd-ycw" firstAttribute="leading" secondItem="vjE-yI-RsA" secondAttribute="leadingMargin" id="PwT-Ma-fve"/>
                             <constraint firstAttribute="trailing" secondItem="1vJ-Q4-BJ0" secondAttribute="trailing" constant="16" id="Rw6-I4-8uW"/>
                             <constraint firstItem="1vJ-Q4-BJ0" firstAttribute="top" secondItem="6r8-bd-ycw" secondAttribute="bottom" constant="8" id="YaN-gJ-g1A"/>
                             <constraint firstItem="6r8-bd-ycw" firstAttribute="trailing" secondItem="vjE-yI-RsA" secondAttribute="trailingMargin" id="Yxl-aU-OZV"/>
+                            <constraint firstItem="vp4-Pu-DdY" firstAttribute="centerX" secondItem="vjE-yI-RsA" secondAttribute="centerX" id="lz1-tR-7tF"/>
                             <constraint firstItem="1vJ-Q4-BJ0" firstAttribute="leading" secondItem="vjE-yI-RsA" secondAttribute="leading" constant="16" id="o4x-MM-pvs"/>
-                            <constraint firstItem="6r8-bd-ycw" firstAttribute="top" secondItem="IRn-A1-7iO" secondAttribute="bottom" constant="8" symbolic="YES" id="v2q-n9-VxP"/>
+                            <constraint firstItem="6r8-bd-ycw" firstAttribute="top" secondItem="IRn-A1-7iO" secondAttribute="bottom" constant="66" id="v2q-n9-VxP"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

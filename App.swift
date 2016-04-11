@@ -18,6 +18,7 @@ struct App {
         static var backendEndpoint: String!
         static var getQuestionsUrl = "question/fetch/1"
         static var uploadImage = "question/image"
+        static var saveUser = "user"
     }
     
     struct Keys {

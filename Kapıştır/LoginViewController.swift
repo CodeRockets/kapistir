@@ -14,10 +14,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
 
     var loginView : FBSDKLoginButton = FBSDKLoginButton()
     
+    
+    @IBAction func cancelLogin(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loginView.frame = CGRectMake(0, 0, 200, 40)
+        let xPos = (self.view.bounds.size.width - 200)/2
+        loginView.frame = CGRectMake(xPos, 210, 200, 40)
+        loginView.titleLabel?.text = "Facebook ile giriş yap!"
         
         self.view.addSubview(loginView)
         loginView.readPermissions = ["public_profile", "email", "user_friends","user_birthday"]
@@ -26,6 +33,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     }
 
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        
+        
+        print("Login button result: \(result)")
+        
         if error != nil {
             //handle error
         } else {
@@ -73,7 +84,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                 "profileImageUrl": result["picture"]!!["data"]!!["url"] as! String
             ]
             
+            print("fb login \(userInfo)")
+            
             UserStore.facebookLogin(userInfo)
+            
+            self.dismissViewControllerAnimated(false, completion: { () -> Void in
+                NSNotificationCenter.defaultCenter().postNotificationName("onUserLogIn", object: nil)
+            })
         }
     }
     
@@ -85,4 +102,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         //
     }
+    
+    
 }

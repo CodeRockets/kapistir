@@ -20,7 +20,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    
     @IBAction func gotoProfile(sender: AnyObject) {
         self.performSegueWithIdentifier("gotoProfile", sender: self)
     }
@@ -32,5 +31,14 @@ class MainViewController: UIViewController {
         
         //self.viewUserLogin.layer.cornerRadius = 10
         //self.viewUserLogin.clipsToBounds = true
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userLogIn", name: "onUserLogIn", object: nil)
+        
+        let token = FBSDKAccessToken.currentAccessToken()?.tokenString
+        print(token)
+    }
+    
+    func userLogIn(){
+        self.performSegueWithIdentifier("gotoCreate", sender: self)
     }
 }
