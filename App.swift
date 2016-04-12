@@ -42,6 +42,8 @@ struct App {
             App.Keys.version = version!
             App.URLs.getQuestionsUrl = backendEndpoint! + App.URLs.getQuestionsUrl
             App.URLs.uploadImage = backendEndpoint! + App.URLs.uploadImage
+            App.URLs.saveUser = backendEndpoint! + App.URLs.saveUser
+
             
             print("app setting loaded \(clientId), \(installation), \(version)")
         }

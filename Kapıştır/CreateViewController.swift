@@ -8,15 +8,13 @@
 
 import UIKit
 import ALCameraViewController
+import Alamofire
 
 class CreateViewController:
     UIViewController,
     UIImagePickerControllerDelegate,
     UINavigationControllerDelegate,
-    UIScrollViewDelegate,
-    NSURLSessionDelegate,
-    NSURLSessionTaskDelegate,
-    NSURLSessionDataDelegate
+    UIScrollViewDelegate
 {
     
     var target = 0
@@ -33,42 +31,41 @@ class CreateViewController:
         print("\(croppedLeft.size)")
         print("\(croppedRight.size)")
         
-        uploadImages()
-    }
 
-    func uploadImages() {
-        print("uploading")
+    }
+    
+    func uploadImage() {
+        let headers = [
+            "Authorization": "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "x-voter-client-id": App.Keys.clientId!,
+            "x-voter-version": App.Keys.version!,
+            "x-voter-installation": App.Keys.installation!
+        ]
         
-        let imageData = UIImageJPEGRepresentation(self.imageLeft!, 1)
+        let fileURL = NSBundle.mainBundle().URLForResource("bestof15device", withExtension: "png")
+        
+        Alamofire.upload(.POST, App.URLs.uploadImage, headers:headers,
+                         multipartFormData: { multipartFormData in
+                            multipartFormData.appendBodyPart(fileURL: fileURL!, name: "file")
+            },
+                         encodingMemoryThreshold: Manager.MultipartFormDataEncodingMemoryThreshold,
+                         encodingCompletion: { encodingResult in
+                            switch encodingResult {
+                            case .Success(let upload, _, _):
+                                upload.progress { bytesRead, totalBytesRead, totalBytesExpectedToRead in
+                                    let ratio = Double(totalBytesRead)/Double(totalBytesExpectedToRead)
+                                    print("uploaded : \(ratio*100)")
+                                }
+                                upload.responseJSON { result in
+                                    debugPrint(result)
+                                }
+                            case .Failure(let encodingError):
+                                print(encodingError)
+                            }
+        })
+        
 
-        let uploadScriptUrl = NSURL(string: App.URLs.uploadImage)
-        let request = NSMutableURLRequest(URL: uploadScriptUrl!)
-        request.HTTPMethod = "POST"
-        request.setValue("Keep-Alive",          forHTTPHeaderField: "Connection")
-        request.setValue(App.Keys.clientId,     forHTTPHeaderField: "x-voter-client-id")
-        request.setValue(App.Keys.version,      forHTTPHeaderField: "x-voter-version")
-        request.setValue(App.Keys.installation, forHTTPHeaderField: "x-voter-installation")
-        
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
-        
-        let task = session.uploadTaskWithRequest(request, fromData: imageData!)
-        task.resume()
-    }
-    
-    func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
-        print("error uploading image \(error))")
-    }
-    
-    func URLSession(session: NSURLSession, task: NSURLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
-        let uploadProgress:Float = Float(totalBytesSent) / Float(totalBytesExpectedToSend)
-        print("didSendBodyData \(uploadProgress)")
-    }
-    
-    
-    func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: (NSURLSessionResponseDisposition) -> Void) {
-        // 
-        print("response \(response)")
     }
     
     func crop(image originalImage: UIImage, targetScrollView: UIScrollView) -> UIImage {
@@ -153,8 +150,8 @@ class CreateViewController:
         self.scrollViewRight.addSubview(imageViewRight)
         self.scrollViewLeft.addSubview(imageViewLeft)
         
-        let tapRight = UITapGestureRecognizer(target: self, action: Selector("tappedRight"))
-        let tapLeft = UITapGestureRecognizer(target: self, action: Selector("tappedLeft"))
+        let tapRight = UITapGestureRecognizer(target: self, action: #selector(CreateViewController.tappedRight))
+        let tapLeft = UITapGestureRecognizer(target: self, action: #selector(CreateViewController.tappedLeft))
         self.scrollViewRight.addGestureRecognizer(tapRight)
         self.scrollViewLeft.addGestureRecognizer(tapLeft)
         

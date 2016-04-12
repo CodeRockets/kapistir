@@ -11,9 +11,11 @@ import Kingfisher
 
 struct User {
     var userName: String
+    var userId: String
+    
     var profileImageUrl: String
     var facebookId: String
-    var facebookToken: String
     
+    //var facebookToken: String
     // var score: Int = 0
 }

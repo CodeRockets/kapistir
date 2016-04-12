@@ -72,7 +72,7 @@ struct Api {
         prefetcher.start()
     }
     
-    static func saveUser(facebookApiToken: String, errorCallback: ()-> Void, successCallback: ()-> Void) {
+    static func saveUser(facebookApiToken: String, errorCallback: ()-> Void, successCallback: (loggedUser: User)-> Void) {
         
         /*
         response
@@ -94,16 +94,30 @@ struct Api {
         
         */
         
+        
+        /*
+        
         let url = NSURL(string: App.URLs.saveUser)
         let request = NSMutableURLRequest(URL: url!)
-        request.setValue("application/json",    forHTTPHeaderField: "Accept")
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
         request.setValue(App.Keys.clientId,     forHTTPHeaderField: "x-voter-client-id")
         request.setValue(App.Keys.version,      forHTTPHeaderField: "x-voter-version")
         request.setValue(App.Keys.installation, forHTTPHeaderField: "x-voter-installation")
         
+        let postParams:[String: AnyObject] = ["token": facebookApiToken]
+        
+        let requestBody = try! NSJSONSerialization.dataWithJSONObject(postParams, options:  NSJSONWritingOptions(rawValue:0))
+        request.HTTPBody = requestBody
+            
+        print("fbToken \(facebookApiToken)")
+        
         NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             
             if error != nil {
+                print("error \(error)")
                 errorCallback()
             }
             
@@ -116,6 +130,14 @@ struct Api {
                     
                     let data = jsonData["data"] as! NSDictionary
                     
+                    let loggedUser = User(
+                        userName: data["name"] as! String,
+                        userId: data["id"] as! String,
+                        profileImageUrl: data["profile_img"] as! String,
+                        facebookId: data["facebook_id"] as! String
+                    )
+                    
+                    successCallback(loggedUser: loggedUser)
                     
                 }
                 else{
@@ -127,8 +149,8 @@ struct Api {
                 errorCallback()
             }
             
-            }.resume()
-
+        }.resume()
+        */
     }
 
     

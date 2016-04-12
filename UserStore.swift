@@ -10,7 +10,7 @@ import Foundation
 
 class UserStore{
     
-    typealias callback = ()-> Void
+    typealias callback = (loggedUser: User)-> Void
     
     private static var _user: User!
     
@@ -24,7 +24,7 @@ class UserStore{
     
     private static func publishUpdate(){
         for block in self._callbacks {
-            block()
+            block(loggedUser: self._user)
         }
     }
     
@@ -33,16 +33,24 @@ class UserStore{
         self.publishUpdate()
     }
     
-    static func facebookLogin(userInfo: [String: String]) {
+    static func facebookLogin(facebookApiToken:String) {
         
-        let user = User(
+        /*let user = User(
             userName: userInfo["userName"]!,
             profileImageUrl: userInfo["profileImageUrl"]!,
             facebookId: userInfo["facebookId"]!,
             facebookToken: "" //userInfo["facebookToken"]!
-        )
+        )*/
         
-        self.updateUser(user)
+        Api.saveUser(facebookApiToken,
+            errorCallback: { () -> Void in
+                // hata
+                print("user save error")
+            
+            },
+            successCallback: { (loggedUser) -> Void in
+                self.updateUser(loggedUser)
+            })
     }
     
     private static func save(user: User) {

@@ -9,11 +9,11 @@
 import UIKit
 import CoreData
 import Kingfisher
+import Pulsator
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
-
-    var loginView : FBSDKLoginButton = FBSDKLoginButton()
     
+    var loginView : FBSDKLoginButton = FBSDKLoginButton()
     
     @IBAction func cancelLogin(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -30,8 +30,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         loginView.readPermissions = ["public_profile", "email", "user_friends","user_birthday"]
         
         loginView.delegate = self
+        
+        UserStore.registerUpdateCallback(userSaved)
+        
+        
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
         
@@ -44,9 +52,22 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         }
     }
     
+    func userSaved(loggedUser: User) {
+        NSNotificationCenter.defaultCenter().postNotificationName("onUserLogIn", object: loggedUser as? AnyObject)
+        
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
     func returnUserData()
     {
+        let token = FBSDKAccessToken.currentAccessToken()?.tokenString
+        
+        print("user will be save \(token)")
+        
+        UserStore.facebookLogin(token!)
+        
         /*
+        data fetched from facebook
         fetched user: {
             "age_range" =     {
                 min = 21;
@@ -66,8 +87,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
             };
         }
         */
-        
-        FBSDKGraphRequest(
+
+        /*FBSDKGraphRequest(
             graphPath: "me",
             parameters: ["fields":"id,interested_in,gender,birthday,email,age_range,name,picture.width(480).height(480)"]
         )
@@ -91,7 +112,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
             self.dismissViewControllerAnimated(false, completion: { () -> Void in
                 NSNotificationCenter.defaultCenter().postNotificationName("onUserLogIn", object: nil)
             })
-        }
+        }*/
     }
     
     func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {

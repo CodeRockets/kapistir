@@ -4,10 +4,11 @@
  use_frameworks!
 
 target 'Kapıştır' do
-	pod 'ChameleonFramework/Swift'
+    pod 'ChameleonFramework/Swift'
     pod 'Kingfisher', '~> 2.1'
     pod 'ALCameraViewController'
     pod 'MBProgressHUD', '~> 0.9.2'
+    pod 'Alamofire', '~> 3.3'
 end
 
 target 'KapıştırTests' do
