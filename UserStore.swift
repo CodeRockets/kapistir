@@ -12,7 +12,7 @@ class UserStore{
     
     typealias callback = (loggedUser: User)-> Void
     
-    private static var _user: User!
+    static var _user: User!
     
     private static var _callbacks = [callback]()
     
@@ -31,26 +31,6 @@ class UserStore{
     static func updateUser(user: User){
         self._user = user
         self.publishUpdate()
-    }
-    
-    static func facebookLogin(facebookApiToken:String) {
-        
-        /*let user = User(
-            userName: userInfo["userName"]!,
-            profileImageUrl: userInfo["profileImageUrl"]!,
-            facebookId: userInfo["facebookId"]!,
-            facebookToken: "" //userInfo["facebookToken"]!
-        )*/
-        
-        Api.saveUser(facebookApiToken,
-            errorCallback: { () -> Void in
-                // hata
-                print("user save error")
-            
-            },
-            successCallback: { (loggedUser) -> Void in
-                self.updateUser(loggedUser)
-            })
     }
     
     private static func save(user: User) {

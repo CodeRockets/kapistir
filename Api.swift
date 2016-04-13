@@ -8,6 +8,8 @@
 
 import Foundation
 import Kingfisher
+import Alamofire
+import SwiftyJSON
 
 struct Api {
     
@@ -74,6 +76,41 @@ struct Api {
     
     static func saveUser(facebookApiToken: String, errorCallback: ()-> Void, successCallback: (loggedUser: User)-> Void) {
         
+        let headers = [
+           "x-voter-client-id": "asd123",
+           "x-voter-version":   "1",
+           "x-voter-installation": "asd123"
+        ]
+        
+        let params = [
+            "token": facebookApiToken
+        ]
+        
+        Alamofire.request(.POST, App.URLs.saveUser, parameters: params, headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    let json = JSON(data)
+                    
+                    print("user saved, json response:  \(json)")
+                    
+                    let user = User(
+                        userName: json["name"].stringValue,
+                        userId: json["id"].stringValue,
+                        profileImageUrl: json["profile_img"].stringValue,
+                        facebookId: json["facebook_id"].stringValue
+                    )
+                    
+                    successCallback(loggedUser: user)
+                    
+                    break
+                case .Failure(_):
+                    errorCallback()
+                }
+                        
+                // print(response)
+        }
+        
         /*
         response
         {
@@ -95,63 +132,7 @@ struct Api {
         */
         
         
-        /*
-        
-        let url = NSURL(string: App.URLs.saveUser)
-        let request = NSMutableURLRequest(URL: url!)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        request.setValue(App.Keys.clientId,     forHTTPHeaderField: "x-voter-client-id")
-        request.setValue(App.Keys.version,      forHTTPHeaderField: "x-voter-version")
-        request.setValue(App.Keys.installation, forHTTPHeaderField: "x-voter-installation")
-        
-        let postParams:[String: AnyObject] = ["token": facebookApiToken]
-        
-        let requestBody = try! NSJSONSerialization.dataWithJSONObject(postParams, options:  NSJSONWritingOptions(rawValue:0))
-        request.HTTPBody = requestBody
-            
-        print("fbToken \(facebookApiToken)")
-        
-        NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            
-            if error != nil {
-                print("error \(error)")
-                errorCallback()
             }
-            
-            do {
-                
-                print("user save \(response)")
-                
-                if let responseData = data {
-                    let jsonData = try NSJSONSerialization.JSONObjectWithData(responseData, options: .MutableContainers)
-                    
-                    let data = jsonData["data"] as! NSDictionary
-                    
-                    let loggedUser = User(
-                        userName: data["name"] as! String,
-                        userId: data["id"] as! String,
-                        profileImageUrl: data["profile_img"] as! String,
-                        facebookId: data["facebook_id"] as! String
-                    )
-                    
-                    successCallback(loggedUser: loggedUser)
-                    
-                }
-                else{
-                    errorCallback()
-                }
-                
-                
-            } catch {
-                errorCallback()
-            }
-            
-        }.resume()
-        */
-    }
 
     
 }

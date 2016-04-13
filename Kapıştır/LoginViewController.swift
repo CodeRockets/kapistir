@@ -31,7 +31,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         
         loginView.delegate = self
         
-        UserStore.registerUpdateCallback(userSaved)
+        // UserStore.registerUpdateCallback(userSaved)
         
         
     }
@@ -53,9 +53,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     }
     
     func userSaved(loggedUser: User) {
-        NSNotificationCenter.defaultCenter().postNotificationName("onUserLogIn", object: loggedUser as? AnyObject)
-        
-        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     func returnUserData()
@@ -64,55 +61,25 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         
         print("user will be save \(token)")
         
-        UserStore.facebookLogin(token!)
-        
-        /*
-        data fetched from facebook
-        fetched user: {
-            "age_range" =     {
-                min = 21;
-            };
-            birthday = "04/28/1984";
-            email = "yortucboylu@outlook.com";
-            gender = male;
-            id = 10153896019412696;
-            name = "Evren Yortu\U00e7boylu";
-            picture =     {
-                data =         {
-                    height = 480;
-                    "is_silhouette" = 0;
-                    url = "https://scontent.xx.fbcdn.net/hprofile-xat1/v/t1.0-1/p480x480/11949472_10153473987572696_3503959071618892326_n.jpg?oh=2429bf184dc01e4d11a5786a3e75d161&oe=57985189";
-                    width = 480;
-                };
-            };
-        }
-        */
-
-        /*FBSDKGraphRequest(
-            graphPath: "me",
-            parameters: ["fields":"id,interested_in,gender,birthday,email,age_range,name,picture.width(480).height(480)"]
-        )
-        .startWithCompletionHandler { (connection, result, error) -> Void in
-            
-            if error != nil {
-                print("login error \(error)")
-                return
-            }
+        Api.saveUser(token!,
+            errorCallback: { () -> Void in
+                // hata
+                print("user save error")
                 
-            let userInfo = [
-                "facebookId" : result.valueForKey("id") as! String,
-                "userName" : result.valueForKey("name") as! String,
-                "profileImageUrl": result["picture"]!!["data"]!!["url"] as! String
-            ]
-            
-            print("fb login \(userInfo)")
-            
-            UserStore.facebookLogin(userInfo)
-            
-            self.dismissViewControllerAnimated(false, completion: { () -> Void in
-                NSNotificationCenter.defaultCenter().postNotificationName("onUserLogIn", object: nil)
+            },
+            successCallback: { (loggedUser) -> Void in
+                
+                UserStore.updateUser(loggedUser)
+                
+                print("user saved, will unwind")
+                
+                dispatch_async(dispatch_get_main_queue()){
+                   self.dismissViewControllerAnimated(true, completion: {
+                        self.performSegueWithIdentifier("userDidLogin", sender: self)
+                   })
+                    //self.performSegueWithIdentifier("userDidLogin", sender: self)
+                }
             })
-        }*/
     }
     
     func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {

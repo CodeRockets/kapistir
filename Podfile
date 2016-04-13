@@ -9,6 +9,7 @@ target 'Kapıştır' do
     pod 'ALCameraViewController'
     pod 'MBProgressHUD', '~> 0.9.2'
     pod 'Alamofire', '~> 3.3'
+    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end
 
 target 'KapıştırTests' do
