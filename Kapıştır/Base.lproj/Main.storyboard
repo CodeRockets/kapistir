@@ -684,6 +684,13 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="baj-Ah-mVM">
+                                <rect key="frame" x="171" y="226" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="gfM-cP-eVh"/>
+                                    <constraint firstAttribute="width" constant="32" id="jU5-Bh-UBJ"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -694,12 +701,19 @@
                             <constraint firstItem="6r8-bd-ycw" firstAttribute="trailing" secondItem="vjE-yI-RsA" secondAttribute="trailingMargin" id="Yxl-aU-OZV"/>
                             <constraint firstItem="vp4-Pu-DdY" firstAttribute="centerX" secondItem="vjE-yI-RsA" secondAttribute="centerX" id="lz1-tR-7tF"/>
                             <constraint firstItem="1vJ-Q4-BJ0" firstAttribute="leading" secondItem="vjE-yI-RsA" secondAttribute="leading" constant="16" id="o4x-MM-pvs"/>
+                            <constraint firstItem="baj-Ah-mVM" firstAttribute="centerX" secondItem="vjE-yI-RsA" secondAttribute="centerX" id="qMg-Rg-KWe"/>
+                            <constraint firstItem="baj-Ah-mVM" firstAttribute="top" secondItem="1vJ-Q4-BJ0" secondAttribute="bottom" constant="50" id="sBb-Ss-vHf"/>
                             <constraint firstItem="6r8-bd-ycw" firstAttribute="top" secondItem="IRn-A1-7iO" secondAttribute="bottom" constant="66" id="v2q-n9-VxP"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="baj-Ah-mVM" id="bbi-sS-ezg"/>
+                        <outlet property="btnCancel" destination="vp4-Pu-DdY" id="bHw-IA-eeF"/>
+                        <outlet property="lblText" destination="1vJ-Q4-BJ0" id="znu-Oa-2uZ"/>
+                        <outlet property="lblTitle" destination="6r8-bd-ycw" id="g7V-YN-SxJ"/>
                         <segue destination="jFb-ZH-pKM" kind="unwind" identifier="userDidLogin" unwindAction="userDidLogIn:" id="GXa-gx-9sP"/>
+                        <segue destination="Rwj-YY-zko" kind="show" identifier="gotoCreateFromLogin" id="4pP-yH-UM9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWt-bS-8i9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -717,4 +731,7 @@
         <image name="raised-fist" width="361" height="500"/>
         <image name="swipe up" width="224" height="230"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="4pP-yH-UM9"/>
+    </inferredMetricsTieBreakers>
 </document>

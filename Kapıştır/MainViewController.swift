@@ -32,17 +32,23 @@ class MainViewController: UIViewController {
         
         let token = FBSDKAccessToken.currentAccessToken()?.tokenString
         print(token)
+        
+        Publisher.subscibe("user/loggedin", callback: { data in
+            print("user did login callback")
+            
+            dispatch_async(dispatch_get_main_queue()){
+                self.performSegueWithIdentifier("gotoCreate", sender: self)
+            }
+        })
     }
     
     @IBAction func userDidLogIn(segue:UIStoryboardSegue){
         
         print("unwinded segue")
         
-        dispatch_async(dispatch_get_main_queue()){
-            
-            self.performSegueWithIdentifier("gotoCreate", sender: self)
-            
-        }
+        //dispatch_async(dispatch_get_main_queue()){
+        //    self.performSegueWithIdentifier("gotoCreate", sender: self)
+        //}
         
         /*KingfisherManager.sharedManager.retrieveImageWithURL(
             NSURL(string: UserStore._user.profileImageUrl)!,

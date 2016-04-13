@@ -15,6 +15,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     
     var loginView : FBSDKLoginButton = FBSDKLoginButton()
     
+    @IBOutlet weak var lblTitle: UILabel!
+    
+    @IBOutlet weak var lblText: UILabel!
+    
+    @IBOutlet weak var btnCancel: UIButton!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBAction func cancelLogin(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -24,7 +32,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         
         let xPos = (self.view.bounds.size.width - 200)/2
         loginView.frame = CGRectMake(xPos, 210, 200, 40)
-        loginView.titleLabel?.text = "Facebook ile giriş yap!"
         
         self.view.addSubview(loginView)
         loginView.readPermissions = ["public_profile", "email", "user_friends","user_birthday"]
@@ -42,7 +49,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
-        
         print("Login button result: \(result)")
         
         if error != nil {
@@ -52,38 +58,36 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         }
     }
     
-    func userSaved(loggedUser: User) {
-    }
-    
-    func returnUserData()
-    {
+    func returnUserData() {
         let token = FBSDKAccessToken.currentAccessToken()?.tokenString
         
-        print("user will be save \(token)")
+        lblTitle.text = "Başarılı!"
+        lblText.text = "Kayıt tamamlanıyor!"
         
         Api.saveUser(token!,
             errorCallback: { () -> Void in
                 // hata
                 print("user save error")
-                
             },
             successCallback: { (loggedUser) -> Void in
                 
                 UserStore.updateUser(loggedUser)
                 
-                print("user saved, will unwind")
+                print("user saved")
                 
-                dispatch_async(dispatch_get_main_queue()){
-                   self.dismissViewControllerAnimated(true, completion: {
-                        self.performSegueWithIdentifier("userDidLogin", sender: self)
-                   })
-                    //self.performSegueWithIdentifier("userDidLogin", sender: self)
-                }
+                self.dismissViewControllerAnimated(false, completion:  {
+                    Publisher.publish("user/loggedin", data: nil)
+                })
             })
     }
     
     func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {
-        //
+        
+        self.activityIndicator.startAnimating()
+        self.activityIndicator.hidden = false
+        self.loginView.hidden = true
+        self.btnCancel.hidden = true
+        
         return true
     }
     
