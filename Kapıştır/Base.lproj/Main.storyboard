@@ -501,15 +501,6 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYe-Pl-2EO">
                                         <rect key="frame" x="0.0" y="0.0" width="188" height="623"/>
                                     </scrollView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yükleniyor %40" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOc-KD-QHS" userLabel="loadingRatioLeft">
-                                        <rect key="frame" x="0.0" y="577" width="188" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="dxb-tP-5xT"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <visualEffectView opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oFL-Bx-LVP" userLabel="loaderLeft">
                                         <rect key="frame" x="0.0" y="601" width="188" height="22"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KHw-Rj-QGM">
@@ -521,6 +512,15 @@
                                         </constraints>
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yükleniyor %40" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOc-KD-QHS" userLabel="loadingRatioLeft">
+                                        <rect key="frame" x="0.0" y="577" width="188" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="dxb-tP-5xT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -606,16 +606,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="623"/>
                                         <color key="backgroundColor" red="0.88699622856196869" green="0.98849507045517815" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </scrollView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yükleniyor %65" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhF-dN-hz7" userLabel="loadingRatioRight">
-                                        <rect key="frame" x="0.0" y="577" width="187" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="eYK-cG-Xmf"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="wPg-wD-6cd"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <visualEffectView opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fts-f3-b8T" userLabel="loaderRight">
                                         <rect key="frame" x="1" y="601" width="186" height="22"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hGG-5f-sKq">
@@ -627,6 +617,16 @@
                                         </constraints>
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yükleniyor %65" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhF-dN-hz7" userLabel="loadingRatioRight">
+                                        <rect key="frame" x="0.0" y="577" width="187" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="eYK-cG-Xmf"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="wPg-wD-6cd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="fhF-dN-hz7" secondAttribute="trailing" id="3LW-to-R4S"/>
@@ -716,11 +716,17 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="imgProfile" destination="GYE-xY-wS8" id="AXx-Oc-CHB"/>
+                        <outlet property="lblLoaderLeftBottom" destination="z1L-b1-kFC" id="dUk-tR-L1E"/>
+                        <outlet property="lblLoaderRightBottom" destination="5k1-Jj-zB8" id="dnV-bT-eB5"/>
                         <outlet property="lblTags" destination="D5K-Oa-wnd" id="BVb-dt-tgb"/>
+                        <outlet property="loaderLeftHeight" destination="fJI-rK-cS7" id="TCh-cw-zLF"/>
+                        <outlet property="loaderRightHeight" destination="q2O-FN-h3A" id="tFn-x5-x4e"/>
                         <outlet property="scrollViewLeft" destination="kYe-Pl-2EO" id="mZA-dg-HVF"/>
                         <outlet property="scrollViewRight" destination="gcs-Ir-LjF" id="vvL-je-Dr2"/>
-                        <outlet property="viewLeft" destination="bPB-ib-HsB" id="7LD-Nh-P38"/>
-                        <outlet property="viewRight" destination="TpH-u1-Gj2" id="kUQ-wi-MOy"/>
+                        <outlet property="viewLeft" destination="bPB-ib-HsB" id="4bv-58-b3p"/>
+                        <outlet property="viewLoaderLeft" destination="oFL-Bx-LVP" id="8r6-CH-5zf"/>
+                        <outlet property="viewLoaderRight" destination="fts-f3-b8T" id="EiY-Yk-SXT"/>
+                        <outlet property="viewRight" destination="TpH-u1-Gj2" id="N0x-OD-hXb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bss-Dh-jpy" userLabel="First Responder" sceneMemberID="firstResponder"/>
