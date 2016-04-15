@@ -95,10 +95,11 @@ struct Api {
                     print("user saved, json response:  \(json)")
                     
                     let user = User(
-                        userName: json["name"].stringValue,
-                        userId: json["id"].stringValue,
-                        profileImageUrl: json["profile_img"].stringValue,
-                        facebookId: json["facebook_id"].stringValue
+                        userName: json["data"]["name"].stringValue,
+                        userId: json["data"]["id"].stringValue,
+                        profileImageUrl: json["data"]["profile_img"].stringValue,
+                        facebookId: json["data"]["facebook_id"].stringValue,
+                        profileImage: nil
                     )
                     
                     successCallback(loggedUser: user)
@@ -108,7 +109,6 @@ struct Api {
                     errorCallback()
                 }
                         
-                // print(response)
         }
         
         /*

@@ -152,10 +152,10 @@
 		1535A6AA1C953E8800897674 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				1535A6F31C98C51700897674 /* MainViewController.swift */,
 				1535A6E41C9541E600897674 /* MainTableViewController.swift */,
 				1535A6E61C95424700897674 /* QuestionTableViewCell.swift */,
 				1535A6ED1C95657700897674 /* OnboardingTableViewCell.swift */,
-				1535A6F31C98C51700897674 /* MainViewController.swift */,
 				1535A6FD1C98CDB800897674 /* LoginViewController.swift */,
 				1535A6FF1C99857700897674 /* UserProfileViewController.swift */,
 				1535A7071C9A1E6E00897674 /* CreateViewController.swift */,

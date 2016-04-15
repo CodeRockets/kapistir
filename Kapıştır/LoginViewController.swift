@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import Kingfisher
-import Pulsator
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
     
@@ -73,7 +72,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
                 
                 UserStore.updateUser(loggedUser)
                 
-                print("user saved")
+                print("user saved \(loggedUser)")
                 
                 self.dismissViewControllerAnimated(false, completion:  {
                     Publisher.publish("user/loggedin", data: nil)

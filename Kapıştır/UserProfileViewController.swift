@@ -12,6 +12,10 @@ class UserProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var imProfileTop: NSLayoutConstraint!
     
+    @IBOutlet weak var imgProfile: RoundedImageButton!
+    
+    @IBOutlet weak var imgProfileBack: UIImageView!
+    
     var logoutButton : FBSDKLoginButton = FBSDKLoginButton()
     
     override func viewDidLoad() {
@@ -43,6 +47,13 @@ class UserProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
             //handle error
         } else {
             print("button result \(result)")
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if let profileImage = UserStore._user?.profileImage {
+            self.imgProfile.setImage(profileImage, forState: .Normal)
+            self.imgProfileBack.image = profileImage
         }
     }
     

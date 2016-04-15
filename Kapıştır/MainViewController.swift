@@ -30,6 +30,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UserStore.registerUpdateCallback(userUpdate)
+        
         let token = FBSDKAccessToken.currentAccessToken()?.tokenString
         print(token)
         
@@ -40,6 +42,13 @@ class MainViewController: UIViewController {
                 self.performSegueWithIdentifier("gotoCreate", sender: self)
             }
         })
+    }
+    
+    private func userUpdate(user: User) {
+        print("user updated callback")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.btnProfile.setImage(user.profileImage, forState: .Normal)
+        }
     }
     
     @IBAction func userDidLogIn(segue:UIStoryboardSegue){

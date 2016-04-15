@@ -16,6 +16,8 @@ struct User {
     var profileImageUrl: String
     var facebookId: String
     
+    var profileImage: UIImage?
+    
     //var facebookToken: String
     // var score: Int = 0
 }
