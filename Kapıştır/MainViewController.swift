@@ -13,9 +13,45 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var btnProfile: RoundedImageButton!
     
-    @IBAction func create() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        if let _ = FBSDKAccessToken.currentAccessToken()?.userID {
+        UserStore.registerUpdateCallback(userUpdate)
+        
+        Publisher.subscibe("user/loggedin", callback: userLoggedIn)
+    }
+    
+    private func userUpdate(user: User) {
+        print("user updated callback image: \(user.profileImage)")
+        dispatch_async(dispatch_get_main_queue()) {
+            self.btnProfile.setImage(user.profileImage, forState: .Normal)
+        }
+    }
+    
+    func userLoggedIn(data: AnyObject?) {
+        print("user did login callback")
+        
+        dispatch_async(dispatch_get_main_queue()){
+            self.performSegueWithIdentifier("gotoCreate", sender: self)
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        UserStore.loadUserLocal()
+        
+        if let _ = UserStore.user {
+            print("user logged in")
+            self.btnProfile.hidden = false
+            let profileImage = UserStore.user!.profileImage
+            self.btnProfile.setImage(profileImage, forState: .Normal)
+        } else {
+            print("no user")
+            self.btnProfile.hidden = true
+        }
+    }
+    
+    @IBAction func create() {
+        if let _ = UserStore.user {
             self.performSegueWithIdentifier("gotoCreate", sender: self)
         }
         else{
@@ -25,48 +61,5 @@ class MainViewController: UIViewController {
     
     @IBAction func gotoProfile(sender: AnyObject) {
         self.performSegueWithIdentifier("gotoProfile", sender: self)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        UserStore.registerUpdateCallback(userUpdate)
-        
-        let token = FBSDKAccessToken.currentAccessToken()?.tokenString
-        print(token)
-        
-        Publisher.subscibe("user/loggedin", callback: { data in
-            print("user did login callback")
-            
-            dispatch_async(dispatch_get_main_queue()){
-                self.performSegueWithIdentifier("gotoCreate", sender: self)
-            }
-        })
-    }
-    
-    private func userUpdate(user: User) {
-        print("user updated callback")
-        dispatch_async(dispatch_get_main_queue()) {
-            self.btnProfile.setImage(user.profileImage, forState: .Normal)
-        }
-    }
-    
-    @IBAction func userDidLogIn(segue:UIStoryboardSegue){
-        
-        print("unwinded segue")
-        
-        //dispatch_async(dispatch_get_main_queue()){
-        //    self.performSegueWithIdentifier("gotoCreate", sender: self)
-        //}
-        
-        /*KingfisherManager.sharedManager.retrieveImageWithURL(
-            NSURL(string: UserStore._user.profileImageUrl)!,
-            optionsInfo: nil,
-            progressBlock: nil,
-            completionHandler: { (image, error, cacheType, imageURL) -> () in
-                self.btnProfile.setBackgroundImage(image, forState: .Normal)
-            })*/
-        
-        
     }
 }

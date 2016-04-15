@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
+class UserProfileViewController: UIViewController {
 
     @IBOutlet weak var imProfileTop: NSLayoutConstraint!
     
@@ -16,45 +16,25 @@ class UserProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var imgProfileBack: UIImageView!
     
-    var logoutButton : FBSDKLoginButton = FBSDKLoginButton()
+    @IBOutlet weak var lblUserName: UILabel!
+    
+    @IBAction func logOut(sender: AnyObject) {
+        UserStore.updateUser(nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let xPos = (self.view.bounds.size.width - 200)/2
-        let yPos = self.view.bounds.size.height - 60
-        logoutButton.frame = CGRectMake(xPos, yPos, 200, 40)
-        self.view.addSubview(logoutButton)
-        logoutButton.delegate = self
     }
     
     @IBAction func close(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        print("user logged out")
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {
-        //
-        return true
-    }
-    
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        if error != nil {
-            //handle error
-        } else {
-            print("button result \(result)")
-        }
-    }
-    
     override func viewWillAppear(animated: Bool) {
-        if let profileImage = UserStore._user?.profileImage {
-            self.imgProfile.setImage(profileImage, forState: .Normal)
-            self.imgProfileBack.image = profileImage
-        }
+        self.imgProfile.setImage(UserStore.user?.profileImage, forState: .Normal)
+        self.imgProfileBack.image = UserStore.user?.profileImage
+        self.lblUserName.text = UserStore.user?.userName
     }
     
     override func viewDidLayoutSubviews() {

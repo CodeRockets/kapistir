@@ -38,8 +38,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         loginView.delegate = self
         
         // UserStore.registerUpdateCallback(userSaved)
-        
-        
     }
     
     override func viewDidLayoutSubviews() {

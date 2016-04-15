@@ -13,47 +13,52 @@ class UserStore{
     
     typealias callback = (loggedUser: User)-> Void
     
-    /*private*/ static var _user: User!
+    private static var _user: User?
+    static var user: User? {
+        return _user
+    }
     
     private static var _callbacks = [callback]()
-    
-    private static var _userImage: UIImage!
     
     static func registerUpdateCallback(block: callback) {
         self._callbacks.append(block)
     }
     
     private static func publishUpdate(){
+        // notify changes to subscribers
         for block in self._callbacks {
-            block(loggedUser: self._user)
+            block(loggedUser: self.user!)
         }
     }
     
-    static func updateUser(user: User){
-        print("user will be updated \(user)")
-        self._user = user
-        self.publishUpdate()
-        self.donwloadProfileImage()
-    }
-    
-    private static func donwloadProfileImage() {
-        print("image url \(UserStore._user.profileImageUrl)")
+    static func updateUser(user: User?){
+        print("user will be updated")
         
-        KingfisherManager.sharedManager.retrieveImageWithURL(
-            NSURL(string: self._user.profileImageUrl)!,
-            optionsInfo: nil,
-            progressBlock: nil,
-            completionHandler: { (image, error, cacheType, imageURL) -> () in
-                print("image downloaded \(error)  \(imageURL)")
-                
-                if error == nil {
-                    self._user.profileImage = image
-                    self.publishUpdate()
-                }
-                else{
-                    // profile image download error
-                }
+        self._user = user
+        
+        if let userData = user {
+            KingfisherManager.sharedManager.retrieveImageWithURL(
+                NSURL(string: userData.profileImageUrl)!,
+                optionsInfo: nil,
+                progressBlock: nil,
+                completionHandler: { (image, error, cacheType, imageURL) -> () in
+                    print("image downloaded \(imageURL)")
+                    
+                    if error == nil {
+                        self._user!.profileImage = image
+                        self.saveUserLocal(self._user!)
+                        self.publishUpdate()
+                    }
+                    else{
+                        // profile image download error
+                        print("profile image download error")
+                    }
             })
+        }
+        else{
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setValue(nil, forKey: "userName")
+        }
     }
     
     private static func saveUserLocal(user: User) {
@@ -62,32 +67,77 @@ class UserStore{
         defaults.setValue(user.facebookId, forKey: "facebookId")
         defaults.setValue(user.userName, forKey: "userName")
         defaults.setValue(user.profileImageUrl, forKey: "profileImageUrl")
+        
+        if let userImage = self.user!.profileImage {
+            print("save user local with image")
+            saveProfileImageLocal(userImage)
+        }
     }
     
-    private static func getUserLocal() {
+    static func loadUserLocal() {
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        self._user = User(
-            userName: defaults.valueForKey("userName") as! String,
-            userId: defaults.valueForKey("userId") as! String,
-            profileImageUrl: defaults.valueForKey("profileImageUrl") as! String,
-            facebookId: defaults.valueForKey("facebookId") as! String,
-            profileImage: nil
-        )
+        // localde kayıtlı kullanıcı var mı?
+        if let userName = defaults.valueForKey("userName") {
+
+            let profileImage = loadProfileImageLocal()
+            
+            self._user = User(
+                userName: userName as! String,
+                userId: defaults.valueForKey("userId") as! String,
+                profileImageUrl: defaults.valueForKey("profileImageUrl") as! String,
+                facebookId: defaults.valueForKey("facebookId") as! String,
+                profileImage: profileImage
+            )
+            
+            print("loading user local \(self._user)")
+            
+            self.publishUpdate()
+        }
     }
     
-    private func saveImageLocal(image: UIImage, path: String ) -> Bool {
+    private static func saveProfileImageLocal(image: UIImage) -> Bool {
+        print("saving image to local")
+        let imagePath = fileInDocumentsDirectory("userProfileImage.jpeg")
         let jpgImageData = UIImageJPEGRepresentation(image, 1.0)   // if you want to save as JPEG
-        let result = jpgImageData!.writeToFile(path, atomically: true)
+        let result = jpgImageData!.writeToFile(imagePath, atomically: true)
         
         return result
     }
     
-    private func loadImageLocal(filename:String) -> UIImage {
-        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-        let filePath = documentsURL.URLByAppendingPathComponent(filename).path!
-        let image = UIImage(contentsOfFile: filePath)
+    private static func loadProfileImageLocal() -> UIImage? {
+        print("loading image form local")
         
-        return image!
+        let imagePath = fileInDocumentsDirectory("userProfileImage.jpeg")
+        let image = loadImageFromPath(imagePath)
+
+        print("\(image)")
+        
+        return image
     }
+
+}
+
+extension String {
+    func stringByAppendingPathComponent(path: String) -> String {
+        let nsSt = self as NSString
+        return nsSt.stringByAppendingPathComponent(path)
+    }
+}
+
+// Documents directory
+func documentsDirectory() -> String {
+    let documentsFolderPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
+    return documentsFolderPath
+}
+
+// File in Documents directory
+func fileInDocumentsDirectory(filename: String) -> String {
+    return documentsDirectory().stringByAppendingPathComponent(filename)
+}
+
+func loadImageFromPath(path: String) -> UIImage? {
+    let data = NSData(contentsOfFile: path)
+    let image = UIImage(data: data!)
+    return image
 }
