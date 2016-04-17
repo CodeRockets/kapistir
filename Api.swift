@@ -41,6 +41,7 @@ struct Api {
                     
                     for questionData in rows {
                         
+                        print("question: \(questionData)")
                         let question = Question.fromApiResponse(questionData as! NSDictionary)
                         retQuestions.append(question)
                     }
@@ -61,8 +62,19 @@ struct Api {
     
     static func fetchBatchImages(batch: [Question], errorCallback: ()->Void, successCallback: ([Question])-> Void) {
         
-        let urlsA = batch.map { NSURL(string: $0.optionA)! }
-        let urls = urlsA + batch.map { NSURL(string: $0.optionB)! }
+        let urlsA = batch.filter({
+            NSURL(string: $0.optionA) != nil
+        }).map { (question) -> NSURL in
+            return NSURL(string: question.optionA)!
+        }
+        
+        let urls = urlsA + batch.filter({ (question) -> Bool in
+            NSURL(string: question.optionA) != nil
+        }).map({ (question) -> NSURL in
+             return NSURL(string: question.optionB)!
+        })
+        
+        print("image urls:  \(urls)")
         
         let prefetcher = ImagePrefetcher(urls: urls, optionsInfo: nil, progressBlock: nil, completionHandler: {
             (skippedResources, failedResources, completedResources) -> () in
@@ -86,7 +98,11 @@ struct Api {
             "token": facebookApiToken
         ]
         
-        Alamofire.request(.POST, App.URLs.saveUser, parameters: params, headers: headers)
+        Alamofire.request(
+            .POST,
+            App.URLs.saveUser,
+            parameters: params,
+            headers: headers)
             .responseJSON { response in
                 switch response.result {
                 case .Success(let data):
@@ -108,31 +124,66 @@ struct Api {
                 case .Failure(_):
                     errorCallback()
                 }
-                        
-        }
-        
-        /*
-        response
-        {
-        "data": {
-        "id": "c94642f0-fd0f-11e5-9a28-a3a2789bd42e",
-        "created_at": "2016-04-07T22:26:34.000Z",
-        "updated_at": "2016-04-07T22:26:34.000Z",
-        "is_deleted": false,
-        "facebook_id": "10153036713185139",
-        "name": "Eyüp Ferhat Güdücü",
-        "profile_img": "https://scontent.xx.fbcdn.net/hprofile-xaf1/v/t1.0-1/p200x200/1901419_10152180825580139_1287991170_n.jpg?oh=14b30a3f828a6515157e9d6e5eda874e&oe=578986B9"
-        },
-        "statusCode": 200,
-        "error": "string",
-        "message": "success",
-        "timestamp": 1460067996068
-        }
-        
-        */
-        
-        
             }
+    }
 
+    static func saveQuestion(imageUrls imageUrls:(String,String), images:(UIImage,UIImage), errorCallback: ()-> Void, successCallback: (question: Question)-> Void) {
+        
+        let headers = [
+            "x-voter-client-id": "asd123",
+            "x-voter-version":   "1",
+            "x-voter-installation": "asd123"
+        ]
+        
+        let params: [String: AnyObject] = [
+            "user_id": (UserStore.user?.userId)!,
+            "app": 1,
+            "option_a": imageUrls.0,
+            "option_b": imageUrls.1
+        ]
+        
+        print("question will be saved. params: \(params)")
+        
+        Alamofire.request(
+            .POST,
+            App.URLs.saveQuestion,
+            parameters: params,
+            headers: headers)
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    let json = JSON(data)
+                    
+                    print("question saved, json response:  \(json)")
+                    
+                    let statusCode = json["statusCode"].intValue
+
+                    if statusCode == 200 {
+                        let question = Question(
+                            id: json["data"]["id"].stringValue,
+                            optionA: json["data"]["option_a"].stringValue,
+                            optionB: json["data"]["option_b"].stringValue,
+                            optionACount: 0,
+                            optionBCount: 0,
+                            skipCount: 0
+                        )
+                        
+                        question.imageLeft = images.0
+                        question.imageRight = images.1
+                        
+                        successCallback(question: question)
+                    }
+                    else{
+                        errorCallback()
+                    }
+                    
+                    break
+                case .Failure(_):
+                    errorCallback()
+                }
+        }
+    }
+
+    
     
 }

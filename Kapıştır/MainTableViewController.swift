@@ -65,6 +65,11 @@ class MainTableViewController: UITableViewController {
         //}
     }
     
+    //override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        //QuestionStore.currentQuestionIndex = indexPath.row
+        //print("current question index \(QuestionStore.currentQuestionIndex)")
+    //}
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.frame.size.height
     }

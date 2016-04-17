@@ -79,6 +79,7 @@ extension Question {
         let id = response["id"] as! String
         let optionA = (response["option_a"] as! String)
         let optionB = response["option_b"] as! String
+        
         //var optionACount = response["option_a_count"] as! Int
         //var optionBCount = response["option_b_count"] as! Int
         //var skipCount = response["skip_count"] as! Int

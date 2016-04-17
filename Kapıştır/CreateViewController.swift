@@ -9,6 +9,7 @@
 import UIKit
 import ALCameraViewController
 import Alamofire
+import SwiftyJSON
 
 class CreateViewController:
     UIViewController,
@@ -17,7 +18,13 @@ class CreateViewController:
     UIScrollViewDelegate
 {
     
-    var target = 0
+    private var target = 0
+    
+    private var uploadedImageCount = 0
+    
+    private var uploadedImageUrls = [Int:String]()
+    
+    private var images = [Int:UIImage]()
     
     @IBOutlet weak var loaderLeftHeight: NSLayoutConstraint!
     
@@ -106,8 +113,35 @@ class CreateViewController:
                             }), completion: nil)
                         }
                     }
-                    upload.responseJSON { result in
-                        print("result: \(result)")
+                    upload.responseJSON { response in
+                        print("result: \(response)")
+                        
+                        switch response.result {
+                        case .Success(let data):
+                            let responseData = JSON(data)
+                            self.uploadedImageCount += 1
+                            self.uploadedImageUrls[target] = responseData["data"].stringValue
+                            self.images[target] = image
+                        
+                            if self.uploadedImageCount == 2 {
+                                
+                                // image yüklemeleri tamamlandı
+                                // soruyu kaydet
+                                
+                                Api.saveQuestion(
+                                    imageUrls: (self.uploadedImageUrls[0]!, self.uploadedImageUrls[1]!),
+                                    images: (self.images[0]!, self.images[1]!),
+                                    errorCallback: {
+                                        print("question save error")
+                                    },
+                                    successCallback: { (question) in
+                                        print("question saved \(question)")
+                                    })
+                                
+                            }
+                        case .Failure(_):
+                            print("question save error")
+                        }
                     }
                 case .Failure(let encodingError):
                     print("fail \(encodingError)")

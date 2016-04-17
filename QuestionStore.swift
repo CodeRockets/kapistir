@@ -14,6 +14,8 @@ struct QuestionStore{
     
     typealias Callback = (Batch)-> Void
     
+    static var currentQuestionIndex = 0
+    
     private static var _questions = [Question]()
     
     private static var _callbacks = [Callback]()
@@ -40,5 +42,13 @@ struct QuestionStore{
             })
     }
 
+    static func updateCurrentQuestionIndex(index: Int) {
+        currentQuestionIndex = index
+    }
+    
+    static func appendQuestion(question: Question) {
+        _questions.append(question)
+        publishUpdate()
+    }
     
 }
