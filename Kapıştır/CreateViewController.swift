@@ -180,8 +180,11 @@ class CreateViewController:
         get { return imageViewLeft.image }
         set {
             imageViewLeft.image = newValue // change image
-            imageViewLeft.sizeToFit()      // resize image with sizes
+            imageViewLeft.contentMode = .ScaleAspectFit
+            imageViewLeft.frame.size = scrollViewLeft.frame.size
+            // imageViewLeft.sizeToFit()      // resize image with sizes
             scrollViewLeft?.contentSize = imageViewLeft.frame.size
+            centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
         }
     }
     
@@ -200,8 +203,11 @@ class CreateViewController:
         get { return imageViewRight.image }
         set {
             imageViewRight.image = newValue // change image
-            imageViewRight.sizeToFit()      // resize image with sizes
-            scrollViewRight?.contentSize = imageViewRight.frame.size
+            imageViewRight.contentMode = .ScaleAspectFit
+            imageViewRight.frame.size = scrollViewRight.frame.size
+            // imageViewRight.sizeToFit()      // resize image with sizes
+            scrollViewRight?.contentSize = self.imageViewRight.frame.size
+            centerImageInScrollview(self.scrollViewRight, imageView: self.imageViewRight)
         }
     }
     
@@ -235,11 +241,16 @@ class CreateViewController:
         self.imageLeft = UIImage(named: "tap")
         self.imageRight = UIImage(named: "tap")
         
-        //let offsetX: CGFloat = max( (self.scrollViewLeft.bounds.size.width - self.scrollViewLeft.contentSize.width) * 0.5, 0.0)
-        //let offsetY: CGFloat = max( (self.scrollViewLeft.bounds.size.height - self.scrollViewLeft.contentSize.height) * 0.5, 0.0)
+        // center views
+        centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
+        centerImageInScrollview(self.scrollViewRight, imageView: self.imageViewRight)
+    }
+    
+    func centerImageInScrollview(scrollView: UIScrollView, imageView: UIImageView) {
+        let offsetX: CGFloat = max( (scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5, 0.0)
+        let offsetY: CGFloat = max( (scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5, 0.0)
         
-        //self.imageViewLeft.center = CGPointMake(self.scrollViewLeft.contentSize.width * 0.5 + offsetX, self.scrollViewLeft.contentSize.height * 0.5 + offsetY)
-        //self.imageViewRight.center = CGPointMake(self.scrollViewRight.contentSize.width * 0.5 + offsetX, self.scrollViewRight.contentSize.height * 0.5 + offsetY)
+        imageView.center = CGPointMake(scrollView.contentSize.width * 0.5 + offsetX, scrollView.contentSize.height * 0.5 + offsetY)
     }
 
     func tappedLeft(){
@@ -250,6 +261,14 @@ class CreateViewController:
     func tappedRight(){
         target = 0
         self.getImage()
+    }
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        if scrollView == self.scrollViewLeft {
+            centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
+        } else {
+            centerImageInScrollview(self.scrollViewRight, imageView: self.imageViewRight)
+        }
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
@@ -279,12 +298,14 @@ class CreateViewController:
             
             let cameraViewController = ALCameraViewController(croppingEnabled: true) { image in
 
-                if self.target == 0 {
-                    self.imageRight = image
-                } else{
-                    self.imageLeft = image
+                if let selectedImage = image {
+                    if self.target == 0 {
+                        self.imageRight = selectedImage
+                    } else{
+                        self.imageLeft = selectedImage
+                    }
                 }
-                
+
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             
