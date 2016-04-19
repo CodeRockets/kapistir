@@ -150,23 +150,18 @@ class CreateViewController:
     }
     
     func crop(image originalImage: UIImage, targetScrollView: UIScrollView) -> UIImage {
-        // Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)
-        let contextImage: UIImage = UIImage(CGImage: originalImage.CGImage!)
-        
-        let posX: CGFloat
-        let posY: CGFloat
-        let width: CGFloat
-        let height: CGFloat
-        
-        posX = targetScrollView.contentOffset.x
-        posY = targetScrollView.contentOffset.y
-        width = targetScrollView.bounds.width
-        height = targetScrollView.bounds.height
+        let posX = targetScrollView.contentOffset.x
+        let posY = targetScrollView.contentOffset.y
+        let width = min( targetScrollView.bounds.width, originalImage.size.width )
+        let height = min ( targetScrollView.bounds.height, originalImage.size.height )
         
         let rect: CGRect = CGRectMake(posX, posY, width, height)
         
+        print("crop rect \(rect)")
+        
         // Create bitmap image from context using the rect
-        let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, rect)!
+        let imageResized = resizeImage(originalImage, newWidth: width)
+        let imageRef: CGImageRef = CGImageCreateWithImageInRect(imageResized.CGImage, rect)!
         
         // Create a new image based on the imageRef and rotate back to the original orientation
         let image: UIImage = UIImage(CGImage: imageRef, scale: originalImage.scale, orientation: originalImage.imageOrientation)
@@ -174,26 +169,49 @@ class CreateViewController:
         return image
     }
     
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+
+    
     private var imageViewLeft = UIImageView()
     
     private var imageLeft: UIImage? {
         get { return imageViewLeft.image }
         set {
-            imageViewLeft.image = newValue // change image
-            imageViewLeft.contentMode = .ScaleAspectFit
-            imageViewLeft.frame.size = scrollViewLeft.frame.size
-            // imageViewLeft.sizeToFit()      // resize image with sizes
-            scrollViewLeft?.contentSize = imageViewLeft.frame.size
-            centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
+            setImage(newValue!, scrollView: self.scrollViewLeft, imageView: self.imageViewLeft)
         }
+    }
+    
+    func setImage(image: UIImage, scrollView: UIScrollView, imageView: UIImageView) {
+        imageView.image = image                 // change image
+        imageView.contentMode = .ScaleToFill    //.ScaleAspectFit
+        
+        let widthImage = scrollView.frame.size.width
+        let scaleImage = image.size.width * image.scale / widthImage
+        let heightImage = image.size.height * image.scale / scaleImage
+        let imageSize = CGSize(width: widthImage, height: heightImage)
+        
+        imageView.frame.size = imageSize        //scrollViewLeft.frame.size
+        
+        scrollView.contentSize = imageView.frame.size
+        centerImageInScrollview(scrollView, imageView: imageView)
     }
     
     @IBOutlet weak var scrollViewLeft: UIScrollView! {
         didSet{
             scrollViewLeft.contentSize = imageViewLeft.frame.size
             scrollViewLeft.delegate = self
-            scrollViewLeft.minimumZoomScale = 0.03
-            scrollViewLeft.maximumZoomScale = 2.0
+            scrollViewLeft.minimumZoomScale = 1
+            scrollViewLeft.maximumZoomScale = 3.0
         }
     }
     
@@ -202,12 +220,7 @@ class CreateViewController:
     private var imageRight: UIImage? {
         get { return imageViewRight.image }
         set {
-            imageViewRight.image = newValue // change image
-            imageViewRight.contentMode = .ScaleAspectFit
-            imageViewRight.frame.size = scrollViewRight.frame.size
-            // imageViewRight.sizeToFit()      // resize image with sizes
-            scrollViewRight?.contentSize = self.imageViewRight.frame.size
-            centerImageInScrollview(self.scrollViewRight, imageView: self.imageViewRight)
+            setImage(newValue!, scrollView: self.scrollViewRight, imageView: self.imageViewRight)
         }
     }
     
@@ -215,8 +228,8 @@ class CreateViewController:
         didSet{
             scrollViewRight.contentSize = imageViewRight.frame.size
             scrollViewRight.delegate = self
-            scrollViewRight.minimumZoomScale = 0.03
-            scrollViewRight.maximumZoomScale = 2.0
+            scrollViewRight.minimumZoomScale = 1
+            scrollViewRight.maximumZoomScale = 3.0
         }
     }
     
@@ -244,6 +257,48 @@ class CreateViewController:
         // center views
         centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
         centerImageInScrollview(self.scrollViewRight, imageView: self.imageViewRight)
+        
+        self.setupActionSheet()
+    }
+    
+    private var actionSheet: UIAlertController!
+    
+    func setupActionSheet() {
+        actionSheet = UIAlertController(title: nil, message: "Resim Ekle", preferredStyle: .ActionSheet)
+        
+        let actionTakePhoto = UIAlertAction(title: "Fotoğraf Çek", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+            imagePicker.allowsEditing = false
+            
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        })
+        
+        let actionSelectPhoto = UIAlertAction(title: "Galeriden Seç", style: .Default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePicker.allowsEditing = false
+            
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        })
+        
+        let actionCancel = UIAlertAction(title: "İptal", style: .Cancel, handler: nil)
+        
+        //let actionSearchWeb = UIAlertAction(title: "Ara", style: .Default, handler: {
+        //    (alert: UIAlertAction!) -> Void in
+            // search
+        //})
+        
+        actionSheet.addAction(actionSelectPhoto)
+        actionSheet.addAction(actionTakePhoto)
+        actionSheet.addAction(actionCancel)
+        //actionSheet.addAction(actionSearchWeb)
     }
     
     func centerImageInScrollview(scrollView: UIScrollView, imageView: UIImageView) {
@@ -255,12 +310,14 @@ class CreateViewController:
 
     func tappedLeft(){
         target = 1
-        self.getImage()
+        actionSheet.message = "← Resim Ekle"
+        self.presentViewController(actionSheet, animated: true, completion: nil)
     }
 
     func tappedRight(){
         target = 0
-        self.getImage()
+        actionSheet.message = "Resim Ekle →"
+        self.presentViewController(actionSheet, animated: true, completion: nil)
     }
     
     func scrollViewDidZoom(scrollView: UIScrollView) {
@@ -277,41 +334,6 @@ class CreateViewController:
         } else{
             return self.imageViewRight
         }
-    }
-    
-    func getImage() {
-        
-        #if (arch(i386) || arch(x86_64))
-            
-            print("simülatör getImage")
-            
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            imagePicker.allowsEditing = false
-            
-            self.presentViewController(imagePicker, animated: true, completion: nil)
-            
-        #else
-            
-            print("non-simülatör getImage")
-            
-            let cameraViewController = ALCameraViewController(croppingEnabled: true) { image in
-
-                if let selectedImage = image {
-                    if self.target == 0 {
-                        self.imageRight = selectedImage
-                    } else{
-                        self.imageLeft = selectedImage
-                    }
-                }
-
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-            
-            self.presentViewController(cameraViewController, animated: true, completion: nil)
-            
-        #endif
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
