@@ -153,8 +153,9 @@ struct Api {
                 switch response.result {
                 case .Success(let data):
                     let json = JSON(data)
-                    
-                    print("question saved, json response:  \(json)")
+
+                    print("question saved, option_a:  \(json["data"]["option_a"].stringValue)")
+                    print("question saved, option_b:  \(json["data"]["option_b"].stringValue)")
                     
                     let statusCode = json["statusCode"].intValue
 

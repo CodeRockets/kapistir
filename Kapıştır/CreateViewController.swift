@@ -17,7 +17,6 @@ class CreateViewController:
     UINavigationControllerDelegate,
     UIScrollViewDelegate
 {
-    
     private var target = 0
     
     private var uploadedImageCount = 0
@@ -88,8 +87,6 @@ class CreateViewController:
                         let ratio = Double(totalBytesRead)/Double(totalBytesExpectedToRead)
                         print(String(target) + " uploaded : \(ratio*100)")
                         
-                        // cell.viewLeft.frame.size.height * CGFloat(question.ratioA)
-                        
                         let height = (self.view.frame.height - 104) * CGFloat(ratio)
                         
                         dispatch_async(dispatch_get_main_queue()) {
@@ -132,10 +129,10 @@ class CreateViewController:
                                     imageUrls: (self.uploadedImageUrls[0]!, self.uploadedImageUrls[1]!),
                                     images: (self.images[0]!, self.images[1]!),
                                     errorCallback: {
-                                        print("question save error")
+                                        //print("question save error")
                                     },
                                     successCallback: { (question) in
-                                        print("question saved \(question)")
+                                        //print("question saved \(question)")
                                     })
                                 
                             }
@@ -153,24 +150,27 @@ class CreateViewController:
         let posX = targetScrollView.contentOffset.x
         let posY = targetScrollView.contentOffset.y
         let width = min( targetScrollView.bounds.width, originalImage.size.width )
-        let height = min ( targetScrollView.bounds.height, originalImage.size.height )
+        let height = min( targetScrollView.bounds.height, originalImage.size.height )
         
         let rect: CGRect = CGRectMake(posX, posY, width, height)
         
         print("crop rect \(rect)")
         
         // Create bitmap image from context using the rect
-        let imageResized = resizeImage(originalImage, newWidth: width)
-        let imageRef: CGImageRef = CGImageCreateWithImageInRect(imageResized.CGImage, rect)!
+        let imageResized = resizeImage(originalImage, newWidth: width * originalImage.scale * targetScrollView.zoomScale )
+        
+        print("resized width: \(imageResized.size), image scale: \(imageResized.scale)")
+        
+        let imageCropped = CGImageCreateWithImageInRect(imageResized.CGImage, rect)!
+        // let imageCroppedResized = resizeImage( UIImage(CGImage: imageCropped), newWidth: width)
         
         // Create a new image based on the imageRef and rotate back to the original orientation
-        let image: UIImage = UIImage(CGImage: imageRef, scale: originalImage.scale, orientation: originalImage.imageOrientation)
+        let image = UIImage(CGImage: imageCropped)
         
         return image
     }
     
     func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        
         let scale = newWidth / image.size.width
         let newHeight = image.size.height * scale
         UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
@@ -181,7 +181,6 @@ class CreateViewController:
         return newImage
     }
 
-    
     private var imageViewLeft = UIImageView()
     
     private var imageLeft: UIImage? {
