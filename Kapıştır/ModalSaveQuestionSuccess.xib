@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ModalSaveQuestionSuccess" customModule="Kapıs_tır" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="280" height="370"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IA0-IY-VBi" userLabel="ContentView">
+                    <rect key="frame" x="0.0" y="0.0" width="280" height="370"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kapıştır oluşturuldu, yayınlandı!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGu-dK-f9U">
+                            <rect key="frame" x="0.0" y="20" width="280" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="EWA-Go-hVw"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="raised-fist" translatesAutoresizingMaskIntoConstraints="NO" id="7Zx-GD-OZN">
+                            <rect key="frame" x="0.0" y="58" width="280" height="254"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="254" id="tCk-nO-SGO"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sR-zH-Fab">
+                            <rect key="frame" x="0.0" y="310" width="280" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="vB1-Lm-kQ8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <state key="normal" title="Tamam">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="closeButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="siw-H8-kmq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="0sR-zH-Fab" firstAttribute="leading" secondItem="IA0-IY-VBi" secondAttribute="leading" id="0y2-6m-qah"/>
+                        <constraint firstItem="7Zx-GD-OZN" firstAttribute="top" secondItem="SGu-dK-f9U" secondAttribute="bottom" constant="17" id="7uX-Ph-LS5"/>
+                        <constraint firstAttribute="trailing" secondItem="SGu-dK-f9U" secondAttribute="trailing" id="ABs-Aw-YNT"/>
+                        <constraint firstAttribute="trailing" secondItem="7Zx-GD-OZN" secondAttribute="trailing" id="AkM-6X-URT"/>
+                        <constraint firstItem="SGu-dK-f9U" firstAttribute="leading" secondItem="IA0-IY-VBi" secondAttribute="leading" id="EKJ-QQ-gph"/>
+                        <constraint firstItem="7Zx-GD-OZN" firstAttribute="leading" secondItem="IA0-IY-VBi" secondAttribute="leading" id="Mer-S9-sKw"/>
+                        <constraint firstAttribute="bottom" secondItem="0sR-zH-Fab" secondAttribute="bottom" id="XbA-re-jqD"/>
+                        <constraint firstAttribute="trailing" secondItem="0sR-zH-Fab" secondAttribute="trailing" id="mbh-EK-Hzf"/>
+                        <constraint firstItem="SGu-dK-f9U" firstAttribute="top" secondItem="IA0-IY-VBi" secondAttribute="top" constant="20" id="tLR-Gb-BwH"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="IA0-IY-VBi" secondAttribute="trailing" id="GpD-UT-EBk"/>
+                <constraint firstItem="IA0-IY-VBi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XW5-mY-hyF"/>
+                <constraint firstAttribute="bottom" secondItem="IA0-IY-VBi" secondAttribute="bottom" id="Xsi-fO-B7E"/>
+                <constraint firstItem="IA0-IY-VBi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="y0m-SQ-8EP"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentView" destination="IA0-IY-VBi" id="18P-wB-67t"/>
+                <outlet property="imageView" destination="7Zx-GD-OZN" id="enF-ao-xhr"/>
+            </connections>
+            <point key="canvasLocation" x="176" y="384"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="raised-fist" width="361" height="500"/>
+    </resources>
+</document>

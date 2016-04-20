@@ -32,6 +32,9 @@
 		1535A7041C99DF9300897674 /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535A7031C99DF9300897674 /* UserStore.swift */; };
 		1535A7061C99E23C00897674 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535A7051C99E23C00897674 /* User.swift */; };
 		1535A7081C9A1E6E00897674 /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535A7071C9A1E6E00897674 /* CreateViewController.swift */; };
+		153C1EA11CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1EA01CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift */; };
+		153C1EA31CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153C1EA21CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib */; };
+		153C1EA51CC8161D00CF94C3 /* PathDynamicModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1EA41CC8161D00CF94C3 /* PathDynamicModal.swift */; };
 		157B9D071CA68B350026EFC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 157B9D061CA68B350026EFC1 /* .gitignore */; };
 		159FABEF1CBEEE540049941E /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FABEE1CBEEE540049941E /* Publisher.swift */; };
 /* End PBXBuildFile section */
@@ -85,6 +88,9 @@
 		1535A7031C99DF9300897674 /* UserStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		1535A7051C99E23C00897674 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1535A7071C9A1E6E00897674 /* CreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
+		153C1EA01CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalSaveQuestionSuccess.swift; sourceTree = "<group>"; };
+		153C1EA21CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModalSaveQuestionSuccess.xib; sourceTree = "<group>"; };
+		153C1EA41CC8161D00CF94C3 /* PathDynamicModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathDynamicModal.swift; sourceTree = "<group>"; };
 		157B9D061CA68B350026EFC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		159FABEE1CBEEE540049941E /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		260E7C28E0B16BCC0D428CDB /* Pods-Kapıştır.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kapıştır.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kapıştır/Pods-Kapıştır.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +166,8 @@
 				1535A6FF1C99857700897674 /* UserProfileViewController.swift */,
 				1535A7071C9A1E6E00897674 /* CreateViewController.swift */,
 				1535A6AF1C953E8800897674 /* Main.storyboard */,
+				153C1EA21CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib */,
+				153C1EA01CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift */,
 			);
 			name = Main;
 			path = "Kapıştır";
@@ -195,6 +203,7 @@
 				1535A7051C99E23C00897674 /* User.swift */,
 				1535A7031C99DF9300897674 /* UserStore.swift */,
 				159FABEE1CBEEE540049941E /* Publisher.swift */,
+				153C1EA41CC8161D00CF94C3 /* PathDynamicModal.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -203,8 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				1535A6B51C953E8800897674 /* Assets.xcassets */,
-				1535A6B71C953E8800897674 /* LaunchScreen.storyboard */,
 				1535A6BA1C953E8800897674 /* Info.plist */,
+				1535A6B71C953E8800897674 /* LaunchScreen.storyboard */,
 				1535A6B21C953E8800897674 /* Kap_s_t_r.xcdatamodeld */,
 				1535A6FC1C98CD3800897674 /* Kapıştır-Bridging-Header.h */,
 			);
@@ -338,6 +347,7 @@
 				157B9D071CA68B350026EFC1 /* .gitignore in Resources */,
 				1535A6B91C953E8800897674 /* LaunchScreen.storyboard in Resources */,
 				1535A6B61C953E8800897674 /* Assets.xcassets in Resources */,
+				153C1EA31CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib in Resources */,
 				1535A6B11C953E8800897674 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,9 +435,11 @@
 				1535A7041C99DF9300897674 /* UserStore.swift in Sources */,
 				1535A7001C99857700897674 /* UserProfileViewController.swift in Sources */,
 				1535A6E51C9541E600897674 /* MainTableViewController.swift in Sources */,
+				153C1EA11CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift in Sources */,
 				1535A6AC1C953E8800897674 /* AppDelegate.swift in Sources */,
 				1535A6EE1C95657700897674 /* OnboardingTableViewCell.swift in Sources */,
 				1535A6E71C95424700897674 /* QuestionTableViewCell.swift in Sources */,
+				153C1EA51CC8161D00CF94C3 /* PathDynamicModal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

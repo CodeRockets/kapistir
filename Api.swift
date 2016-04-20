@@ -89,9 +89,9 @@ struct Api {
     static func saveUser(facebookApiToken: String, errorCallback: ()-> Void, successCallback: (loggedUser: User)-> Void) {
         
         let headers = [
-           "x-voter-client-id": "asd123",
-           "x-voter-version":   "1",
-           "x-voter-installation": "asd123"
+           "x-voter-client-id":     "asd123",
+           "x-voter-version":       "1",
+           "x-voter-installation":  "asd123"
         ]
         
         let params = [
@@ -130,14 +130,14 @@ struct Api {
     static func saveQuestion(imageUrls imageUrls:(String,String), images:(UIImage,UIImage), errorCallback: ()-> Void, successCallback: (question: Question)-> Void) {
         
         let headers = [
-            "x-voter-client-id": "asd123",
-            "x-voter-version":   "1",
+            "x-voter-client-id":    "asd123",
+            "x-voter-version":      "1",
             "x-voter-installation": "asd123"
         ]
         
         let params: [String: AnyObject] = [
-            "user_id": (UserStore.user?.userId)!,
-            "app": 1,
+            "user_id":  (UserStore.user?.userId)!,
+            "app":      1,
             "option_a": imageUrls.0,
             "option_b": imageUrls.1
         ]
@@ -184,7 +184,4 @@ struct Api {
                 }
         }
     }
-
-    
-    
 }

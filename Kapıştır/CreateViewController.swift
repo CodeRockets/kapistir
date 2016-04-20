@@ -25,6 +25,10 @@ class CreateViewController:
     
     private var images = [Int:UIImage]()
     
+    @IBOutlet weak var lblLoaderLeft: UILabel!
+    
+    @IBOutlet weak var lblLoaderRight: UILabel!
+    
     @IBOutlet weak var loaderLeftHeight: NSLayoutConstraint!
     
     @IBOutlet weak var loaderRightHeight: NSLayoutConstraint!
@@ -132,7 +136,16 @@ class CreateViewController:
                                         //print("question save error")
                                     },
                                     successCallback: { (question) in
-                                        //print("question saved \(question)")
+                                        print("question saved \(question)")
+                                        let view = ModalSaveQuestionSuccess.instantiateFromNib()
+                                        let window = UIApplication.sharedApplication().delegate?.window!
+                                        let modal = PathDynamicModal.show(modalView: view, inView: window!)
+                                        view.closeButtonHandler = {[weak modal] in
+                                            modal?.closeWithLeansRandom()
+                                            self.dismissViewControllerAnimated(true, completion: nil)
+                                            return
+                                        }
+                                        
                                     })
                                 
                             }
