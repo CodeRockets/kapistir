@@ -45,6 +45,8 @@ class Question {
     var optionBCount: Int
     var skipCount: Int
     
+    var answer: Answer?
+    
     var isAnswered: Bool = false
     
     var imageLeft: UIImage?
@@ -80,14 +82,14 @@ extension Question {
         let optionA = (response["option_a"] as! String)
         let optionB = response["option_b"] as! String
         
-        //var optionACount = response["option_a_count"] as! Int
-        //var optionBCount = response["option_b_count"] as! Int
-        //var skipCount = response["skip_count"] as! Int
+        let optionACount = response["option_a_count"] as! Int
+        let optionBCount = response["option_b_count"] as! Int
+        let skipCount = response["skip_count"] as! Int
         
         // test
-        let optionACount = Int(arc4random_uniform(100) + 1)
-        let optionBCount = Int(arc4random_uniform(100) + 1)
-        let skipCount =   Int(arc4random_uniform(12) + 1)
+        //let optionACount = Int(arc4random_uniform(100) + 1)
+        //let optionBCount = Int(arc4random_uniform(100) + 1)
+        //let skipCount =   Int(arc4random_uniform(12) + 1)
         
         let question = Question(
             id: id, optionA: optionA, optionB: optionB, optionACount: optionACount, optionBCount: optionBCount, skipCount: skipCount

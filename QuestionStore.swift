@@ -14,20 +14,20 @@ struct QuestionStore{
     
     typealias Callback = (Batch)-> Void
     
-    static var currentQuestionIndex = 0
+    private static var currentQuestion: Question?
     
     private static var _questions = [Question]()
     
     private static var _callbacks = [Callback]()
     
-    static func registerUpdateCallback(block: Callback) {
-        self._callbacks.append(block)
-    }
-    
     private static func publishUpdate(){
         for block in self._callbacks {
             block(self._questions)
         }
+    }
+    
+    static func registerUpdateCallback(block: Callback) {
+        self._callbacks.append(block)
     }
     
     static func getBatch() {
@@ -37,18 +37,24 @@ struct QuestionStore{
             // error
             },
             successCallback:  {(questions) -> Void in
-                self._questions = questions
+                self._questions = self._questions + questions
                 self.publishUpdate()
             })
     }
-
-    static func updateCurrentQuestionIndex(index: Int) {
-        currentQuestionIndex = index
-    }
     
-    static func appendQuestion(question: Question) {
-        _questions.append(question)
-        publishUpdate()
+    static func setCurrentQuestion(question: Question) {
+        self.currentQuestion = question
+        
+        let index = self._questions.indexOf { q -> Bool in
+            return q.id == question.id
+        }
+        
+        print("index \(index), question count: \(self._questions.count)")
+        
+        if self._questions.count - index! < 7 {
+            print("get next batch")
+            self.getBatch()
+            print("index \(index), question count: \(self._questions.count)")
+        }
     }
-    
 }

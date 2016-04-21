@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         App.Load.settings()
+        UserStore.loadUserLocal()
         
         return true
     }

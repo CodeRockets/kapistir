@@ -14,6 +14,8 @@ class MainTableViewController: UITableViewController {
     
     var questions = [Question]()
     
+    var currentQuestion: Question?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,15 +62,28 @@ class MainTableViewController: UITableViewController {
             cell.question = self.questions[indexPath.row]
         
             QuestionTableViewCell.configureTableCell(cell.question, cell: &cell)
-            
+        
             return cell
         //}
     }
     
-    //override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         //QuestionStore.currentQuestionIndex = indexPath.row
-        //print("current question index \(QuestionStore.currentQuestionIndex)")
-    //}
+        print("current question index \(indexPath.row)")
+        
+        if let _ = self.currentQuestion?.answer {
+            
+        } else{
+            
+            if let currentQuestion = self.currentQuestion {
+                Api.saveAnswer(currentQuestion, answer: .Skip, errorCallback: {}, successCallback: {})
+            }
+            
+        }
+        
+        self.currentQuestion = self.questions[indexPath.row]
+        QuestionStore.setCurrentQuestion(self.currentQuestion!)
+    }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.frame.size.height

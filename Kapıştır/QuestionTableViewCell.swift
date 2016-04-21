@@ -46,7 +46,7 @@ class QuestionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
           
             /*let colorsLeft = ColorsFromImage(self.imgLeft.image!, withFlatScheme: true)
@@ -63,8 +63,8 @@ class QuestionTableViewCell: UITableViewCell {
             self.imgProfileImage.layer.cornerRadius = self.imgProfileImage.frame.size.width / 2
             self.imgProfileImage.layer.masksToBounds = true
             
-            let tapGestureRecoginzerLeft = UITapGestureRecognizer(target:self, action:Selector("tappedLeft"))
-            let tapGestureRecoginzerRight = UITapGestureRecognizer(target:self, action:Selector("tappedRight"))
+            let tapGestureRecoginzerLeft = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedLeft))
+            let tapGestureRecoginzerRight = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedRight))
 
             self.imgLeft.addGestureRecognizer(tapGestureRecoginzerLeft)
             self.imgRight.addGestureRecognizer(tapGestureRecoginzerRight)
@@ -74,11 +74,27 @@ class QuestionTableViewCell: UITableViewCell {
     func tappedLeft() {
         self.question.optionACount += 1
         showVotes()
+        
+        self.question.answer = .Left
+        
+        Api.saveAnswer(self.question, answer: .Left, errorCallback: {
+            // hata oluştu
+            }, successCallback: {
+                // cevap kaydedildi
+            })
     }
     
     func tappedRight() {
         self.question.optionBCount += 1
         showVotes()
+        
+        self.question.answer = .Right
+        
+        Api.saveAnswer(self.question, answer: .Right, errorCallback: {
+            // hata oluştu
+            }, successCallback: {
+                // cevap kaydedildi
+            })
     }
     
     func showVotes() {
@@ -118,14 +134,10 @@ class QuestionTableViewCell: UITableViewCell {
         
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) { () -> Void in
             for i in 1...100 {
-                print("in loop")
                 usleep(5000)
                 dispatch_async(dispatch_get_main_queue()) { ()-> Void in
                     self.ratioLeft.text = "% \(Int(self.question.ratioA * 100.0)*i/100 )"
                     self.ratioRight.text = "% \(Int(self.question.ratioB * 100.0)*i/100 )"
-                    
-                    print(self.ratioLeft.text)
-                    print(self.ratioRight.text)
                 }
             }
         }
@@ -157,5 +169,6 @@ class QuestionTableViewCell: UITableViewCell {
         
         cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
         cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!)
+        
     }
 }

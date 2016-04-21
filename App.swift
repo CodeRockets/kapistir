@@ -20,12 +20,15 @@ struct App {
         static var uploadImage = "question/image"
         static var saveUser = "user"
         static var saveQuestion = "question"
+        static var saveAnswer = "answer"
     }
     
     struct Keys {
         static var clientId: String!
         static var version: String!
         static var installation: String!
+        
+        static var requestHeaders: [String:String]!
     }
     
     struct Load {
@@ -45,8 +48,15 @@ struct App {
             App.URLs.uploadImage = backendEndpoint! + App.URLs.uploadImage
             App.URLs.saveUser = backendEndpoint! + App.URLs.saveUser
             App.URLs.saveQuestion = backendEndpoint! + App.URLs.saveQuestion
+            App.URLs.saveAnswer = backendEndpoint! + App.URLs.saveAnswer
             
-            print("app setting loaded \(clientId), \(installation), \(version)")
+            App.Keys.requestHeaders = [
+                "x-voter-client-id":     App.Keys.clientId,
+                "x-voter-version":       App.Keys.version,
+                "x-voter-installation":  UIDevice.currentDevice().identifierForVendor!.UUIDString
+            ]
+        
+            print("app setting loaded \(App.Keys.requestHeaders)")
         }
     }
 }

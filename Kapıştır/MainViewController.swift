@@ -36,9 +36,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        UserStore.loadUserLocal()
-        
+    override func viewWillAppear(animated: Bool) {        
         if let _ = UserStore.user {
             print("user logged in")
             self.btnProfile.hidden = false

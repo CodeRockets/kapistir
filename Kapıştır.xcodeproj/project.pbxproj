@@ -35,6 +35,7 @@
 		153C1EA11CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1EA01CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift */; };
 		153C1EA31CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153C1EA21CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib */; };
 		153C1EA51CC8161D00CF94C3 /* PathDynamicModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1EA41CC8161D00CF94C3 /* PathDynamicModal.swift */; };
+		153C1EA71CC95FED00CF94C3 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1EA61CC95FED00CF94C3 /* Answer.swift */; };
 		157B9D071CA68B350026EFC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 157B9D061CA68B350026EFC1 /* .gitignore */; };
 		159FABEF1CBEEE540049941E /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FABEE1CBEEE540049941E /* Publisher.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +92,7 @@
 		153C1EA01CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalSaveQuestionSuccess.swift; sourceTree = "<group>"; };
 		153C1EA21CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModalSaveQuestionSuccess.xib; sourceTree = "<group>"; };
 		153C1EA41CC8161D00CF94C3 /* PathDynamicModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathDynamicModal.swift; sourceTree = "<group>"; };
+		153C1EA61CC95FED00CF94C3 /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		157B9D061CA68B350026EFC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		159FABEE1CBEEE540049941E /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		260E7C28E0B16BCC0D428CDB /* Pods-Kapıştır.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kapıştır.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kapıştır/Pods-Kapıştır.release.xcconfig"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		1535A6DC1C953E9100897674 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				153C1EA61CC95FED00CF94C3 /* Answer.swift */,
 				1535A6F11C95C31000897674 /* RoundedImageButton.swift */,
 				1535A6AB1C953E8800897674 /* AppDelegate.swift */,
 				1535A6DE1C953ED000897674 /* App.swift */,
@@ -428,6 +431,7 @@
 				1535A6E31C95405C00897674 /* Question.swift in Sources */,
 				1535A6F01C95866D00897674 /* QuestionStore.swift in Sources */,
 				1535A6E11C953EFB00897674 /* Api.swift in Sources */,
+				153C1EA71CC95FED00CF94C3 /* Answer.swift in Sources */,
 				1535A6F21C95C31000897674 /* RoundedImageButton.swift in Sources */,
 				1535A7081C9A1E6E00897674 /* CreateViewController.swift in Sources */,
 				1535A7061C99E23C00897674 /* User.swift in Sources */,
