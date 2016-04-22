@@ -18,6 +18,8 @@ struct User {
     
     var profileImage: UIImage?
     
+    var questions = [Question]()
+    
     //var facebookToken: String
     // var score: Int = 0
 }

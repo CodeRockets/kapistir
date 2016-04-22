@@ -87,7 +87,8 @@ class UserStore{
                 userId: defaults.valueForKey("userId") as! String,
                 profileImageUrl: defaults.valueForKey("profileImageUrl") as! String,
                 facebookId: defaults.valueForKey("facebookId") as! String,
-                profileImage: profileImage
+                profileImage: profileImage,
+                questions: [Question]()
             )
             
             print("loading user local \(self._user)")

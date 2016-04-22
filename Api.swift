@@ -93,7 +93,8 @@ struct Api {
                         userId: json["data"]["id"].stringValue,
                         profileImageUrl: json["data"]["profile_img"].stringValue,
                         facebookId: json["data"]["facebook_id"].stringValue,
-                        profileImage: nil
+                        profileImage: nil,
+                        questions: [Question]()
                     )
                     
                     successCallback(loggedUser: user)
@@ -187,5 +188,9 @@ struct Api {
                     errorCallback()
                 }
         }
+    }
+    
+    static func getUserQuestions(user: User, errorCallback: ()-> Void, successCallback: ([Question])->Void) {
+        Api.getBatch(errorCallback, successCallback: successCallback)
     }
 }

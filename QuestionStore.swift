@@ -54,7 +54,6 @@ struct QuestionStore{
         if self._questions.count - index! < 7 {
             print("get next batch")
             self.getBatch()
-            print("index \(index), question count: \(self._questions.count)")
         }
     }
 }
