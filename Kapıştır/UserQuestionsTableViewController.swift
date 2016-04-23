@@ -10,42 +10,49 @@ import UIKit
 
 class UserQuestionsTableViewController: UITableViewController {
 
+    var userQuestions = [Question]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        Api.getUserQuestions(UserStore.user!, errorCallback: {
+            // error
+            print("getUserQuestions error")
+            }, successCallback: { questions in
+                
+                print("got user questions \(questions.count)")
+                
+                self.userQuestions = questions
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.reloadData()
+                }
+            })
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return self.userQuestions.count
     }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UserQuestionTableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("userQuestionCell", forIndexPath: indexPath) as! UserQuestionTableViewCell
 
-        // Configure the cell...
-
+        let question = self.userQuestions[indexPath.row]
+        
+        UserQuestionTableViewCell.configureTableCell(question, cell: &cell)
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

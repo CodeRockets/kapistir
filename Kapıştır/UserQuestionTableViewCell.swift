@@ -29,4 +29,12 @@ class UserQuestionTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    static func configureTableCell(question: Question, inout cell: UserQuestionTableViewCell)  {
+        cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
+        cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!)
+        
+        cell.lblLeft.text = "% " + String(question.ratioA) + "(" + String(question.optionACount) + " oy)"
+        cell.lblRight.text = "% " + String(question.ratioB) + "(" + String(question.optionBCount) + " oy)"
+    }
 }

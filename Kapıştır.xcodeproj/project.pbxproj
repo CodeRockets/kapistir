@@ -172,8 +172,8 @@
 				1535A6FF1C99857700897674 /* UserProfileViewController.swift */,
 				1535A7071C9A1E6E00897674 /* CreateViewController.swift */,
 				153C1EA81CC9820900CF94C3 /* UserQuestionsTableViewController.swift */,
-				1535A6AF1C953E8800897674 /* Main.storyboard */,
 				153C1EAA1CC9ED2A00CF94C3 /* UserQuestionTableViewCell.swift */,
+				1535A6AF1C953E8800897674 /* Main.storyboard */,
 				153C1EA21CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib */,
 				153C1EA01CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift */,
 			);
