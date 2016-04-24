@@ -38,7 +38,7 @@ class UserProfileViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        UIView.animateWithDuration(
+        /*UIView.animateWithDuration(
             2.0,
             delay: 0,
             usingSpringWithDamping: 0.6,
@@ -46,9 +46,9 @@ class UserProfileViewController: UIViewController {
             options: .CurveLinear,
             animations: { () -> Void in
                 
-                self.imProfileTop.constant = 66
+                self.imProfileTop.constant = 30
                 self.view.layoutIfNeeded()
                 
-            }, completion: nil)
+            }, completion: nil)*/
     }
 }

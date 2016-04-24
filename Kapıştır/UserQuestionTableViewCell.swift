@@ -18,6 +18,7 @@ class UserQuestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblLeft: UILabel!
     
+    @IBOutlet weak var lblMid: UILabel!
     
     @IBOutlet weak var lblRight: UILabel!
     
@@ -34,7 +35,8 @@ class UserQuestionTableViewCell: UITableViewCell {
         cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
         cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!)
         
-        cell.lblLeft.text = "% " + String(question.ratioA) + "(" + String(question.optionACount) + " oy)"
-        cell.lblRight.text = "% " + String(question.ratioB) + "(" + String(question.optionBCount) + " oy)"
+        cell.lblLeft.text = /*"% " + String(question.ratioA) + "(" +*/ String(question.optionACount) + " oy"
+        cell.lblRight.text = /*"% " + String(question.ratioB) + "(" + */ String(question.optionBCount) + " oy"
+        cell.lblMid.text = "Boş: " + String(question.skipCount) //+ " (%"+String(question.ratioSkip)+")"
     }
 }

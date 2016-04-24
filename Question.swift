@@ -64,6 +64,10 @@ class Question {
         return totalAnswerCount > 0 ? Double(optionBCount) / Double(totalAnswerCount) : 0
     }
 
+    var ratioSkip: Double {
+        return totalAnswerCount > 0 ? Double(skipCount) / Double(totalAnswerCount) : 0
+    }
+    
     init(id: String, optionA: String, optionB: String, optionACount:Int, optionBCount:Int, skipCount: Int){
         self.id = id
         self.optionA = optionA
@@ -85,11 +89,6 @@ extension Question {
         let optionACount = response["option_a_count"] as! Int
         let optionBCount = response["option_b_count"] as! Int
         let skipCount = response["skip_count"] as! Int
-        
-        // test
-        //let optionACount = Int(arc4random_uniform(100) + 1)
-        //let optionBCount = Int(arc4random_uniform(100) + 1)
-        //let skipCount =   Int(arc4random_uniform(12) + 1)
         
         let question = Question(
             id: id, optionA: optionA, optionB: optionB, optionACount: optionACount, optionBCount: optionBCount, skipCount: skipCount

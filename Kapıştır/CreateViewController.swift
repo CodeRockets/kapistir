@@ -50,6 +50,9 @@ class CreateViewController:
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
+    @IBOutlet weak var btnSend: RoundedImageButton!
+    
     @IBAction func add(sender: RoundedImageButton) {
         let croppedLeft = crop(image: self.imageLeft!, targetScrollView: self.scrollViewLeft)
         let croppedRight = crop(image: self.imageRight!, targetScrollView: self.scrollViewRight)
@@ -269,6 +272,8 @@ class CreateViewController:
         // center views
         centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
         centerImageInScrollview(self.scrollViewRight, imageView: self.imageViewRight)
+        
+        self.btnSend.enabled = false
         
         self.setupActionSheet()
     }
