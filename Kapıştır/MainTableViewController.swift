@@ -24,7 +24,7 @@ class MainTableViewController: UITableViewController {
     }
 
     func questionsUpdated(batch: [Question]) {
-        print("questions updated and receiced in tableViewController \(batch)")
+        print("questions updated and received in tableViewController")
         
         self.questions = batch
         

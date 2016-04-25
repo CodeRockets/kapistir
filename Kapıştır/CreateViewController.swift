@@ -140,6 +140,9 @@ class CreateViewController:
                                     },
                                     successCallback: { (question) in
                                         print("question saved \(question)")
+                                        
+                                        QuestionStore.insertCurrentQuestion(question)
+                                        
                                         let view = ModalSaveQuestionSuccess.instantiateFromNib()
                                         let window = UIApplication.sharedApplication().delegate?.window!
                                         let modal = PathDynamicModal.show(modalView: view, inView: window!)
@@ -272,9 +275,7 @@ class CreateViewController:
         // center views
         centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
         centerImageInScrollview(self.scrollViewRight, imageView: self.imageViewRight)
-        
-        self.btnSend.enabled = false
-        
+                
         self.setupActionSheet()
     }
     

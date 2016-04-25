@@ -16,6 +16,8 @@ struct QuestionStore{
     
     private static var currentQuestion: Question?
     
+    private static var currentQuestionIndex = 0
+    
     private static var _questions = [Question]()
     
     private static var _callbacks = [Callback]()
@@ -45,15 +47,20 @@ struct QuestionStore{
     static func setCurrentQuestion(question: Question) {
         self.currentQuestion = question
         
-        let index = self._questions.indexOf { q -> Bool in
+        self.currentQuestionIndex = self._questions.indexOf { q -> Bool in
             return q.id == question.id
-        }
+        }!
         
         print("index \(index), question count: \(self._questions.count)")
         
-        if self._questions.count - index! < 7 {
+        if self._questions.count - self.currentQuestionIndex < 7 && self._questions.count > 7 {
             print("get next batch")
             self.getBatch()
         }
+    }
+    
+    static func insertCurrentQuestion(question: Question){
+        self._questions.insert(question, atIndex: self.currentQuestionIndex)
+        self.publishUpdate()
     }
 }
