@@ -25,6 +25,14 @@ class CreateViewController:
     
     private var images = [Int:UIImage]()
     
+    private var settedImageCount = 0 {
+        didSet{
+            if settedImageCount == 2 {
+                btnSend.enabled = true
+            }
+        }
+    }
+    
     @IBOutlet weak var lblLoaderLeft: UILabel!
     
     @IBOutlet weak var lblLoaderRight: UILabel!
@@ -50,8 +58,11 @@ class CreateViewController:
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
-    @IBOutlet weak var btnSend: RoundedImageButton!
+    @IBOutlet weak var btnSend: RoundedImageButton! {
+        didSet {
+            btnSend.enabled = false
+        }
+    }
     
     @IBAction func add(sender: RoundedImageButton) {
         let croppedLeft = crop(image: self.imageLeft!, targetScrollView: self.scrollViewLeft)
@@ -133,8 +144,8 @@ class CreateViewController:
                                 // soruyu kaydet
                                 
                                 Api.saveQuestion(
-                                    imageUrls: (self.uploadedImageUrls[0]!, self.uploadedImageUrls[1]!),
-                                    images: (self.images[0]!, self.images[1]!),
+                                    imageUrls: (self.uploadedImageUrls[1]!, self.uploadedImageUrls[0]!),
+                                    images: (self.images[1]!, self.images[0]!),
                                     errorCallback: {
                                         //print("question save error")
                                     },
@@ -151,9 +162,7 @@ class CreateViewController:
                                             self.dismissViewControllerAnimated(true, completion: nil)
                                             return
                                         }
-                                        
                                     })
-                                
                             }
                         case .Failure(_):
                             print("question save error")
@@ -363,6 +372,8 @@ class CreateViewController:
         } else{
             self.imageLeft = image
         }
+        
+        self.settedImageCount += 1
         
         self.dismissViewControllerAnimated(true, completion:nil)
     }
