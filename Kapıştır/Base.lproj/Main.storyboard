@@ -25,7 +25,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PwW-Y5-h7p">
                                             <rect key="frame" x="207" y="60" width="207" height="269"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pepsi_logo" translatesAutoresizingMaskIntoConstraints="NO" id="xd2-Rl-mme">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pepsi_logo" translatesAutoresizingMaskIntoConstraints="NO" id="xd2-Rl-mme">
                                                     <rect key="frame" x="0.0" y="0.0" width="207" height="269"/>
                                                 </imageView>
                                                 <visualEffectView opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YKd-St-nWS">
@@ -72,7 +72,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0N-CD-iGh">
                                             <rect key="frame" x="0.0" y="60" width="207" height="269"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coke_logo" translatesAutoresizingMaskIntoConstraints="NO" id="wyT-ju-Gy4">
+                                                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coke_logo" translatesAutoresizingMaskIntoConstraints="NO" id="wyT-ju-Gy4">
                                                     <rect key="frame" x="0.0" y="0.0" width="207" height="269"/>
                                                 </imageView>
                                                 <visualEffectView opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJv-o0-imk">

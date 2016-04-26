@@ -166,17 +166,18 @@ class CreateViewController:
     }
     
     func crop(image originalImage: UIImage, targetScrollView: UIScrollView) -> UIImage {
-        let posX = targetScrollView.contentOffset.x
-        let posY = targetScrollView.contentOffset.y
-        let width = min( targetScrollView.bounds.width, originalImage.size.width )
-        let height = min( targetScrollView.bounds.height, originalImage.size.height )
+        let scale = UIScreen.mainScreen().scale
+        let posX = targetScrollView.contentOffset.x * scale
+        let posY = targetScrollView.contentOffset.y * scale
+        let width = min( scale * targetScrollView.bounds.width, originalImage.scale * originalImage.size.width )
+        let height = min( scale * targetScrollView.bounds.height, originalImage.scale * originalImage.size.height )
         
         let rect: CGRect = CGRectMake(posX, posY, width, height)
         
         print("crop rect \(rect)")
         
         // Create bitmap image from context using the rect
-        let imageResized = resizeImage(originalImage, newWidth: width * originalImage.scale * targetScrollView.zoomScale )
+        let imageResized = resizeImage(originalImage, newWidth: width * targetScrollView.zoomScale )
         
         print("resized width: \(imageResized.size), image scale: \(imageResized.scale)")
         
