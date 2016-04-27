@@ -33,13 +33,29 @@ class CreateViewController:
         }
     }
     
-    @IBOutlet weak var lblLoaderLeft: UILabel!
+    @IBOutlet weak var lblLoaderLeft: UILabel! {
+        didSet{
+            lblLoaderLeft.hidden = true
+        }
+    }
     
-    @IBOutlet weak var lblLoaderRight: UILabel!
+    @IBOutlet weak var lblLoaderRight: UILabel! {
+        didSet{
+            lblLoaderRight.hidden = true
+        }
+    }
     
-    @IBOutlet weak var loaderLeftHeight: NSLayoutConstraint!
+    @IBOutlet weak var loaderLeftHeight: NSLayoutConstraint! {
+        didSet{
+            loaderLeftHeight.constant = 0
+        }
+    }
     
-    @IBOutlet weak var loaderRightHeight: NSLayoutConstraint!
+    @IBOutlet weak var loaderRightHeight: NSLayoutConstraint! {
+        didSet{
+            loaderRightHeight.constant = 0
+        }
+    }
     
     @IBOutlet weak var lblLoaderLeftBottom: NSLayoutConstraint!
     
@@ -90,6 +106,11 @@ class CreateViewController:
         // save image to URL
         UIImageJPEGRepresentation(image, 1.0)?.writeToURL(imageURL, atomically: true)
         
+        // show progress bars and info labels
+        self.lblLoaderLeft.hidden = false
+        self.lblLoaderRight.hidden = false
+        self.btnSend.enabled = false
+        
         Alamofire.upload(
             .POST,
             App.URLs.uploadImage,
@@ -108,6 +129,7 @@ class CreateViewController:
                         let height = (self.view.frame.height - 104) * CGFloat(ratio)
                         
                         dispatch_async(dispatch_get_main_queue()) {
+
                             UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
                                 
                                 if target == 0 {
@@ -116,14 +138,16 @@ class CreateViewController:
                                     
                                     self.lblLoaderLeftBottom.constant = self.loaderLeftHeight.constant - 30
                                     self.viewLeft.layoutIfNeeded()
+                                    
+                                    self.lblLoaderLeft.text = "Yükleniyor %\(Int(ratio*100.0))"
                                 } else{
                                     self.loaderRightHeight.constant = height
                                     self.viewLoaderRight.layoutIfNeeded()
                                     
                                     self.lblLoaderRightBottom.constant = self.loaderRightHeight.constant - 30
                                     self.viewRight.layoutIfNeeded()
+                                    self.lblLoaderRight.text = "Yükleniyor %\(Int(ratio*100.0))"
                                 }
-                                
                                 
                             }), completion: nil)
                         }

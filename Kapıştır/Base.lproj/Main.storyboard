@@ -674,7 +674,7 @@
                                             <constraint firstAttribute="height" constant="32" id="efE-8s-AYn"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Etiket ekle! " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5K-Oa-wnd">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Etiket ekle! " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5K-Oa-wnd">
                                         <rect key="frame" x="292" y="11" width="75" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="THF-fY-mMB"/>
@@ -725,9 +725,9 @@
                                         <color key="backgroundColor" red="0.88699622856196869" green="0.98849507045517815" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </scrollView>
                                     <visualEffectView opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fts-f3-b8T" userLabel="loaderRight">
-                                        <rect key="frame" x="1" y="541" width="186" height="22"/>
+                                        <rect key="frame" x="0.0" y="541" width="187" height="22"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hGG-5f-sKq">
-                                            <rect key="frame" x="0.0" y="0.0" width="186" height="22"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="22"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <constraints>
@@ -751,7 +751,7 @@
                                     <constraint firstAttribute="bottom" secondItem="fhF-dN-hz7" secondAttribute="bottom" constant="25" id="5k1-Jj-zB8"/>
                                     <constraint firstItem="gcs-Ir-LjF" firstAttribute="centerX" secondItem="TpH-u1-Gj2" secondAttribute="centerX" id="9h0-pg-TLk"/>
                                     <constraint firstItem="fhF-dN-hz7" firstAttribute="leading" secondItem="TpH-u1-Gj2" secondAttribute="leading" id="LXN-Y7-ONq"/>
-                                    <constraint firstItem="fts-f3-b8T" firstAttribute="leading" secondItem="TpH-u1-Gj2" secondAttribute="leading" constant="1" id="Ozp-Rq-wke"/>
+                                    <constraint firstItem="fts-f3-b8T" firstAttribute="leading" secondItem="TpH-u1-Gj2" secondAttribute="leading" id="Ozp-Rq-wke"/>
                                     <constraint firstItem="gcs-Ir-LjF" firstAttribute="height" secondItem="TpH-u1-Gj2" secondAttribute="height" id="P2s-LN-YQT"/>
                                     <constraint firstAttribute="trailing" secondItem="fts-f3-b8T" secondAttribute="trailing" id="gCZ-bs-gzW"/>
                                     <constraint firstItem="gcs-Ir-LjF" firstAttribute="centerY" secondItem="TpH-u1-Gj2" secondAttribute="centerY" id="lU0-tG-Ese"/>
