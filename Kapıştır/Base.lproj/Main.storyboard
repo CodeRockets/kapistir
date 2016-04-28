@@ -408,7 +408,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jrl-OQ-a8N">
                                             <rect key="frame" x="0.0" y="0.0" width="188" height="137"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PRu-Bc-8NL">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PRu-Bc-8NL">
                                                     <rect key="frame" x="0.0" y="20" width="188" height="117"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dq-1J-BbM">
@@ -434,7 +434,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H5x-o6-IhY">
                                             <rect key="frame" x="188" y="0.0" width="187" height="137"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uEr-o4-GhF">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uEr-o4-GhF">
                                                     <rect key="frame" x="0.0" y="20" width="187" height="117"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkX-HE-cfM">
@@ -791,12 +791,19 @@
                                                 <constraint firstAttribute="width" constant="77" id="xlY-Oj-K47"/>
                                             </constraints>
                                             <state key="normal" title="Gönder">
-                                                <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" red="0.45911458329999999" green="0.45911458329999999" blue="0.45911458329999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="add:" destination="Rwj-YY-zko" eventType="touchUpInside" id="STg-nm-fW5"/>
                                             </connections>
                                         </button>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ZBs-I8-W5u">
+                                            <rect key="frame" x="316" y="23" width="24" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="7B7-mT-eiV"/>
+                                                <constraint firstAttribute="height" constant="24" id="dgY-b7-EBT"/>
+                                            </constraints>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="IOC-eS-E4B" secondAttribute="trailing" constant="8" id="8gt-m9-YxC"/>
@@ -805,6 +812,8 @@
                                         <constraint firstAttribute="bottom" secondItem="IOC-eS-E4B" secondAttribute="bottom" constant="8" id="Uh6-xo-hVC"/>
                                         <constraint firstItem="Kpq-vG-we3" firstAttribute="top" secondItem="n9D-8B-oHf" secondAttribute="top" constant="20" id="WNX-on-41r"/>
                                         <constraint firstAttribute="trailing" secondItem="Wug-mf-RJv" secondAttribute="trailing" id="dqi-i4-2CJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZBs-I8-W5u" secondAttribute="trailing" constant="35" id="fHf-Ia-MiS"/>
+                                        <constraint firstItem="ZBs-I8-W5u" firstAttribute="top" secondItem="n9D-8B-oHf" secondAttribute="top" constant="23" id="nLW-iy-B4F"/>
                                         <constraint firstItem="Kpq-vG-we3" firstAttribute="leading" secondItem="n9D-8B-oHf" secondAttribute="leading" constant="8" id="xFE-af-eqT"/>
                                     </constraints>
                                 </view>
@@ -836,6 +845,7 @@
                     <connections>
                         <outlet property="btnSend" destination="IOC-eS-E4B" id="Rtx-z2-rsw"/>
                         <outlet property="imgProfile" destination="GYE-xY-wS8" id="AXx-Oc-CHB"/>
+                        <outlet property="indWorking" destination="ZBs-I8-W5u" id="A9n-e3-Yca"/>
                         <outlet property="lblLoaderLeft" destination="eOc-KD-QHS" id="Lma-bZ-tqm"/>
                         <outlet property="lblLoaderLeftBottom" destination="z1L-b1-kFC" id="dUk-tR-L1E"/>
                         <outlet property="lblLoaderRight" destination="fhF-dN-hz7" id="oMP-vQ-rwI"/>

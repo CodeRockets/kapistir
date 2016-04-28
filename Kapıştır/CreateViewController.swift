@@ -25,37 +25,45 @@ class CreateViewController:
     
     private var images = [Int:UIImage]()
     
-    private var settedImageCount = 0 {
+    private var working = false {
         didSet{
-            if settedImageCount == 2 {
-                btnSend.enabled = true
+            if working {
+                self.btnSend.hidden = true
+                self.indWorking.hidden = false
+                self.indWorking.startAnimating()
+            }
+            else{
+                self.indWorking.hidden = true
+                self.lblLoaderLeft.hidden = true
+                self.lblLoaderRight.hidden = true
+                self.loaderLeftHeight.constant = 0
+                self.loaderRightHeight.constant = 0
+                self.btnSend.enabled = false
             }
         }
     }
     
-    @IBOutlet weak var lblLoaderLeft: UILabel! {
+    @IBOutlet weak var indWorking: UIActivityIndicatorView!
+    
+    private var settedImageCount = 0 {
         didSet{
-            lblLoaderLeft.hidden = true
+            if settedImageCount == 2 {
+                btnSend.enabled = true
+                
+                // get default button color
+                let defaultButtonColor = UIButton(type: UIButtonType.System).titleColorForState(.Normal)!
+                btnSend.setTitleColor(defaultButtonColor, forState: .Normal)
+            }
         }
     }
     
-    @IBOutlet weak var lblLoaderRight: UILabel! {
-        didSet{
-            lblLoaderRight.hidden = true
-        }
-    }
+    @IBOutlet weak var lblLoaderLeft: UILabel!
     
-    @IBOutlet weak var loaderLeftHeight: NSLayoutConstraint! {
-        didSet{
-            loaderLeftHeight.constant = 0
-        }
-    }
+    @IBOutlet weak var lblLoaderRight: UILabel!
     
-    @IBOutlet weak var loaderRightHeight: NSLayoutConstraint! {
-        didSet{
-            loaderRightHeight.constant = 0
-        }
-    }
+    @IBOutlet weak var loaderLeftHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var loaderRightHeight: NSLayoutConstraint!
     
     @IBOutlet weak var lblLoaderLeftBottom: NSLayoutConstraint!
     
@@ -74,11 +82,7 @@ class CreateViewController:
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBOutlet weak var btnSend: RoundedImageButton! {
-        didSet {
-            btnSend.enabled = false
-        }
-    }
+    @IBOutlet weak var btnSend: RoundedImageButton!
     
     @IBAction func add(sender: RoundedImageButton) {
         let croppedLeft = crop(image: self.imageLeft!, targetScrollView: self.scrollViewLeft)
@@ -91,7 +95,36 @@ class CreateViewController:
         uploadImage(croppedRight, target: 0)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.imgProfile.layer.cornerRadius = imgProfile.bounds.size.width / 2
+        self.imgProfile.clipsToBounds = true
+        
+        self.scrollViewRight.addSubview(imageViewRight)
+        self.scrollViewLeft.addSubview(imageViewLeft)
+        
+        let tapRight = UITapGestureRecognizer(target: self, action: #selector(CreateViewController.tappedRight))
+        let tapLeft = UITapGestureRecognizer(target: self, action: #selector(CreateViewController.tappedLeft))
+        self.scrollViewRight.addGestureRecognizer(tapRight)
+        self.scrollViewLeft.addGestureRecognizer(tapLeft)
+        
+        self.imageLeft = UIImage(named: "tap")
+        self.imageRight = UIImage(named: "tap")
+        
+        // center views
+        centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
+        centerImageInScrollview(self.scrollViewRight, imageView: self.imageViewRight)
+        
+        self.setupActionSheet()
+        
+        self.working = false
+    }
+    
     func uploadImage(image:UIImage, target: Int) {
+        
+        self.working = true
+        
         let headers = [
             "Authorization": "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
             "Content-Type": "application/x-www-form-urlencoded",
@@ -109,7 +142,6 @@ class CreateViewController:
         // show progress bars and info labels
         self.lblLoaderLeft.hidden = false
         self.lblLoaderRight.hidden = false
-        self.btnSend.enabled = false
         
         Alamofire.upload(
             .POST,
@@ -175,6 +207,8 @@ class CreateViewController:
                                     },
                                     successCallback: { (question) in
                                         print("question saved \(question)")
+                                        
+                                        self.working = false
                                         
                                         QuestionStore.insertCurrentQuestion(question)
                                         
@@ -288,30 +322,6 @@ class CreateViewController:
     @IBOutlet weak var lblTags: UILabel!
     
     @IBOutlet weak var imgProfile: UIImageView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.imgProfile.layer.cornerRadius = imgProfile.bounds.size.width / 2
-        self.imgProfile.clipsToBounds = true
-        
-        self.scrollViewRight.addSubview(imageViewRight)
-        self.scrollViewLeft.addSubview(imageViewLeft)
-        
-        let tapRight = UITapGestureRecognizer(target: self, action: #selector(CreateViewController.tappedRight))
-        let tapLeft = UITapGestureRecognizer(target: self, action: #selector(CreateViewController.tappedLeft))
-        self.scrollViewRight.addGestureRecognizer(tapRight)
-        self.scrollViewLeft.addGestureRecognizer(tapLeft)
-        
-        self.imageLeft = UIImage(named: "tap")
-        self.imageRight = UIImage(named: "tap")
-        
-        // center views
-        centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
-        centerImageInScrollview(self.scrollViewRight, imageView: self.imageViewRight)
-                
-        self.setupActionSheet()
-    }
     
     private var actionSheet: UIAlertController!
     
