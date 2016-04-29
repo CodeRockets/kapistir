@@ -107,8 +107,8 @@ class QuestionTableViewCell: UITableViewCell {
         
         // label oluştur
         
-        let heightA = 40 + (self.viewLeft.frame.size.height-40-88) * CGFloat(question.ratioA)
-        let heightB = 40 + (self.viewRight.frame.size.height-40-88) * CGFloat(question.ratioB)
+        let heightA = 40 + (self.viewLeft.frame.size.height-40) * CGFloat(question.ratioA)
+        let heightB = 40 + (self.viewRight.frame.size.height-40) * CGFloat(question.ratioB)
         
         print("A: \(self.question.optionACount), B: \(self.question.optionBCount), Tot: \(question.totalAnswerCount), RatA: \(question.ratioA), RatB: \(question.ratioB), HA: \(heightA), HB: \(heightB)")
         
@@ -145,11 +145,15 @@ class QuestionTableViewCell: UITableViewCell {
     
     static func configureTableCell(question: Question, inout cell: QuestionTableViewCell)  {
         if question.isAnswered == true {
-            cell.viewVotesLeftHeightConst.constant = cell.viewLeft.frame.size.height * CGFloat(question.ratioA)
-            cell.viewVotesRightHeightConst.constant = cell.viewRight.frame.size.height * CGFloat(question.ratioB)
             
-            cell.ratioLeftBottom.constant = cell.viewLeft.frame.size.height * CGFloat(question.ratioA) - 30
-            cell.ratioRightBottom.constant = cell.viewRight.frame.size.height * CGFloat(question.ratioB) - 30
+            let heightA = 40 + (cell.viewLeft.frame.size.height-40) * CGFloat(question.ratioA)
+            let heightB = 40 + (cell.viewRight.frame.size.height-40) * CGFloat(question.ratioB)
+            
+            cell.viewVotesLeftHeightConst.constant = heightA
+            cell.viewVotesRightHeightConst.constant = heightB
+            
+            cell.ratioLeftBottom.constant = heightA - 30
+            cell.ratioRightBottom.constant = heightB - 30
             
             cell.ratioLeft.text = "% \( Int(question.ratioA * 100) )"
             cell.ratioRight.text = "% \( Int(question.ratioB * 100) )"

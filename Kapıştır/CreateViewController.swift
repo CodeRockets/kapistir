@@ -170,7 +170,6 @@ class CreateViewController:
                                     
                                     self.lblLoaderLeftBottom.constant = self.loaderLeftHeight.constant - 30
                                     self.viewLeft.layoutIfNeeded()
-                                    
                                     self.lblLoaderLeft.text = "Yükleniyor %\(Int(ratio*100.0))"
                                 } else{
                                     self.loaderRightHeight.constant = height
