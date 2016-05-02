@@ -43,6 +43,22 @@ class QuestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var viewVotesRightHeightConst: NSLayoutConstraint!
     
+    @IBOutlet weak var imgCheckLeft: UIImageView!
+    
+    @IBOutlet weak var imgCheckLeftBottomConst: NSLayoutConstraint! {
+        didSet{
+            self.imgCheckLeftBottomConst.constant = 0
+        }
+    }
+    
+    @IBOutlet weak var imgCheckRight: UIImageView!
+    
+    @IBOutlet weak var imgCheckRightBottomConst: NSLayoutConstraint! {
+        didSet{
+            self.imgCheckRightBottomConst.constant = 0
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -63,20 +79,31 @@ class QuestionTableViewCell: UITableViewCell {
             self.imgProfileImage.layer.cornerRadius = self.imgProfileImage.frame.size.width / 2
             self.imgProfileImage.layer.masksToBounds = true
             
-            let tapGestureRecoginzerLeft = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedLeft))
-            let tapGestureRecoginzerRight = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedRight))
+            let tapGestureRecoginzerLeft = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedLeft(_:)))
+            let tapGestureRecoginzerRight = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedRight(_:)))
 
             self.imgLeft.addGestureRecognizer(tapGestureRecoginzerLeft)
             self.imgRight.addGestureRecognizer(tapGestureRecoginzerRight)
         }
     }
     
-    func tappedLeft() {
+    func tappedLeft(gesture: UITapGestureRecognizer ) {
+        if self.question.answer != nil {
+            return
+        }
+        
         self.question.optionACount += 1
         showVotes()
         
         self.question.answer = .Left
         
+        // show selection tick
+        self.imgCheckLeft.hidden = false
+        UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+            self.imgCheckLeftBottomConst.constant = self.viewLeft.bounds.size.height - gesture.locationInView(self.viewLeft).y - self.imgCheckLeft.bounds.size.height/2
+            self.viewLeft.layoutIfNeeded()
+        }), completion: nil)
+
         Api.saveAnswer(self.question, answer: .Left, errorCallback: {
             // hata oluştu
             }, successCallback: {
@@ -84,11 +111,22 @@ class QuestionTableViewCell: UITableViewCell {
             })
     }
     
-    func tappedRight() {
+    func tappedRight(gesture: UITapGestureRecognizer) {
+        if self.question.answer != nil {
+            return
+        }
+        
         self.question.optionBCount += 1
         showVotes()
         
         self.question.answer = .Right
+        
+        // show selection tick
+        self.imgCheckRight.hidden = false
+        UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+            self.imgCheckRightBottomConst.constant = self.viewRight.bounds.size.height - gesture.locationInView(self.viewRight).y - self.imgCheckRight.bounds.size.height/2
+            self.viewRight.layoutIfNeeded()
+        }), completion: nil)
         
         Api.saveAnswer(self.question, answer: .Right, errorCallback: {
             // hata oluştu

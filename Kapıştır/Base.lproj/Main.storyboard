@@ -48,6 +48,13 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick" translatesAutoresizingMaskIntoConstraints="NO" id="x7H-Ai-zjB" userLabel="imgCheckRight">
+                                                    <rect key="frame" x="53" y="85" width="100" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="WAm-s2-WfX"/>
+                                                        <constraint firstAttribute="height" constant="100" id="hTm-or-jEo"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -57,9 +64,11 @@
                                                 <constraint firstAttribute="bottom" secondItem="Zau-gO-zzb" secondAttribute="bottom" constant="30" id="E8n-kY-QMU"/>
                                                 <constraint firstAttribute="bottom" secondItem="xd2-Rl-mme" secondAttribute="bottom" id="Gcc-3p-ySv"/>
                                                 <constraint firstItem="Zau-gO-zzb" firstAttribute="leading" secondItem="PwW-Y5-h7p" secondAttribute="leading" constant="8" id="Kcn-ac-vkF"/>
+                                                <constraint firstAttribute="bottom" secondItem="x7H-Ai-zjB" secondAttribute="bottom" constant="84" id="h5j-Oo-YbY"/>
                                                 <constraint firstItem="YKd-St-nWS" firstAttribute="leading" secondItem="PwW-Y5-h7p" secondAttribute="leading" id="hV0-DP-ubA"/>
                                                 <constraint firstItem="xd2-Rl-mme" firstAttribute="top" secondItem="PwW-Y5-h7p" secondAttribute="top" id="kxA-h2-2Nw"/>
                                                 <constraint firstAttribute="trailing" secondItem="Zau-gO-zzb" secondAttribute="trailing" constant="8" id="m3f-e3-Kqu"/>
+                                                <constraint firstItem="x7H-Ai-zjB" firstAttribute="centerX" secondItem="PwW-Y5-h7p" secondAttribute="centerX" id="pcr-6g-S6E"/>
                                                 <constraint firstAttribute="trailing" secondItem="YKd-St-nWS" secondAttribute="trailing" id="rcD-Ek-Prh"/>
                                                 <constraint firstItem="xd2-Rl-mme" firstAttribute="leading" secondItem="PwW-Y5-h7p" secondAttribute="leading" id="tTm-eg-ea1"/>
                                             </constraints>
@@ -95,6 +104,13 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick" translatesAutoresizingMaskIntoConstraints="NO" id="xbr-4r-bff" userLabel="imgCheckLeft">
+                                                    <rect key="frame" x="53" y="85" width="100" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="0wy-nK-rXv"/>
+                                                        <constraint firstAttribute="height" constant="100" id="F30-F6-GCg"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -104,8 +120,10 @@
                                                 <constraint firstItem="fJv-o0-imk" firstAttribute="leading" secondItem="f0N-CD-iGh" secondAttribute="leading" id="7RW-hg-4wf"/>
                                                 <constraint firstAttribute="bottom" secondItem="fJv-o0-imk" secondAttribute="bottom" id="E5r-Jx-e7a"/>
                                                 <constraint firstAttribute="bottom" secondItem="nk7-AU-ubO" secondAttribute="bottom" constant="30" id="H97-tc-7Ln"/>
+                                                <constraint firstAttribute="bottom" secondItem="xbr-4r-bff" secondAttribute="bottom" constant="84" id="Nfo-op-xma"/>
                                                 <constraint firstAttribute="trailing" secondItem="nk7-AU-ubO" secondAttribute="trailing" constant="8" id="VtF-oj-XNy"/>
                                                 <constraint firstAttribute="trailing" secondItem="fJv-o0-imk" secondAttribute="trailing" id="cCT-ma-S8f"/>
+                                                <constraint firstItem="xbr-4r-bff" firstAttribute="centerX" secondItem="f0N-CD-iGh" secondAttribute="centerX" id="ePs-54-bbG"/>
                                                 <constraint firstAttribute="bottom" secondItem="wyT-ju-Gy4" secondAttribute="bottom" id="pGi-lc-7Ba"/>
                                                 <constraint firstItem="wyT-ju-Gy4" firstAttribute="leading" secondItem="f0N-CD-iGh" secondAttribute="leading" id="pVF-1O-u0Q"/>
                                             </constraints>
@@ -190,6 +208,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="imgCheckLeft" destination="xbr-4r-bff" id="2Bz-BG-y94"/>
+                                    <outlet property="imgCheckLeftBottomConst" destination="Nfo-op-xma" id="1tB-x6-x6q"/>
+                                    <outlet property="imgCheckRight" destination="x7H-Ai-zjB" id="6lt-Ze-bEj"/>
+                                    <outlet property="imgCheckRightBottomConst" destination="h5j-Oo-YbY" id="rWE-cA-aQj"/>
                                     <outlet property="imgLeft" destination="wyT-ju-Gy4" id="B7f-Ny-QQE"/>
                                     <outlet property="imgProfileImage" destination="OFk-jv-wi3" id="eiL-gS-lTA"/>
                                     <outlet property="imgRight" destination="xd2-Rl-mme" id="YVX-5N-tsj"/>
@@ -948,5 +970,6 @@
         <image name="profile_img" width="508" height="428"/>
         <image name="raised-fist" width="361" height="500"/>
         <image name="swipe up" width="224" height="230"/>
+        <image name="tick" width="512" height="512"/>
     </resources>
 </document>

@@ -219,6 +219,10 @@ class CreateViewController:
                                             self.dismissViewControllerAnimated(true, completion: nil)
                                             return
                                         }
+                                        modal.closedHandler = {
+                                            print("modal closed")
+                                            self.dismissViewControllerAnimated(true, completion: nil)
+                                        }
                                     })
                             }
                         case .Failure(_):
