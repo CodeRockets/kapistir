@@ -46,6 +46,7 @@ struct Api {
                     
                     break
                 case .Failure(_):
+                    App.UI.showServerError(completion: nil)
                     errorCallback()
                 }
             }
@@ -101,6 +102,7 @@ struct Api {
                     
                     break
                 case .Failure(_):
+                    App.UI.showServerError(completion: nil)
                     errorCallback()
                 }
             }
@@ -132,6 +134,7 @@ struct Api {
                     
                     break
                 case .Failure(_):
+                    App.UI.showServerError(completion: nil)
                     errorCallback()
                 }
         }
@@ -180,11 +183,13 @@ struct Api {
                         successCallback(question: question)
                     }
                     else{
+                        App.UI.showServerError(completion: nil)
                         errorCallback()
                     }
                     
                     break
                 case .Failure(_):
+                    App.UI.showServerError(completion: nil)
                     errorCallback()
                 }
         }

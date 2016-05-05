@@ -37,6 +37,7 @@ struct QuestionStore{
         
         Api.getBatch({ () -> Void in
             // error
+                
             },
             successCallback:  {(questions) -> Void in
                 self._questions = self._questions + questions

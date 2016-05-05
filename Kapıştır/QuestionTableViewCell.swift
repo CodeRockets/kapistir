@@ -99,8 +99,9 @@ class QuestionTableViewCell: UITableViewCell {
         
         // show selection tick
         self.imgCheckLeft.hidden = false
-        UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+        UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [.CurveEaseInOut], animations: ({
             self.imgCheckLeftBottomConst.constant = self.viewLeft.bounds.size.height - gesture.locationInView(self.viewLeft).y - self.imgCheckLeft.bounds.size.height/2
+            //self.imgCheckLeft.transform = CGAffineTransformMakeScale(1.3, 1.3)
             self.viewLeft.layoutIfNeeded()
         }), completion: nil)
 

@@ -38,7 +38,7 @@ class CreateViewController:
                 self.lblLoaderRight.hidden = true
                 self.loaderLeftHeight.constant = 0
                 self.loaderRightHeight.constant = 0
-                self.btnSend.enabled = false
+                // self.btnSend.enabled = false
             }
         }
     }

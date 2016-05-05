@@ -12,6 +12,25 @@ struct App {
     
     struct UI {
         static let batchSize = 10
+        
+        static func showServerError(completion completionCallback: (()->Void)?) {
+            let alert = UIAlertController(
+                title: "Sunucu Hatası",
+                message: "İnternete bağlanılamıyor. Lütfen internet bağlantınızı kontrol ederek tekrar deneyiniz.",
+                preferredStyle: .Alert
+            )
+            
+            App.UI.getTopMostViewController().presentViewController(alert, animated: true, completion: completionCallback)
+        }
+        
+        private static func getTopMostViewController() -> UIViewController {
+            var topController = UIApplication.sharedApplication().keyWindow?.rootViewController
+            
+            while let presentedViewController = topController!.presentedViewController {
+                topController = presentedViewController
+            }
+            return topController!
+        }
     }
 
     struct URLs {
