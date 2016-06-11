@@ -19,7 +19,8 @@ struct Api {
         
         let params: [String: AnyObject] = [
             "user_id": UserStore.user?.userId ?? "",
-            "limit": 10
+            "limit": 10,
+            "debug": App.UI.DEBUG
         ]
         
         print("fetch params: \(params)")
@@ -32,7 +33,10 @@ struct Api {
             .responseJSON { response in
                 switch response.result {
                 case .Success(let data):
+                    
                     let json = JSON(data)
+                    
+                    print("gelen json: \(json)")
                     
                     let rows = json["data"]["rows"].arrayObject
                     
@@ -140,6 +144,13 @@ struct Api {
         }
     }
 
+    /**
+        Save the question
+        - parameter imageUrls: *String* tuple of images to be saved
+        - parameter images: *UIImage* tuple of the images
+        - parameter errorCallback: block for error
+        - parameter successCallback: block for success
+     */
     static func saveQuestion(imageUrls imageUrls:(String,String), images:(UIImage,UIImage), errorCallback: ()-> Void, successCallback: (question: Question)-> Void) {
         
         let params: [String: AnyObject] = [
@@ -174,7 +185,9 @@ struct Api {
                             optionB: json["data"]["option_b"].stringValue,
                             optionACount: 0,
                             optionBCount: 0,
-                            skipCount: 0
+                            skipCount: 0,
+                            askerName: UserStore.user!.userName,
+                            askerProfileImage: UserStore.user!.profileImageUrl
                         )
                         
                         question.imageLeft = images.0
@@ -196,6 +209,50 @@ struct Api {
     }
     
     static func getUserQuestions(user: User, errorCallback: ()-> Void, successCallback: ([Question])->Void) {
-        Api.getBatch(errorCallback, successCallback: successCallback)
+        
+        //GET /v1/user/questions
+        
+        
+        //Api.getBatch(errorCallback, successCallback: successCallback)
+        
+        var retQuestions = [Question]()
+        
+        let params: [String: AnyObject] = [
+            "app": 1,
+            "user_id": UserStore.user?.userId ?? "",
+            "limit": 100
+        ]
+        
+        print("fetch params: \(params)")
+        
+        Alamofire.request(
+            .GET,
+            App.URLs.getUserQuestions,
+            parameters: params,
+            headers: App.Keys.requestHeaders)
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    let json = JSON(data)
+                    
+                    let rows = json["data"]["rows"].arrayObject
+                    
+                    for questionData in rows! {
+                        print("question: \(questionData)")
+                        let question = Question.fromApiResponse(questionData as! NSDictionary)
+                        retQuestions.append(question)
+                    }
+                    
+                    successCallback(retQuestions)
+                    
+                    fetchBatchImages(retQuestions, errorCallback: errorCallback, successCallback: { _ in})
+                    
+                    break
+                case .Failure(_):
+                    App.UI.showServerError(completion: nil)
+                    errorCallback()
+                }
+        }
+
     }
 }

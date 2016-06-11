@@ -39,6 +39,8 @@ class QuestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var viewVotesRight: UIVisualEffectView!
     
+    @IBOutlet weak var lblInfo: UILabel!
+    
     @IBOutlet weak var viewVotesLeftHeightConst: NSLayoutConstraint!
     
     @IBOutlet weak var viewVotesRightHeightConst: NSLayoutConstraint!
@@ -84,6 +86,9 @@ class QuestionTableViewCell: UITableViewCell {
 
             self.imgLeft.addGestureRecognizer(tapGestureRecoginzerLeft)
             self.imgRight.addGestureRecognizer(tapGestureRecoginzerRight)
+            
+            self.lblQuestion.text = self.question.askerName
+            self.imgProfileImage.kf_setImageWithURL(NSURL(string: self.question.askerProfileImage!)!)
         }
     }
     
@@ -138,6 +143,8 @@ class QuestionTableViewCell: UITableViewCell {
     
     func showVotes() {
     
+        self.lblInfo.text = "☆ " + String(question.totalAnswerCount) + " Oy"
+        
         if question.isAnswered == true {
             return
         }
@@ -188,6 +195,8 @@ class QuestionTableViewCell: UITableViewCell {
             let heightA = 40 + (cell.viewLeft.frame.size.height-40) * CGFloat(question.ratioA)
             let heightB = 40 + (cell.viewRight.frame.size.height-40) * CGFloat(question.ratioB)
             
+            print("cell height: \(cell.viewLeft.frame.size.height-40), ratioA: \(question.ratioA)")
+            
             cell.viewVotesLeftHeightConst.constant = heightA
             cell.viewVotesRightHeightConst.constant = heightB
             
@@ -206,9 +215,12 @@ class QuestionTableViewCell: UITableViewCell {
             
             cell.ratioLeft.text = "% 0"
             cell.ratioRight.text = "% 0"
+            
+            cell.imgCheckLeft.hidden = true
+            cell.imgCheckRight.hidden = true
         }
         
-        cell.lblStats.text = "☆ " + String(question.totalAnswerCount) + "   ◎ " + String(question.skipCount)
+        cell.lblInfo.text = "☆ " + String(question.totalAnswerCount) + " Oy" //+ "   ◎ " + String(question.skipCount)
         
         cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
         cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!)

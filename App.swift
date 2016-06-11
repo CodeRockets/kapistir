@@ -13,6 +13,10 @@ struct App {
     struct UI {
         static let batchSize = 10
         
+        static var onboarded = false
+        
+        static let DEBUG = 1
+        
         static func showServerError(completion completionCallback: (()->Void)?) {
             let alert = UIAlertController(
                 title: "Sunucu Hatası",
@@ -40,6 +44,7 @@ struct App {
         static var saveUser = "user"
         static var saveQuestion = "question"
         static var saveAnswer = "answer"
+        static var getUserQuestions = "user/questions"
     }
     
     struct Keys {
@@ -68,6 +73,7 @@ struct App {
             App.URLs.saveUser = backendEndpoint! + App.URLs.saveUser
             App.URLs.saveQuestion = backendEndpoint! + App.URLs.saveQuestion
             App.URLs.saveAnswer = backendEndpoint! + App.URLs.saveAnswer
+            App.URLs.getUserQuestions = backendEndpoint! + App.URLs.getUserQuestions
             
             App.Keys.requestHeaders = [
                 "x-voter-client-id":     App.Keys.clientId,
@@ -75,6 +81,10 @@ struct App {
                 "x-voter-installation":  UIDevice.currentDevice().identifierForVendor!.UUIDString
             ]
         
+            App.UI.onboarded = NSUserDefaults.standardUserDefaults().valueForKey("onboarded") != nil
+ 
+            print("user onboarded \(UI.onboarded)")
+            
             print("app setting loaded \(App.Keys.requestHeaders)")
         }
     }

@@ -13,12 +13,16 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var btnProfile: RoundedImageButton!
     
+    @IBOutlet weak var viewToolbar: UIVisualEffectView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         UserStore.registerUpdateCallback(userUpdate)
         
         Publisher.subscibe("user/loggedin", callback: userLoggedIn)
+        
+        Publisher.subscibe("user/didFinishOnboarding", callback: userFinishedOnboarding)
     }
     
     private func userUpdate(user: User) {
@@ -26,6 +30,10 @@ class MainViewController: UIViewController {
         dispatch_async(dispatch_get_main_queue()) {
             self.btnProfile.setImage(user.profileImage, forState: .Normal)
         }
+    }
+    
+    func userFinishedOnboarding(data: AnyObject?) {
+        self.viewToolbar.hidden = false
     }
     
     func userLoggedIn(data: AnyObject?) {
@@ -46,6 +54,8 @@ class MainViewController: UIViewController {
             print("no user")
             self.btnProfile.hidden = true
         }
+        
+        self.viewToolbar.hidden = !App.UI.onboarded
     }
     
     @IBAction func create() {

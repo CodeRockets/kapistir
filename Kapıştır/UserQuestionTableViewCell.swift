@@ -37,6 +37,6 @@ class UserQuestionTableViewCell: UITableViewCell {
         
         cell.lblLeft.text = /*"% " + String(question.ratioA) + "(" +*/ String(question.optionACount) + " oy"
         cell.lblRight.text = /*"% " + String(question.ratioB) + "(" + */ String(question.optionBCount) + " oy"
-        cell.lblMid.text = "Boş: " + String(question.skipCount) //+ " (%"+String(question.ratioSkip)+")"
+        //cell.lblMid.text = "Boş: " + String(question.skipCount) //+ " (%"+String(question.ratioSkip)+")"
     }
 }

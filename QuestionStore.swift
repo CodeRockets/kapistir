@@ -52,7 +52,7 @@ struct QuestionStore{
             return q.id == question.id
         }!
         
-        print("index \(index), question count: \(self._questions.count)")
+        print("index \(self.currentQuestionIndex), question count: \(self._questions.count)")
         
         if self._questions.count - self.currentQuestionIndex < 7 && self._questions.count > 7 {
             print("get next batch")

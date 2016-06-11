@@ -9,9 +9,7 @@
 import UIKit
 
 class MainTableViewController: UITableViewController {
-
-    var onboarded = true
-    
+   
     var questions = [Question]()
     
     var currentQuestion: Question?
@@ -21,6 +19,10 @@ class MainTableViewController: UITableViewController {
         
         QuestionStore.registerUpdateCallback(questionsUpdated)
         QuestionStore.getBatch()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
     }
 
     func questionsUpdated(batch: [Question]) {
@@ -45,18 +47,20 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        /*if !onboarded && indexPath.row < 2 {
+        if !App.UI.onboarded && indexPath.row < 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier("OnboardingCell", forIndexPath: indexPath) as! OnboardingTableViewCell
         
             // Configure the cell...
         
             cell.lblTitle.text = "Kapıştır'a Hoşgeldiniz!"
             cell.lblText.text = indexPath.row == 0 ? "Bu ilk sayfa" : "Bu diğer sayfa"
-        
+            
             return cell
         }
-        else{*/
+        else{
         
+            Publisher.publish("user/didFinishOnboarding", data: nil)
+            
             var cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! QuestionTableViewCell
            
             cell.question = self.questions[indexPath.row]
@@ -64,7 +68,7 @@ class MainTableViewController: UITableViewController {
             QuestionTableViewCell.configureTableCell(cell.question, cell: &cell)
         
             return cell
-        //}
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

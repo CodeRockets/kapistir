@@ -45,6 +45,9 @@ class Question {
     var optionBCount: Int
     var skipCount: Int
     
+    var askerName: String?
+    var askerProfileImage: String?
+    
     var answer: Answer?
     
     var isAnswered: Bool = false
@@ -68,13 +71,17 @@ class Question {
         return totalAnswerCount > 0 ? Double(skipCount) / Double(totalAnswerCount) : 0
     }
     
-    init(id: String, optionA: String, optionB: String, optionACount:Int, optionBCount:Int, skipCount: Int){
+    init(id: String, optionA: String, optionB: String, optionACount:Int, optionBCount:Int, skipCount: Int, askerName: String?, askerProfileImage: String?){
         self.id = id
         self.optionA = optionA
         self.optionB = optionB
         self.optionACount = optionACount
         self.optionBCount = optionBCount
         self.skipCount = skipCount
+        self.askerName = askerName
+        self.askerProfileImage = askerProfileImage
+        
+        print("asker name : \(askerName), \(ratioA), \(ratioB)")
     }
 }
 
@@ -90,8 +97,12 @@ extension Question {
         let optionBCount = response["option_b_count"] as! Int
         let skipCount = response["skip_count"] as! Int
         
+        let askerName = response["asker_name"] as? String
+        let askerProfileImage = response["asker_profile_img"] as? String
+        
         let question = Question(
-            id: id, optionA: optionA, optionB: optionB, optionACount: optionACount, optionBCount: optionBCount, skipCount: skipCount
+            id: id, optionA: optionA, optionB: optionB, optionACount: optionACount, optionBCount: optionBCount, skipCount: skipCount,
+            askerName: askerName, askerProfileImage: askerProfileImage
         )
         
         return question
