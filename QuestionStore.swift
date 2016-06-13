@@ -16,7 +16,7 @@ struct QuestionStore{
     
     private static var currentQuestion: Question?
     
-    private static var currentQuestionIndex = 0
+    static var currentQuestionIndex = 0
     
     private static var _questions = [Question]()
     

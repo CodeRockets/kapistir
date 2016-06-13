@@ -55,7 +55,7 @@ class MainViewController: UIViewController {
             self.btnProfile.hidden = true
         }
         
-        self.viewToolbar.hidden = !App.UI.onboarded
+        // self.viewToolbar.hidden = !App.UI.onboarded
     }
     
     @IBAction func create() {

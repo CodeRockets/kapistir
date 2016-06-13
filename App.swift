@@ -17,6 +17,8 @@ struct App {
         
         static let DEBUG = 1
         
+        static let questionScrollDelay = UInt32(1500000)
+        
         static func showServerError(completion completionCallback: (()->Void)?) {
             let alert = UIAlertController(
                 title: "Sunucu Hatası",

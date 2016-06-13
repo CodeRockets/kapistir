@@ -187,6 +187,8 @@ class QuestionTableViewCell: UITableViewCell {
                 }
             }
         }
+        
+        Publisher.publish("question.voted", data: nil)
     }
     
     static func configureTableCell(question: Question, inout cell: QuestionTableViewCell)  {

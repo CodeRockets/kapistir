@@ -19,6 +19,26 @@ class MainTableViewController: UITableViewController {
         
         QuestionStore.registerUpdateCallback(questionsUpdated)
         QuestionStore.getBatch()
+        
+        Publisher.subscibe("question.voted") { _ in
+            
+            // scroll to next question
+            dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
+                
+                usleep(App.UI.questionScrollDelay)
+                
+                print("will scroll to next question")
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tableView.scrollToRowAtIndexPath(
+                        NSIndexPath(forRow: QuestionStore.currentQuestionIndex+1, inSection: 0),
+                        atScrollPosition: .Top,
+                        animated: true
+                    )
+                }
+            }
+            
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,7 +67,7 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if !App.UI.onboarded && indexPath.row < 2 {
+        /*if !App.UI.onboarded && indexPath.row < 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier("OnboardingCell", forIndexPath: indexPath) as! OnboardingTableViewCell
         
             // Configure the cell...
@@ -57,8 +77,8 @@ class MainTableViewController: UITableViewController {
             
             return cell
         }
-        else{
-        
+        else{*/
+ 
             Publisher.publish("user/didFinishOnboarding", data: nil)
             
             var cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! QuestionTableViewCell
@@ -68,7 +88,7 @@ class MainTableViewController: UITableViewController {
             QuestionTableViewCell.configureTableCell(cell.question, cell: &cell)
         
             return cell
-        }
+        //}
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -90,6 +110,7 @@ class MainTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        print("height: \(tableView.frame.size.height)")
         return tableView.frame.size.height
     }
     
