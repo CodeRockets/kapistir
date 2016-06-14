@@ -36,7 +36,7 @@ struct Api {
                     
                     let json = JSON(data)
                     
-                    print("gelen json: \(json)")
+                    // print("gelen json: \(json)")
                     
                     let rows = json["data"]["rows"].arrayObject
                     

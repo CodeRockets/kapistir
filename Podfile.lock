@@ -6,6 +6,7 @@ PODS:
     - ChameleonFramework/Default
   - DynamicColor (2.4.0)
   - Kingfisher (2.1.0)
+  - M13Checkbox (2.1.2)
   - MBProgressHUD (0.9.2)
   - SwiftyJSON (2.3.2)
 
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - ChameleonFramework/Swift
   - DynamicColor (~> 2.4.0)
   - Kingfisher (~> 2.1)
+  - M13Checkbox
   - MBProgressHUD (~> 0.9.2)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
@@ -33,6 +35,7 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DynamicColor: 2f3fd61053684667bad9f03045dcf9a2a5a007ea
   Kingfisher: 3ac09acad75a25ab22f6d7cef3de10d61dd4792d
+  M13Checkbox: fbc53145e3ca8ecd1c444a76439bdc0ddb17b008
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 

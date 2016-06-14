@@ -11,6 +11,7 @@ target 'Kapıştır' do
     pod 'Alamofire', '~> 3.3'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
     pod 'DynamicColor', '~> 2.4.0'
+    pod 'M13Checkbox'
 end
 
 target 'KapıştırTests' do

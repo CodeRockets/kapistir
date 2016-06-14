@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewToolbar.hidden = !App.UI.onboarded
         
         UserStore.registerUpdateCallback(userUpdate)
         
@@ -34,6 +35,7 @@ class MainViewController: UIViewController {
     
     func userFinishedOnboarding(data: AnyObject?) {
         self.viewToolbar.hidden = false
+        App.Store.saveUserOnboarded()
     }
     
     func userLoggedIn(data: AnyObject?) {

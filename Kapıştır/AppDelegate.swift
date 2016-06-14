@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //
         }
         
-        App.Load.settings()
+        App.Store.loadAppSettings()
         UserStore.loadUserLocal()
         
         return true

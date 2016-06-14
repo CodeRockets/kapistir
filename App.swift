@@ -57,8 +57,8 @@ struct App {
         static var requestHeaders: [String:String]!
     }
     
-    struct Load {
-        static func settings() {
+    struct Store {
+        static func loadAppSettings() {
             let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
             let dict = NSDictionary(contentsOfFile: path!)
             
@@ -88,6 +88,12 @@ struct App {
             print("user onboarded \(UI.onboarded)")
             
             print("app setting loaded \(App.Keys.requestHeaders)")
+        }
+        
+        static func saveUserOnboarded() {
+            NSUserDefaults.standardUserDefaults().setValue("yes", forKey: "onboarded")
+            App.UI.onboarded = true
+            print("user onboarded saved")
         }
     }
 }

@@ -11,6 +11,10 @@ import MBProgressHUD
 
 class MainTableViewController: UITableViewController {
    
+    var table_onboarded = App.UI.onboarded
+    
+    let ONBOARDING_PAGE_COUNT = 2
+    
     var questions = [Question]()
     
     var currentQuestion: Question?
@@ -20,13 +24,15 @@ class MainTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        loadingNotification!.mode = MBProgressHUDMode.Indeterminate
-        loadingNotification!.opacity = 0.5
-        
         QuestionStore.registerUpdateCallback(questionsUpdated)
         QuestionStore.getBatch()
         
+        if App.UI.onboarded {
+            loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            loadingNotification!.mode = MBProgressHUDMode.Indeterminate
+            loadingNotification!.opacity = 0.5
+        }
+
         Publisher.subscibe("question.voted") { _ in
             
             // scroll to next question
@@ -44,7 +50,6 @@ class MainTableViewController: UITableViewController {
                     )
                 }
             }
-            
         }
     }
     
@@ -60,8 +65,10 @@ class MainTableViewController: UITableViewController {
         
         self.questions = batch
         
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            self.tableView.reloadData()
+        if App.UI.onboarded {
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -72,24 +79,33 @@ class MainTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questions.count
+        return App.UI.onboarded ? questions.count : ONBOARDING_PAGE_COUNT + 1
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        /*if !App.UI.onboarded && indexPath.row < 2 {
+        if !table_onboarded && indexPath.row < ONBOARDING_PAGE_COUNT {
+            
+            // create onboarding page
+            
             let cell = tableView.dequeueReusableCellWithIdentifier("OnboardingCell", forIndexPath: indexPath) as! OnboardingTableViewCell
-        
-            // Configure the cell...
         
             cell.lblTitle.text = "Kapıştır'a Hoşgeldiniz!"
             cell.lblText.text = indexPath.row == 0 ? "Bu ilk sayfa" : "Bu diğer sayfa"
             
             return cell
         }
-        else{*/
+        else{
  
-            Publisher.publish("user/didFinishOnboarding", data: nil)
+            // first time here
+            if !App.UI.onboarded {
+                Publisher.publish("user/didFinishOnboarding", data: nil)
+                print("onboarding completed")
+                
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    self.tableView.reloadData()
+                }
+            }
             
             var cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! QuestionTableViewCell
            
@@ -98,10 +114,15 @@ class MainTableViewController: UITableViewController {
             QuestionTableViewCell.configureTableCell(cell.question, cell: &cell)
         
             return cell
-        //}
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if !App.UI.onboarded {
+            return
+        }
+        
         //QuestionStore.currentQuestionIndex = indexPath.row
         print("current question index \(indexPath.row)")
         
@@ -120,7 +141,6 @@ class MainTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        print("height: \(tableView.frame.size.height)")
         return tableView.frame.size.height
     }
     
