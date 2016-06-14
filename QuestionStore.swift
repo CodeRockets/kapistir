@@ -61,7 +61,7 @@ struct QuestionStore{
     }
     
     static func insertCurrentQuestion(question: Question){
-        self._questions.insert(question, atIndex: self.currentQuestionIndex)
+        self._questions.insert(question, atIndex: self.currentQuestionIndex+1)
         self.publishUpdate()
     }
 }

@@ -51,10 +51,22 @@ class MainTableViewController: UITableViewController {
                 }
             }
         }
+        
+        Publisher.subscibe("question/created", callback: scrollToCreatedQuestion)
     }
     
     override func viewWillAppear(animated: Bool) {
         
+    }
+    
+    func scrollToCreatedQuestion(payload: AnyObject?) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.scrollToRowAtIndexPath(
+                NSIndexPath(forRow: QuestionStore.currentQuestionIndex+1, inSection: 0),
+                atScrollPosition: .Top,
+                animated: true
+            )
+        }
     }
 
     func questionsUpdated(batch: [Question]) {

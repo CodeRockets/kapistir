@@ -218,12 +218,18 @@ class CreateViewController:
                                         let modal = PathDynamicModal.show(modalView: view, inView: window!)
                                         view.closeButtonHandler = {[weak modal] in
                                             modal?.closeWithLeansRandom()
-                                            self.dismissViewControllerAnimated(true, completion: nil)
+                                            self.dismissViewControllerAnimated(true, completion: {
+                                                print("question/created")
+                                                Publisher.publish("question/created", data: nil)
+                                            })
                                             return
                                         }
                                         modal.closedHandler = {
                                             print("modal closed")
-                                            self.dismissViewControllerAnimated(true, completion: nil)
+                                            self.dismissViewControllerAnimated(true, completion: {
+                                                print("question/created")
+                                                Publisher.publish("question/created", data: nil)
+                                            })
                                         }
                                     })
                             }
