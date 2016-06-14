@@ -43,6 +43,11 @@ class UserQuestionsTableViewController: UITableViewController {
     }
 
     
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        (cell as! UserQuestionTableViewCell).imgLeft.kf_cancelDownloadTask()
+        (cell as! UserQuestionTableViewCell).imgRight.kf_cancelDownloadTask()
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UserQuestionTableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("userQuestionCell", forIndexPath: indexPath) as! UserQuestionTableViewCell
 
@@ -52,7 +57,6 @@ class UserQuestionsTableViewController: UITableViewController {
         
         return cell
     }
-    
 
     /*
     // Override to support conditional editing of the table view.

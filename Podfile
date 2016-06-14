@@ -10,6 +10,7 @@ target 'Kapıştır' do
     pod 'MBProgressHUD', '~> 0.9.2'
     pod 'Alamofire', '~> 3.3'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+    pod 'DynamicColor', '~> 2.4.0'
 end
 
 target 'KapıştırTests' do

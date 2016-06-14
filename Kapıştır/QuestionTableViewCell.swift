@@ -151,7 +151,8 @@ class QuestionTableViewCell: UITableViewCell {
         
         self.question.isAnswered = true
         
-        // label oluştur
+        self.ratioLeft.hidden = false
+        self.ratioRight.hidden = false
         
         let heightA = 40 + (self.viewLeft.frame.size.height-40) * CGFloat(question.ratioA)
         let heightB = 40 + (self.viewRight.frame.size.height-40) * CGFloat(question.ratioB)
@@ -205,8 +206,14 @@ class QuestionTableViewCell: UITableViewCell {
             cell.ratioLeftBottom.constant = heightA - 30
             cell.ratioRightBottom.constant = heightB - 30
             
+            cell.ratioLeft.hidden = false
+            cell.ratioRight.hidden = false
+            
             cell.ratioLeft.text = "% \( Int(question.ratioA * 100) )"
             cell.ratioRight.text = "% \( Int(question.ratioB * 100) )"
+            
+            cell.imgCheckLeft.hidden = !(question.answer == .Left)
+            cell.imgCheckRight.hidden = !(question.answer == .Right)
         }
         else{
             cell.viewVotesRightHeightConst.constant = 0
@@ -215,8 +222,8 @@ class QuestionTableViewCell: UITableViewCell {
             cell.ratioLeftBottom.constant = 0
             cell.ratioRightBottom.constant = 0
             
-            cell.ratioLeft.text = "% 0"
-            cell.ratioRight.text = "% 0"
+            cell.ratioLeft.hidden = true
+            cell.ratioRight.hidden = true
             
             cell.imgCheckLeft.hidden = true
             cell.imgCheckRight.hidden = true
@@ -224,8 +231,13 @@ class QuestionTableViewCell: UITableViewCell {
         
         cell.lblInfo.text = "☆ " + String(question.totalAnswerCount) + " Oy" //+ "   ◎ " + String(question.skipCount)
         
-        cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
-        cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!)
+        cell.imgLeft.image = question.imageLeft
+        cell.imgRight.image = question.imageRight
         
+        // dont load if question already has images
+        if question.imageLeft == nil {
+            cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
+            cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!)
+        }
     }
 }

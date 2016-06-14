@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class MainTableViewController: UITableViewController {
    
@@ -14,8 +15,14 @@ class MainTableViewController: UITableViewController {
     
     var currentQuestion: Question?
     
+    var loadingNotification: MBProgressHUD?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        loadingNotification!.mode = MBProgressHUDMode.Indeterminate
+        loadingNotification!.opacity = 0.5
         
         QuestionStore.registerUpdateCallback(questionsUpdated)
         QuestionStore.getBatch()
@@ -46,6 +53,9 @@ class MainTableViewController: UITableViewController {
     }
 
     func questionsUpdated(batch: [Question]) {
+        
+        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+        
         print("questions updated and received in tableViewController")
         
         self.questions = batch

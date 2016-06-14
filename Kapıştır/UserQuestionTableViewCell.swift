@@ -9,6 +9,7 @@
 import UIKit
 import ChameleonFramework
 import Kingfisher
+import DynamicColor
 
 class UserQuestionTableViewCell: UITableViewCell {
 
@@ -43,18 +44,26 @@ class UserQuestionTableViewCell: UITableViewCell {
     }
     
     static func configureTableCell(question: Question, inout cell: UserQuestionTableViewCell)  {
-        cell.imgLeft.kf_showIndicatorWhenLoading = true
         cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) in
-            let colorLeft = ColorsFromImage(cell.imgLeft.image!, withFlatScheme: true)
-            cell.viewBarLeft.backgroundColor = colorLeft.last
-            //cell.lblLeft.textColor = cell.viewBarLeft.backgroundColor!.invertedColor
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let avgColor = UIColor(averageColorFromImage: cell.imgLeft.image) {
+                        cell.viewBarLeft.backgroundColor = avgColor.adjustedHueColor(45/360)
+                        cell.lblLeft.textColor = avgColor.invertedColor
+                    }
+                }
+            }
         }
         
-        cell.imgRight.kf_showIndicatorWhenLoading = true
         cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) in
-            let colorRight = ColorsFromImage(cell.imgRight.image!, withFlatScheme: true)
-            cell.viewBarRight.backgroundColor = colorRight.last
-            //cell.lblRight.textColor = cell.viewBarRight.backgroundColor!.invertedColor
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let avgColor = UIColor(averageColorFromImage: cell.imgRight.image) {
+                        cell.viewBarRight.backgroundColor = avgColor.adjustedHueColor(45/360)
+                        cell.lblRight.textColor =  avgColor.invertedColor
+                    }
+                }
+            }
         }
         
         cell.lblLeft.text =  String(question.optionACount)

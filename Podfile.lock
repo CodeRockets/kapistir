@@ -4,6 +4,7 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - DynamicColor (2.4.0)
   - Kingfisher (2.1.0)
   - MBProgressHUD (0.9.2)
   - SwiftyJSON (2.3.2)
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - Alamofire (~> 3.3)
   - ALCameraViewController
   - ChameleonFramework/Swift
+  - DynamicColor (~> 2.4.0)
   - Kingfisher (~> 2.1)
   - MBProgressHUD (~> 0.9.2)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
@@ -29,6 +31,7 @@ SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   ALCameraViewController: 15bd245a247cff0f8a038c349ac2bbe79152b686
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  DynamicColor: 2f3fd61053684667bad9f03045dcf9a2a5a007ea
   Kingfisher: 3ac09acad75a25ab22f6d7cef3de10d61dd4792d
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
