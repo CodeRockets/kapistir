@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 struct App {
     
@@ -36,6 +37,24 @@ struct App {
                 topController = presentedViewController
             }
             return topController!
+        }
+    }
+    
+    struct Play {
+        
+        static var audioPlayer: AVAudioPlayer?
+        
+        static func Applause(){
+            let soundFileUrl = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("applause", ofType: "mp3")!)
+
+            do{
+                audioPlayer = try AVAudioPlayer(contentsOfURL: soundFileUrl)
+                audioPlayer!.prepareToPlay()
+                audioPlayer!.play()
+            } catch {
+                
+            }
+            
         }
     }
 

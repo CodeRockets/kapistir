@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SAConfettiView
 
 class PathDynamicModal: NSObject, UIGestureRecognizerDelegate {
     
@@ -86,19 +87,24 @@ class PathDynamicModal: NSObject, UIGestureRecognizerDelegate {
     
     /* private functions */
     
+    var confettiView: SAConfettiView?
+    
     private func setup() {
         self.animator = UIDynamicAnimator(referenceView: self.backgroundView)
         
-        self.tap = UITapGestureRecognizer(target: self, action: "handleBackgroundView:")
+        self.tap = UITapGestureRecognizer(target: self, action: #selector(PathDynamicModal.handleBackgroundView(_:)))
         self.tap.delegate = self
         
-        self.pan = UIPanGestureRecognizer(target: self, action: "panBackgroundView:")
+        self.pan = UIPanGestureRecognizer(target: self, action: #selector(PathDynamicModal.panBackgroundView(_:)))
         
         self.backgroundView.frame = UIScreen.mainScreen().bounds
         self.backgroundView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
         
         self.backgroundView.addGestureRecognizer(self.tap)
         self.backgroundView.addGestureRecognizer(self.pan)
+        
+        self.confettiView = SAConfettiView(frame: self.backgroundView.bounds)
+        self.self.backgroundView.addSubview(confettiView!)
     }
     
     private func close(horizontalOffset h: CGFloat) {
@@ -157,6 +163,7 @@ class PathDynamicModal: NSObject, UIGestureRecognizerDelegate {
                     self.contentView.transform = CGAffineTransformIdentity
                     }, completion:  { (flag) -> Void in
                         self.showedHandler?()
+                        self.confettiView?.startConfetti()
                         return
                 })
         })

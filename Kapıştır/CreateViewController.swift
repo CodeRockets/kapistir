@@ -10,6 +10,7 @@ import UIKit
 import ALCameraViewController
 import Alamofire
 import SwiftyJSON
+import SAConfettiView
 
 class CreateViewController:
     UIViewController,
@@ -94,7 +95,7 @@ class CreateViewController:
         uploadImage(croppedLeft, target: 1)
         uploadImage(croppedRight, target: 0)
     }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -206,6 +207,8 @@ class CreateViewController:
                                     },
                                     successCallback: { (question) in
                                         print("question saved \(question)")
+                                        
+                                        App.Play.Applause()
                                         
                                         self.working = false
                                         

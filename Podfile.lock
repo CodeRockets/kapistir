@@ -8,6 +8,7 @@ PODS:
   - Kingfisher (2.1.0)
   - M13Checkbox (2.1.2)
   - MBProgressHUD (0.9.2)
+  - SAConfettiView (0.1.8)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - Kingfisher (~> 2.1)
   - M13Checkbox
   - MBProgressHUD (~> 0.9.2)
+  - SAConfettiView
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -37,6 +39,7 @@ SPEC CHECKSUMS:
   Kingfisher: 3ac09acad75a25ab22f6d7cef3de10d61dd4792d
   M13Checkbox: fbc53145e3ca8ecd1c444a76439bdc0ddb17b008
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  SAConfettiView: c87031a2280659261b730fce3669fb10e73636ee
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

@@ -12,6 +12,7 @@ target 'Kapıştır' do
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
     pod 'DynamicColor', '~> 2.4.0'
     pod 'M13Checkbox'
+    pod "SAConfettiView"
 end
 
 target 'KapıştırTests' do

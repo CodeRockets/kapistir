@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		010D8688394DEA14E6F1E65B /* Pods_Kap_s_t_r.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52CEC117A2914D3AA6942F8E /* Pods_Kap_s_t_r.framework */; };
+		151E1B341D10D3FE00FB524C /* applause.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 151E1B331D10D3FE00FB524C /* applause.mp3 */; };
 		1535A6AC1C953E8800897674 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535A6AB1C953E8800897674 /* AppDelegate.swift */; };
 		1535A6B11C953E8800897674 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1535A6AF1C953E8800897674 /* Main.storyboard */; };
 		1535A6B41C953E8800897674 /* Kap_s_t_r.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1535A6B21C953E8800897674 /* Kap_s_t_r.xcdatamodeld */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		151E1B331D10D3FE00FB524C /* applause.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = applause.mp3; path = images/applause.mp3; sourceTree = "<group>"; };
 		1535A6A81C953E8800897674 /* Kapıştır.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kapıştır.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1535A6AB1C953E8800897674 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Kapıştır/AppDelegate.swift"; sourceTree = "<group>"; };
 		1535A6B01C953E8800897674 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				1535A6B51C953E8800897674 /* Assets.xcassets */,
+				151E1B331D10D3FE00FB524C /* applause.mp3 */,
 				1535A6BA1C953E8800897674 /* Info.plist */,
 				1535A6B71C953E8800897674 /* LaunchScreen.storyboard */,
 				1535A6B21C953E8800897674 /* Kap_s_t_r.xcdatamodeld */,
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				157B9D071CA68B350026EFC1 /* .gitignore in Resources */,
+				151E1B341D10D3FE00FB524C /* applause.mp3 in Resources */,
 				1535A6B91C953E8800897674 /* LaunchScreen.storyboard in Resources */,
 				1535A6B61C953E8800897674 /* Assets.xcassets in Resources */,
 				153C1EA31CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib in Resources */,
