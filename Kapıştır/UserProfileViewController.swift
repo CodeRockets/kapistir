@@ -25,10 +25,19 @@ class UserProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Publisher.subscibe("user/userQuestionsLoaded", callback: userQuestionsLoaded)
     }
     
     @IBAction func close(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBOutlet weak var lblNoKapistir: UILabel!
+    
+    func userQuestionsLoaded(userQuestionsCount: AnyObject?)  {
+        print("userQuestionsCount \( userQuestionsCount as! Int )")
+        self.lblNoKapistir.hidden = (userQuestionsCount as! Int) != 0
     }
     
     override func viewWillAppear(animated: Bool) {

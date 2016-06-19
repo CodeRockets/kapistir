@@ -26,6 +26,8 @@ class CreateViewController:
     
     private var images = [Int:UIImage]()
     
+    @IBOutlet weak var lblUserName: UILabel!
+    
     private var working = false {
         didSet{
             if working {
@@ -101,6 +103,8 @@ class CreateViewController:
         
         self.imgProfile.layer.cornerRadius = imgProfile.bounds.size.width / 2
         self.imgProfile.clipsToBounds = true
+        self.imgProfile.image = UserStore.user?.profileImage
+        self.lblUserName.text = UserStore.user?.userName
         
         self.scrollViewRight.addSubview(imageViewRight)
         self.scrollViewLeft.addSubview(imageViewLeft)

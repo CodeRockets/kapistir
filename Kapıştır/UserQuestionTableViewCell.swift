@@ -37,7 +37,6 @@ class UserQuestionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -46,23 +45,23 @@ class UserQuestionTableViewCell: UITableViewCell {
     static func configureTableCell(question: Question, inout cell: UserQuestionTableViewCell)  {
         cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) in
             if error == nil {
-                dispatch_async(dispatch_get_main_queue()) {
+                /*dispatch_async(dispatch_get_main_queue()) {
                     if let avgColor = UIColor(averageColorFromImage: cell.imgLeft.image) {
                         cell.viewBarLeft.backgroundColor = avgColor.adjustedHueColor(45/360)
                         cell.lblLeft.textColor = avgColor.invertedColor
                     }
-                }
+                }*/
             }
         }
         
         cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) in
             if error == nil {
-                dispatch_async(dispatch_get_main_queue()) {
+                /*dispatch_async(dispatch_get_main_queue()) {
                     if let avgColor = UIColor(averageColorFromImage: cell.imgRight.image) {
                         cell.viewBarRight.backgroundColor = avgColor.adjustedHueColor(45/360)
                         cell.lblRight.textColor =  avgColor.invertedColor
                     }
-                }
+                }*/
             }
         }
         
@@ -77,6 +76,20 @@ class UserQuestionTableViewCell: UITableViewCell {
         
         cell.constBarLeftHeight.constant = heightA - offsetTop
         cell.constBarRightHeignt.constant = heightB - offsetTop
+        
+        // vote bar styling
+        cell.viewBarRight.layer.borderWidth = CGFloat(0.5)
+        cell.viewBarLeft.layer.borderWidth = CGFloat(0.5)
+        
+        let black = UIColor.blackColor()
+        let white = UIColor.whiteColor()
+        
+        cell.viewBarLeft.backgroundColor = black
+        cell.viewBarRight.backgroundColor = white
+        cell.viewBarLeft.layer.borderColor = white.CGColor
+        cell.viewBarRight.layer.borderColor = black.CGColor
+        cell.lblLeft.textColor = white
+        cell.lblRight.textColor = black
     }
 }
 

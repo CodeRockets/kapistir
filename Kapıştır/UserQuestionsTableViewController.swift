@@ -7,14 +7,21 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class UserQuestionsTableViewController: UITableViewController {
 
     var userQuestions = [Question]()
     
+    var loadingNotification: MBProgressHUD?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        loadingNotification!.mode = MBProgressHUDMode.Indeterminate
+        loadingNotification!.opacity = 0.5
+        
         Api.getUserQuestions(UserStore.user!, errorCallback: {
             // error
             print("getUserQuestions error")
@@ -24,7 +31,10 @@ class UserQuestionsTableViewController: UITableViewController {
                 
                 self.userQuestions = questions
                 
+                Publisher.publish("user/userQuestionsLoaded", data: questions.count)
+                
                 dispatch_async(dispatch_get_main_queue()) {
+                    MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                     self.tableView.reloadData()
                 }
             })

@@ -20,7 +20,7 @@ class MainTableViewController: UITableViewController {
     var currentQuestion: Question?
     
     var loadingNotification: MBProgressHUD?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         

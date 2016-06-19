@@ -8,6 +8,7 @@
 
 import UIKit
 import ChameleonFramework
+import M13Checkbox
 
 class QuestionTableViewCell: UITableViewCell {
     
@@ -45,19 +46,17 @@ class QuestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var viewVotesRightHeightConst: NSLayoutConstraint!
     
-    @IBOutlet weak var imgCheckLeft: UIImageView!
-    
-    @IBOutlet weak var imgCheckLeftBottomConst: NSLayoutConstraint! {
+    @IBOutlet weak var chkLeft: M13Checkbox! {
         didSet{
-            self.imgCheckLeftBottomConst.constant = 0
+            chkLeft.userInteractionEnabled = false
+            chkLeft.stateChangeAnimation = .Dot(.Fill)
         }
     }
     
-    @IBOutlet weak var imgCheckRight: UIImageView!
-    
-    @IBOutlet weak var imgCheckRightBottomConst: NSLayoutConstraint! {
+    @IBOutlet weak var chkRight: M13Checkbox! {
         didSet{
-            self.imgCheckRightBottomConst.constant = 0
+            chkRight.userInteractionEnabled = false
+            chkRight.stateChangeAnimation = .Dot(.Fill)
         }
     }
     
@@ -103,13 +102,16 @@ class QuestionTableViewCell: UITableViewCell {
         self.question.answer = .Left
         
         // show selection tick
-        self.imgCheckLeft.hidden = false
-        UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [.CurveEaseInOut], animations: ({
-            self.imgCheckLeftBottomConst.constant = self.viewLeft.bounds.size.height - gesture.locationInView(self.viewLeft).y - self.imgCheckLeft.bounds.size.height/2
+        //self.imgCheckLeft.hidden = false
+        //UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [.CurveEaseInOut], animations: ({
+           // self.imgCheckLeftBottomConst.constant = self.viewLeft.bounds.size.height - gesture.locationInView(self.viewLeft).y - self.imgCheckLeft.bounds.size.height/2
             //self.imgCheckLeft.transform = CGAffineTransformMakeScale(1.3, 1.3)
-            self.viewLeft.layoutIfNeeded()
-        }), completion: nil)
+            //self.viewLeft.layoutIfNeeded()
+        //}), completion: nil)
 
+        self.chkLeft.hidden = false
+        self.chkLeft.setCheckState(.Checked, animated: true)
+        
         Api.saveAnswer(self.question, answer: .Left, errorCallback: {
             // hata oluştu
             }, successCallback: {
@@ -128,11 +130,14 @@ class QuestionTableViewCell: UITableViewCell {
         self.question.answer = .Right
         
         // show selection tick
-        self.imgCheckRight.hidden = false
-        UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
-            self.imgCheckRightBottomConst.constant = self.viewRight.bounds.size.height - gesture.locationInView(self.viewRight).y - self.imgCheckRight.bounds.size.height/2
-            self.viewRight.layoutIfNeeded()
-        }), completion: nil)
+        //self.imgCheckRight.hidden = false
+        //UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+            //self.imgCheckRightBottomConst.constant = self.viewRight.bounds.size.height - gesture.locationInView(self.viewRight).y - self.imgCheckRight.bounds.size.height/2
+            //self.viewRight.layoutIfNeeded()
+        //}), completion: nil)
+        
+        self.chkRight.hidden = false
+        self.chkRight.setCheckState(.Checked, animated: true)
         
         Api.saveAnswer(self.question, answer: .Right, errorCallback: {
             // hata oluştu
@@ -212,8 +217,22 @@ class QuestionTableViewCell: UITableViewCell {
             cell.ratioLeft.text = "% \( Int(question.ratioA * 100) )"
             cell.ratioRight.text = "% \( Int(question.ratioB * 100) )"
             
-            cell.imgCheckLeft.hidden = !(question.answer == .Left)
-            cell.imgCheckRight.hidden = !(question.answer == .Right)
+            cell.chkLeft.checkState = .Unchecked
+            cell.chkRight.checkState = .Unchecked
+            
+            cell.chkLeft.hidden = true
+            cell.chkRight.hidden = true
+            
+            if question.answer == .Left {
+                cell.chkLeft.hidden = false
+                cell.chkLeft.checkState = .Checked
+            }
+            
+            if question.answer == .Right {
+                cell.chkRight.hidden = false
+                cell.chkRight.checkState = .Checked
+            }
+        
         }
         else{
             cell.viewVotesRightHeightConst.constant = 0
@@ -225,8 +244,11 @@ class QuestionTableViewCell: UITableViewCell {
             cell.ratioLeft.hidden = true
             cell.ratioRight.hidden = true
             
-            cell.imgCheckLeft.hidden = true
-            cell.imgCheckRight.hidden = true
+            cell.chkLeft.hidden = true
+            cell.chkRight.hidden = true
+            
+            cell.chkLeft.checkState = .Unchecked
+            cell.chkRight.checkState = .Unchecked
         }
         
         cell.lblInfo.text = "☆ " + String(question.totalAnswerCount) + " Oy" //+ "   ◎ " + String(question.skipCount)
