@@ -28,6 +28,19 @@ class CreateViewController:
     
     @IBOutlet weak var lblUserName: UILabel!
     
+    
+    @IBOutlet weak var btnAddImageLeft: UIButton!
+    
+    @IBAction func addImageLeft(sender: AnyObject) {
+        tappedLeft()
+    }
+    
+    @IBOutlet weak var btnAddImageRight: UIButton!
+    
+    @IBAction func addImageRight(sender: AnyObject) {
+        tappedRight()
+    }
+    
     private var working = false {
         didSet{
             if working {
@@ -41,7 +54,7 @@ class CreateViewController:
                 self.lblLoaderRight.hidden = true
                 self.loaderLeftHeight.constant = 0
                 self.loaderRightHeight.constant = 0
-                // self.btnSend.enabled = false
+                self.btnSend.enabled = false
             }
         }
     }
@@ -114,8 +127,8 @@ class CreateViewController:
         self.scrollViewRight.addGestureRecognizer(tapRight)
         self.scrollViewLeft.addGestureRecognizer(tapLeft)
         
-        self.imageLeft = UIImage(named: "tap")
-        self.imageRight = UIImage(named: "tap")
+        //self.imageLeft = UIImage(named: "tap")
+        //self.imageRight = UIImage(named: "tap")
         
         // center views
         centerImageInScrollview(self.scrollViewLeft, imageView: self.imageViewLeft)
@@ -421,8 +434,10 @@ class CreateViewController:
         
         if target == 0 {
             self.imageRight = image
+            self.btnAddImageRight.hidden = true
         } else{
             self.imageLeft = image
+            self.btnAddImageLeft.hidden = true
         }
         
         self.settedImageCount += 1

@@ -13,6 +13,8 @@ target 'Kapıştır' do
     pod 'DynamicColor', '~> 2.4.0'
     pod 'M13Checkbox'
     pod "SAConfettiView"
+    pod 'Fabric'
+    pod 'Crashlytics'
 end
 
 target 'KapıştırTests' do

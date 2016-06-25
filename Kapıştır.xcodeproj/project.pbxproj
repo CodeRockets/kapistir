@@ -262,6 +262,7 @@
 				1535A6A61C953E8800897674 /* Resources */,
 				1610064DD77231A2A4C54C3E /* Embed Pods Frameworks */,
 				7546F56D59E7B10CAFF7716E /* Copy Pods Resources */,
+				150047711D1EB534000BB034 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -320,6 +321,7 @@
 				TargetAttributes = {
 					1535A6A71C953E8800897674 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 6YN3LGG3MH;
 					};
 					1535A6BE1C953E8800897674 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -382,6 +384,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		150047711D1EB534000BB034 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 7af1b4c317e31b006e8caaf4a44e31e752dbac23 0dbb6237b9483020a8cecd78bdf1edf5567e3540031b34a1cde48e161c753437";
+		};
 		1610064DD77231A2A4C54C3E /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -597,6 +612,8 @@
 			baseConfigurationReference = B71ECC96EEDDF5986E840999 /* Pods-Kapıştır.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -615,6 +632,7 @@
 			baseConfigurationReference = 260E7C28E0B16BCC0D428CDB /* Pods-Kapıştır.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

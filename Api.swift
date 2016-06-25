@@ -114,13 +114,16 @@ struct Api {
     
     static func saveAnswer(question: Question, answer: Answer, errorCallback: ()-> Void, successCallback: ()-> Void) {
         
-        let params: [String: AnyObject] = [
+        var params: [String: AnyObject] = [
             "option":       answer.rawValue,
             "question_id":  question.id,
-            "user_id":      UserStore.user!.userId,
             "client_id":    1,
             "text":         "0"
         ]
+
+        if let userId = UserStore.user?.userId {
+            params["user_id"] = userId
+        }
         
         Alamofire.request(
             .POST,

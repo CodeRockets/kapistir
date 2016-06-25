@@ -4,7 +4,10 @@ PODS:
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
+  - Crashlytics (3.7.2):
+    - Fabric (~> 1.6.3)
   - DynamicColor (2.4.0)
+  - Fabric (1.6.7)
   - Kingfisher (2.1.0)
   - M13Checkbox (2.1.2)
   - MBProgressHUD (0.9.2)
@@ -15,7 +18,9 @@ DEPENDENCIES:
   - Alamofire (~> 3.3)
   - ALCameraViewController
   - ChameleonFramework/Swift
+  - Crashlytics
   - DynamicColor (~> 2.4.0)
+  - Fabric
   - Kingfisher (~> 2.1)
   - M13Checkbox
   - MBProgressHUD (~> 0.9.2)
@@ -35,7 +40,9 @@ SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   ALCameraViewController: 15bd245a247cff0f8a038c349ac2bbe79152b686
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   DynamicColor: 2f3fd61053684667bad9f03045dcf9a2a5a007ea
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   Kingfisher: 3ac09acad75a25ab22f6d7cef3de10d61dd4792d
   M13Checkbox: fbc53145e3ca8ecd1c444a76439bdc0ddb17b008
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1

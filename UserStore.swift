@@ -8,6 +8,7 @@
 
 import Foundation
 import Kingfisher
+import Crashlytics
 
 class UserStore{
     
@@ -94,6 +95,10 @@ class UserStore{
             print("loading user local \(self._user)")
             
             self.publishUpdate()
+            
+            // Crashlytics.sharedInstance().setUserEmail("user@fabric.io")
+            Crashlytics.sharedInstance().setUserIdentifier(self._user!.facebookId)
+            Crashlytics.sharedInstance().setUserName(self._user!.userName)
         }
     }
     

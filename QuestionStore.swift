@@ -37,10 +37,22 @@ struct QuestionStore{
         
         Api.getBatch({ () -> Void in
             // error
-                
+            
             },
             successCallback:  {(questions) -> Void in
-                self._questions = self._questions + questions
+                
+                let questionsWillAdd = questions.filter({ q -> Bool in
+                    
+                    return self._questions.indexOf({ question -> Bool in
+                        return question.id == q.id
+                    }) == nil
+                    
+                })
+                
+                self._questions = self._questions + questionsWillAdd
+                
+                print("\(questionsWillAdd.count) questions added")
+                
                 self.publishUpdate()
             })
     }

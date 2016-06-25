@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Crashlytics
+import Fabric
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKLoginManager.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:NSError!) -> Void in
             //
         }
+        
+        Fabric.with([Crashlytics.self])
         
         App.Store.loadAppSettings()
         UserStore.loadUserLocal()

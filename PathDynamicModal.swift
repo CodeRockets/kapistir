@@ -104,7 +104,7 @@ class PathDynamicModal: NSObject, UIGestureRecognizerDelegate {
         self.backgroundView.addGestureRecognizer(self.pan)
         
         self.confettiView = SAConfettiView(frame: self.backgroundView.bounds)
-        self.self.backgroundView.addSubview(confettiView!)
+        self.backgroundView.addSubview(confettiView!)
     }
     
     private func close(horizontalOffset h: CGFloat) {
