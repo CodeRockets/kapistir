@@ -256,8 +256,8 @@
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burada onboarding olacak" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhC-y9-7sC">
-                                            <rect key="frame" x="107" y="84" width="200" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burada onboarding olacak" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OhC-y9-7sC">
+                                            <rect key="frame" x="8" y="84" width="398" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Hjl-AU-RGO"/>
                                                 <constraint firstAttribute="width" constant="200" id="gxM-Uu-vIH"/>
@@ -265,6 +265,12 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Hjl-AU-RGO"/>
+                                                    <exclude reference="gxM-Uu-vIH"/>
+                                                </mask>
+                                            </variation>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe up" translatesAutoresizingMaskIntoConstraints="NO" id="cif-lY-fkL">
                                             <rect key="frame" x="80" y="128" width="254" height="298"/>
@@ -275,10 +281,12 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="cif-lY-fkL" secondAttribute="bottom" constant="66" id="1pF-it-ne4"/>
                                         <constraint firstItem="OhC-y9-7sC" firstAttribute="centerX" secondItem="vwq-mi-CZt" secondAttribute="centerX" id="9Vs-Jz-8L6"/>
+                                        <constraint firstItem="OhC-y9-7sC" firstAttribute="trailing" secondItem="vwq-mi-CZt" secondAttribute="trailingMargin" id="EYK-cL-JVz"/>
                                         <constraint firstItem="OhC-y9-7sC" firstAttribute="centerY" secondItem="vwq-mi-CZt" secondAttribute="centerY" constant="-151.5" id="OY0-7N-liC"/>
                                         <constraint firstAttribute="trailing" secondItem="cif-lY-fkL" secondAttribute="trailing" constant="80" id="Pcz-Gh-eB1"/>
                                         <constraint firstItem="cif-lY-fkL" firstAttribute="leading" secondItem="vwq-mi-CZt" secondAttribute="leading" constant="80" id="k9D-vW-KOy"/>
                                         <constraint firstItem="T0K-hy-I6J" firstAttribute="centerX" secondItem="vwq-mi-CZt" secondAttribute="centerX" id="lB5-By-8B2"/>
+                                        <constraint firstItem="OhC-y9-7sC" firstAttribute="leading" secondItem="vwq-mi-CZt" secondAttribute="leadingMargin" id="r4N-DE-dQ3"/>
                                         <constraint firstItem="T0K-hy-I6J" firstAttribute="top" secondItem="vwq-mi-CZt" secondAttribute="top" constant="38" id="rL8-GF-Lr6"/>
                                         <constraint firstItem="cif-lY-fkL" firstAttribute="top" secondItem="OhC-y9-7sC" secondAttribute="bottom" constant="23" id="rbI-KV-ETb"/>
                                     </constraints>

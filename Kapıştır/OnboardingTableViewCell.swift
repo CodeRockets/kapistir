@@ -13,7 +13,6 @@ class OnboardingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblTitle: UILabel!
     
-    
     @IBOutlet weak var lblText: UILabel!
     
     @IBOutlet weak var imgImage: UIImageView!

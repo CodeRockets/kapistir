@@ -22,7 +22,17 @@ class MainTableViewController: UITableViewController {
     var loadingNotification: MBProgressHUD?
     
     var reloadingTable = false
-        
+    
+    let onboardingTitles = [
+        "Kapıştır'a hoşgeldiniz!",
+        "Hemen başlıyoruz!"
+    ]
+    
+    let onboardingTexts = [
+        "Herhangi ikişeyi karşılaştırın, arkadaşlarınız ile oylayın!",
+        "+ ile siz de anında kapıştır oluşturabilirsiniz."
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,8 +118,8 @@ class MainTableViewController: UITableViewController {
             
             let cell = tableView.dequeueReusableCellWithIdentifier("OnboardingCell", forIndexPath: indexPath) as! OnboardingTableViewCell
         
-            cell.lblTitle.text = "Kapıştır'a Hoşgeldiniz!"
-            cell.lblText.text = indexPath.row == 0 ? "Bu ilk sayfa" : "Bu diğer sayfa"
+            cell.lblTitle.text = self.onboardingTitles[indexPath.row]
+            cell.lblText.text = self.onboardingTexts[indexPath.row]
             
             return cell
         }

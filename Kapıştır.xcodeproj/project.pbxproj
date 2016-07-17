@@ -321,7 +321,7 @@
 				TargetAttributes = {
 					1535A6A71C953E8800897674 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 6YN3LGG3MH;
+						DevelopmentTeam = ESA5635Y2J;
 					};
 					1535A6BE1C953E8800897674 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -614,6 +614,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -621,7 +622,7 @@
 				INFOPLIST_FILE = "Kapıştır/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.coderockets.kapistir;
+				PRODUCT_BUNDLE_IDENTIFIER = coderockets.kapistir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kapıştır-Bridging-Header.h";
 			};
@@ -633,6 +634,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -640,7 +642,7 @@
 				INFOPLIST_FILE = "Kapıştır/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.coderockets.kapistir;
+				PRODUCT_BUNDLE_IDENTIFIER = coderockets.kapistir;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Kapıştır-Bridging-Header.h";
 			};
