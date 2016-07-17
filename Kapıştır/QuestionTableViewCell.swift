@@ -62,33 +62,12 @@ class QuestionTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-          
-            /*let colorsLeft = ColorsFromImage(self.imgLeft.image!, withFlatScheme: true)
-            
-            let colorsRight = ColorsFromImage(self.imgRight.image!, withFlatScheme: true)
-            
-            //print(colorsLeft)
-            
-            self.viewLeft.backgroundColor = colorsLeft.first
-            
-            self.viewRight.backgroundColor = colorsRight.first*/
-            
-            // profile image
-            self.imgProfileImage.layer.cornerRadius = self.imgProfileImage.frame.size.width / 2
-            self.imgProfileImage.layer.masksToBounds = true
-            
-            let tapGestureRecoginzerLeft = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedLeft(_:)))
-            let tapGestureRecoginzerRight = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedRight(_:)))
-
-            self.imgLeft.addGestureRecognizer(tapGestureRecoginzerLeft)
-            self.imgRight.addGestureRecognizer(tapGestureRecoginzerRight)
-            
-            self.lblQuestion.text = self.question.askerName
-            self.imgProfileImage.kf_setImageWithURL(NSURL(string: self.question.askerProfileImage!)!)
-        }
+        
+        let tapGestureRecoginzerLeft = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedLeft(_:)))
+        let tapGestureRecoginzerRight = UITapGestureRecognizer(target:self, action:#selector(QuestionTableViewCell.tappedRight(_:)))
+        
+        self.imgLeft.addGestureRecognizer(tapGestureRecoginzerLeft)
+        self.imgRight.addGestureRecognizer(tapGestureRecoginzerRight)
     }
     
     func tappedLeft(gesture: UITapGestureRecognizer ) {
@@ -97,20 +76,11 @@ class QuestionTableViewCell: UITableViewCell {
         }
         
         self.question.optionACount += 1
-        showVotes()
-        
         self.question.answer = .Left
-        
-        // show selection tick
-        //self.imgCheckLeft.hidden = false
-        //UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: [.CurveEaseInOut], animations: ({
-           // self.imgCheckLeftBottomConst.constant = self.viewLeft.bounds.size.height - gesture.locationInView(self.viewLeft).y - self.imgCheckLeft.bounds.size.height/2
-            //self.imgCheckLeft.transform = CGAffineTransformMakeScale(1.3, 1.3)
-            //self.viewLeft.layoutIfNeeded()
-        //}), completion: nil)
-
         self.chkLeft.hidden = false
         self.chkLeft.setCheckState(.Checked, animated: true)
+        
+        showVotes()
         
         Api.saveAnswer(self.question, answer: .Left, errorCallback: {
             // hata oluştu
@@ -125,19 +95,11 @@ class QuestionTableViewCell: UITableViewCell {
         }
         
         self.question.optionBCount += 1
-        showVotes()
-        
         self.question.answer = .Right
-        
-        // show selection tick
-        //self.imgCheckRight.hidden = false
-        //UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 3.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
-            //self.imgCheckRightBottomConst.constant = self.viewRight.bounds.size.height - gesture.locationInView(self.viewRight).y - self.imgCheckRight.bounds.size.height/2
-            //self.viewRight.layoutIfNeeded()
-        //}), completion: nil)
-        
         self.chkRight.hidden = false
         self.chkRight.setCheckState(.Checked, animated: true)
+        
+        showVotes()
         
         Api.saveAnswer(self.question, answer: .Right, errorCallback: {
             // hata oluştu
@@ -198,12 +160,22 @@ class QuestionTableViewCell: UITableViewCell {
     }
     
     static func configureTableCell(question: Question, inout cell: QuestionTableViewCell)  {
+        
+        cell.question = question
+        
+        // profile image
+        cell.imgProfileImage.layer.cornerRadius = cell.imgProfileImage.frame.size.width / 2
+        cell.imgProfileImage.layer.masksToBounds = true
+
+        cell.lblQuestion.text = question.askerName
+        cell.imgProfileImage.kf_setImageWithURL(NSURL(string: question.askerProfileImage!)!)
+        
         if question.isAnswered == true {
             
             let heightA = 40 + (cell.viewLeft.frame.size.height-40) * CGFloat(question.ratioA)
             let heightB = 40 + (cell.viewRight.frame.size.height-40) * CGFloat(question.ratioB)
             
-            print("cell height: \(cell.viewLeft.frame.size.height-40), ratioA: \(question.ratioA)")
+            // print("cell height: \(cell.viewLeft.frame.size.height-40), ratioA: \(question.ratioA)")
             
             cell.viewVotesLeftHeightConst.constant = heightA
             cell.viewVotesRightHeightConst.constant = heightB
@@ -252,14 +224,7 @@ class QuestionTableViewCell: UITableViewCell {
         }
         
         cell.lblInfo.text = "☆ " + String(question.totalAnswerCount) + " Oy" //+ "   ◎ " + String(question.skipCount)
-        
-        cell.imgLeft.image = question.imageLeft
-        cell.imgRight.image = question.imageRight
-        
-        // dont load if question already has images
-        if question.imageLeft == nil {
-            cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
-            cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!)
-        }
+        cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
+        cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!)
     }
 }

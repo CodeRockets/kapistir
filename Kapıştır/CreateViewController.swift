@@ -229,8 +229,8 @@ class CreateViewController:
                                         
                                         self.working = false
                                         
-                                        question.imageLeft = self.images[0]
-                                        question.imageRight = self.images[1]
+                                        //question.imageLeft = self.images[0]
+                                        //question.imageRight = self.images[1]
                                         QuestionStore.insertCurrentQuestion(question)
                                         
                                         let view = ModalSaveQuestionSuccess.instantiateFromNib()

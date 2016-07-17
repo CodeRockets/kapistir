@@ -23,7 +23,7 @@ struct Api {
             "debug": App.UI.DEBUG
         ]
         
-        print("fetch params: \(params)")
+        // print("fetch params: \(params)")
         
         Alamofire.request(
             .GET,
@@ -36,12 +36,10 @@ struct Api {
                     
                     let json = JSON(data)
                     
-                    // print("gelen json: \(json)")
-                    
                     let rows = json["data"]["rows"].arrayObject
                     
                     for questionData in rows! {
-                        print("question: \(questionData)")
+                        // print("question: \(questionData)")
                         let question = Question.fromApiResponse(questionData as! NSDictionary)
                         retQuestions.append(question)
                     }
@@ -59,17 +57,18 @@ struct Api {
     static func fetchBatchImages(batch: [Question], errorCallback: ()->Void, successCallback: ([Question])-> Void) {
         
         let urlsA = batch.map { NSURL(string: $0.optionA)! }
-        
         let urls = urlsA + batch.map { NSURL(string: $0.optionB)! }
-        
-        // print("image urls:  \(urls)")
         
         let prefetcher = ImagePrefetcher(urls: urls, optionsInfo: nil, progressBlock: nil, completionHandler: {
             (skippedResources, failedResources, completedResources) -> () in
 
-            // print("resources are prefetched: \(completedResources)")
+            print("resources are prefetched")
             
             successCallback(batch)
+            
+            //let cache = KingfisherManager.sharedManager.cache
+            //cache.clearMemoryCache()
+            
         })
         
         prefetcher.start()
@@ -193,8 +192,8 @@ struct Api {
                             askerProfileImage: UserStore.user!.profileImageUrl
                         )
                         
-                        question.imageLeft = images.0
-                        question.imageRight = images.1
+                        // question.imageLeft = images.0
+                        // question.imageRight = images.1
                         
                         successCallback(question: question)
                     }

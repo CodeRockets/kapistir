@@ -31,6 +31,7 @@ class UserStore{
             block(loggedUser: self.user!)
         }
     }
+
     
     static func updateUser(user: User?){
         print("user will be updated")

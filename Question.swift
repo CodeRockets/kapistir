@@ -52,8 +52,8 @@ class Question {
     
     var isAnswered: Bool = false
     
-    var imageLeft: UIImage?
-    var imageRight: UIImage?
+    // var imageLeft: UIImage?
+    // var imageRight: UIImage?
     
     var totalAnswerCount: Int {
         return optionACount + optionBCount

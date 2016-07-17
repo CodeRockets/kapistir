@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import Kingfisher
 
 struct App {
     
@@ -107,6 +108,9 @@ struct App {
             print("user onboarded \(UI.onboarded)")
             
             print("app setting loaded \(App.Keys.requestHeaders)")
+            
+             let cache = KingfisherManager.sharedManager.cache
+             cache.maxMemoryCost = 600*400*10
         }
         
         static func saveUserOnboarded() {

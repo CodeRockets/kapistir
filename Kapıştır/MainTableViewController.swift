@@ -20,6 +20,8 @@ class MainTableViewController: UITableViewController {
     var currentQuestion: Question?
     
     var loadingNotification: MBProgressHUD?
+    
+    var reloadingTable = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,12 +44,14 @@ class MainTableViewController: UITableViewController {
                 
                 print("will scroll to next question")
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.tableView.scrollToRowAtIndexPath(
-                        NSIndexPath(forRow: QuestionStore.currentQuestionIndex+1, inSection: 0),
-                        atScrollPosition: .Top,
-                        animated: true
-                    )
+                if QuestionStore.hasNextQuestion {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.scrollToRowAtIndexPath(
+                            NSIndexPath(forRow: QuestionStore.currentQuestionIndex+1, inSection: 0),
+                            atScrollPosition: .Top,
+                            animated: true
+                        )
+                    }
                 }
             }
         }
@@ -79,6 +83,8 @@ class MainTableViewController: UITableViewController {
         
         if App.UI.onboarded {
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                print("table reloaded")
+                self.reloadingTable = true
                 self.tableView.reloadData()
             }
         }
@@ -115,15 +121,16 @@ class MainTableViewController: UITableViewController {
                 print("onboarding completed")
                 
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    print("table reloaded after onboarding")
                     self.tableView.reloadData()
                 }
             }
             
             var cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! QuestionTableViewCell
-           
-            cell.question = self.questions[indexPath.row]
         
-            QuestionTableViewCell.configureTableCell(cell.question, cell: &cell)
+            let question = self.questions[indexPath.row]
+            
+            QuestionTableViewCell.configureTableCell(question, cell: &cell)
         
             return cell
         }
@@ -132,6 +139,11 @@ class MainTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if !App.UI.onboarded {
+            return
+        }
+        
+        if self.reloadingTable {
+            self.reloadingTable = false
             return
         }
         
@@ -150,6 +162,7 @@ class MainTableViewController: UITableViewController {
         
         self.currentQuestion = self.questions[indexPath.row]
         QuestionStore.setCurrentQuestion(self.currentQuestion!)
+        
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

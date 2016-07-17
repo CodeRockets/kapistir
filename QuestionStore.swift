@@ -32,6 +32,11 @@ struct QuestionStore{
         self._callbacks.append(block)
     }
     
+    
+    static var hasNextQuestion: Bool {
+        return _questions.count > currentQuestionIndex+1
+    }
+    
     static func getBatch() {
         // sorular indirilecek
         
@@ -49,7 +54,13 @@ struct QuestionStore{
                     
                 })
                 
-                self._questions = self._questions + questionsWillAdd
+                //if self._questions.count > 3 {
+                //    self._questions = self._questions[0..<self.currentQuestionIndex-3] + questionsWillAdd
+                //    self.currentQuestionIndex = 3
+                //
+                //}else{
+                    self._questions = self._questions + questionsWillAdd
+                //}
                 
                 print("\(questionsWillAdd.count) questions added")
                 
