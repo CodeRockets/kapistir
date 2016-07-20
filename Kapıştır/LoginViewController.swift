@@ -33,7 +33,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         loginView.frame = CGRectMake(xPos, 210, 200, 40)
         
         self.view.addSubview(loginView)
-        loginView.readPermissions = ["public_profile", "email", "user_friends","user_birthday"]
+        loginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
         
         loginView.delegate = self
         
@@ -48,10 +48,31 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         
         print("Login button result: \(result)")
         
+        self.view.layoutIfNeeded()
+       
         if error != nil {
             //handle error
+            
+            print("fb login error")
+            
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.hidden = true
+            self.loginView.hidden = false
+            self.btnCancel.hidden = false
+            
         } else {
-            returnUserData()
+            
+            if let _ = FBSDKAccessToken.currentAccessToken() {
+                returnUserData()
+            }
+            else{
+                print("fb login cancelled")
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidden = true
+                self.loginView.hidden = false
+                self.btnCancel.hidden = false
+            }
+            
         }
     }
     
@@ -91,6 +112,4 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         //
     }
-    
-    
 }

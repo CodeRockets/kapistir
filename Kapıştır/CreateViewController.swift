@@ -240,6 +240,7 @@ class CreateViewController:
                                             modal?.closeWithLeansRandom()
                                             self.dismissViewControllerAnimated(true, completion: {
                                                 print("question/created")
+                                                App.Play.Stop()
                                                 Publisher.publish("question/created", data: nil)
                                             })
                                             return
@@ -248,6 +249,7 @@ class CreateViewController:
                                             print("modal closed")
                                             self.dismissViewControllerAnimated(true, completion: {
                                                 print("question/created")
+                                                App.Play.Stop()
                                                 Publisher.publish("question/created", data: nil)
                                             })
                                         }

@@ -17,7 +17,7 @@ struct App {
         
         static var onboarded = false
         
-        static let DEBUG = 1
+        static let DEBUG = 0
         
         static let questionScrollDelay = UInt32(1300000)
         
@@ -28,7 +28,25 @@ struct App {
                 preferredStyle: .Alert
             )
             
+            alert.addAction(UIAlertAction(title: "Tamam", style: .Default, handler: { (action) -> Void in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            
             App.UI.getTopMostViewController().presentViewController(alert, animated: true, completion: completionCallback)
+        }
+        
+        static func noQuestionsLeftMessage() {
+            let alert = UIAlertController(
+                title: "Bu Kadar",
+                message: "Bugünlük bu kadar. Elimizde şu anda başka kapıştır kalmadı. Sen ekleyebilirsin!",
+                preferredStyle: .Alert
+            )
+            
+            alert.addAction(UIAlertAction(title: "Peki", style: .Default, handler: { (action) -> Void in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            
+            App.UI.getTopMostViewController().presentViewController(alert, animated: true, completion: nil)
         }
         
         private static func getTopMostViewController() -> UIViewController {
@@ -55,7 +73,10 @@ struct App {
             } catch {
                 
             }
-            
+        }
+        
+        static func Stop() {
+            audioPlayer?.stop()
         }
     }
 

@@ -13,7 +13,16 @@ import SwiftyJSON
 
 struct Api {
     
+    static var gettingBatch = false
+    
     static func getBatch( errorCallback: ()-> Void, successCallback: ([Question])-> Void ) {
+        
+        if self.gettingBatch {
+            print("currently getting a batch...")
+            return
+        }
+        
+        self.gettingBatch = true
         
         var retQuestions = [Question]()
         
@@ -22,8 +31,6 @@ struct Api {
             "limit": 10,
             "debug": App.UI.DEBUG
         ]
-        
-        // print("fetch params: \(params)")
         
         Alamofire.request(
             .GET,
@@ -38,16 +45,23 @@ struct Api {
                     
                     let rows = json["data"]["rows"].arrayObject
                     
-                    for questionData in rows! {
-                        // print("question: \(questionData)")
-                        let question = Question.fromApiResponse(questionData as! NSDictionary)
-                        retQuestions.append(question)
+                    if rows?.count == 0 {
+                        // no questions left in service
+                        App.UI.noQuestionsLeftMessage()
                     }
-                    
-                    fetchBatchImages(retQuestions, errorCallback: errorCallback, successCallback: successCallback)
+                    else{
+                        for questionData in rows! {
+                            // print("question: \(questionData)")
+                            let question = Question.fromApiResponse(questionData as! NSDictionary)
+                            retQuestions.append(question)
+                        }
+                        
+                        fetchBatchImages(retQuestions, errorCallback: errorCallback, successCallback: successCallback)
+                    }
                     
                     break
                 case .Failure(_):
+                    self.gettingBatch = false
                     App.UI.showServerError(completion: nil)
                     errorCallback()
                 }
@@ -63,6 +77,8 @@ struct Api {
             (skippedResources, failedResources, completedResources) -> () in
 
             print("resources are prefetched")
+            
+            self.gettingBatch = false
             
             successCallback(batch)
             
@@ -90,8 +106,6 @@ struct Api {
                 case .Success(let data):
                     let json = JSON(data)
                     
-                    print("user saved, json response:  \(json)")
-                    
                     let user = User(
                         userName: json["data"]["name"].stringValue,
                         userId: json["data"]["id"].stringValue,
@@ -113,16 +127,13 @@ struct Api {
     
     static func saveAnswer(question: Question, answer: Answer, errorCallback: ()-> Void, successCallback: ()-> Void) {
         
-        var params: [String: AnyObject] = [
+        let params: [String: AnyObject] = [
+            "user_id":      UserStore.user?.userId ?? "",
             "option":       answer.rawValue,
             "question_id":  question.id,
             "client_id":    1,
             "text":         "0"
         ]
-
-        if let userId = UserStore.user?.userId {
-            params["user_id"] = userId
-        }
         
         Alamofire.request(
             .POST,
@@ -130,16 +141,22 @@ struct Api {
             parameters: params,
             headers: App.Keys.requestHeaders)
             .responseJSON { response in
+                
+                print("answer response \(response.result)")
+                
                 switch response.result {
-                case .Success(let _):
-                    // let json = JSON(data)
+                case .Success(let data):
+                    let json = JSON(data)
                     
                     print("answer saved \(question.id) \(answer.rawValue)")
                     
                     successCallback()
                     
                     break
-                case .Failure(_):
+                    
+                case .Failure(let data):
+                    print("answer save error \(data)")
+                    
                     App.UI.showServerError(completion: nil)
                     errorCallback()
                 }

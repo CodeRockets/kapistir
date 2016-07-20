@@ -81,7 +81,7 @@ class Question {
         self.askerName = askerName
         self.askerProfileImage = askerProfileImage
         
-        print("asker name : \(askerName), \(ratioA), \(ratioB)")
+        // print("asker name : \(askerName), \(ratioA), \(ratioB)")
     }
 }
 

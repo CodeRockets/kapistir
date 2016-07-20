@@ -46,6 +46,8 @@ struct QuestionStore{
             },
             successCallback:  {(questions) -> Void in
                 
+                print("\(questions.count) questions fetched")
+                
                 let questionsWillAdd = questions.filter({ q -> Bool in
                     
                     return self._questions.indexOf({ question -> Bool in
@@ -53,14 +55,8 @@ struct QuestionStore{
                     }) == nil
                     
                 })
-                
-                //if self._questions.count > 3 {
-                //    self._questions = self._questions[0..<self.currentQuestionIndex-3] + questionsWillAdd
-                //    self.currentQuestionIndex = 3
-                //
-                //}else{
-                    self._questions = self._questions + questionsWillAdd
-                //}
+
+                self._questions = self._questions + questionsWillAdd
                 
                 print("\(questionsWillAdd.count) questions added")
                 
