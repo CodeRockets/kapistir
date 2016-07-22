@@ -11,7 +11,7 @@ import MBProgressHUD
 
 class MainTableViewController: UITableViewController {
    
-    var table_onboarded = App.UI.onboarded
+    var table_onboarded = true // App.UI.onboarded
     
     let ONBOARDING_PAGE_COUNT = 2
     
@@ -74,6 +74,7 @@ class MainTableViewController: UITableViewController {
     }
     
     func scrollToCreatedQuestion(payload: AnyObject?) {
+        
         dispatch_async(dispatch_get_main_queue()) {
             self.tableView.scrollToRowAtIndexPath(
                 NSIndexPath(forRow: QuestionStore.currentQuestionIndex+1, inSection: 0),
@@ -137,9 +138,8 @@ class MainTableViewController: UITableViewController {
             }
             
             var cell = tableView.dequeueReusableCellWithIdentifier("QuestionCell", forIndexPath: indexPath) as! QuestionTableViewCell
-        
-            let question = self.questions[indexPath.row]
             
+            let question = self.questions[indexPath.row]
             QuestionTableViewCell.configureTableCell(question, cell: &cell)
         
             return cell

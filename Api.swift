@@ -47,9 +47,9 @@ struct Api {
                     
                     if rows?.count == 0 {
                         // no questions left in service
-                        App.UI.noQuestionsLeftMessage()
+                        // App.UI.noQuestionsLeftMessage()
                     }
-                    else{
+                    //else{
                         for questionData in rows! {
                             // print("question: \(questionData)")
                             let question = Question.fromApiResponse(questionData as! NSDictionary)
@@ -57,7 +57,7 @@ struct Api {
                         }
                         
                         fetchBatchImages(retQuestions, errorCallback: errorCallback, successCallback: successCallback)
-                    }
+                    //}
                     
                     break
                 case .Failure(_):

@@ -32,7 +32,6 @@ struct QuestionStore{
         self._callbacks.append(block)
     }
     
-    
     static var hasNextQuestion: Bool {
         return _questions.count > currentQuestionIndex+1
     }
@@ -80,7 +79,11 @@ struct QuestionStore{
     }
     
     static func insertCurrentQuestion(question: Question){
-        self._questions.insert(question, atIndex: self.currentQuestionIndex+1)
+        // to be fixed.
+        // if kapistir count = 0 and user tries to create kapistir
+        // kapistir count must be checked
+        
+        self._questions.insert(question, atIndex: self.currentQuestionIndex + 1)
         self.publishUpdate()
     }
 }

@@ -204,9 +204,37 @@ class CreateViewController:
                     upload.responseJSON { response in
                         print("result: \(response)")
                         
+                        
                         switch response.result {
                         case .Success(let data):
                             let responseData = JSON(data)
+                            
+                            // cloudinary timed-out
+                            if responseData["statusCode"] == 408 {
+                                print("cloudinary timedout")
+                                
+                                UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
+                                        if target == 0 {
+                                            self.loaderLeftHeight.constant = 0
+                                            self.viewLoaderLeft.layoutIfNeeded()
+                                    
+                                            self.lblLoaderLeftBottom.constant = self.loaderLeftHeight.constant - 30
+                                            self.viewLeft.layoutIfNeeded()
+                                            self.lblLoaderLeft.text = "Tekrar Yükleniyor"
+                                        } else{
+                                            self.loaderRightHeight.constant = 0
+                                            self.viewLoaderRight.layoutIfNeeded()
+                                    
+                                            self.lblLoaderRightBottom.constant = self.loaderRightHeight.constant - 30
+                                            self.viewRight.layoutIfNeeded()
+                                            self.lblLoaderRight.text = "Tekrar Yükleniyor"
+                                        }
+                                    }), completion: nil)
+                                
+                                self.uploadImage(image, target: target)
+                                return
+                            }
+                            
                             self.uploadedImageCount += 1
                             self.uploadedImageUrls[target] = responseData["data"].stringValue
                             self.images[target] = image

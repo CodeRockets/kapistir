@@ -124,7 +124,7 @@ struct App {
                 "x-voter-installation":  UIDevice.currentDevice().identifierForVendor!.UUIDString
             ]
         
-            App.UI.onboarded = NSUserDefaults.standardUserDefaults().valueForKey("onboarded") != nil
+            App.UI.onboarded = true // NSUserDefaults.standardUserDefaults().valueForKey("onboarded") != nil
  
             print("user onboarded \(UI.onboarded)")
             
