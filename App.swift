@@ -9,6 +9,7 @@
 import Foundation
 import AVFoundation
 import Kingfisher
+import Crashlytics
 
 struct App {
     
@@ -16,6 +17,8 @@ struct App {
         static let batchSize = 10
         
         static var onboarded = false
+        
+        static var createOnboarded = false
         
         static let DEBUG = 0
         
@@ -126,7 +129,9 @@ struct App {
         
             App.UI.onboarded = true // NSUserDefaults.standardUserDefaults().valueForKey("onboarded") != nil
  
-            print("user onboarded \(UI.onboarded)")
+            App.UI.createOnboarded = NSUserDefaults.standardUserDefaults().valueForKey("createOnboarded") != nil
+            
+            print("createOnboarded \(UI.createOnboarded)")
             
             print("app setting loaded \(App.Keys.requestHeaders)")
             
@@ -137,7 +142,19 @@ struct App {
         static func saveUserOnboarded() {
             NSUserDefaults.standardUserDefaults().setValue("yes", forKey: "onboarded")
             App.UI.onboarded = true
-            print("user onboarded saved")
+            print("onboarded saved")
+        }
+        
+        static func saveCreateOnboarded() {
+            NSUserDefaults.standardUserDefaults().setValue("yes", forKey: "createOnboarded")
+            App.UI.createOnboarded = true
+            print("createOnboarded saved")
+        }
+    }
+    
+    struct Logging {
+        static func Log(text: String) {
+            CLSLogv(text + " %@", getVaList([UserStore.user?.facebookId ?? ""]))
         }
     }
 }

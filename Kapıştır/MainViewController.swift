@@ -15,11 +15,16 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var viewToolbar: UIVisualEffectView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewToolbar.hidden = !App.UI.onboarded
         
+        //self.activityIndicator.startAnimating()
+        
         UserStore.registerUpdateCallback(userUpdate)
+        
+        // QuestionStore.registerUpdateCallback(questionsUpdate)
         
         Publisher.subscibe("user/loggedin", callback: userLoggedIn)
         
@@ -31,6 +36,10 @@ class MainViewController: UIViewController {
         dispatch_async(dispatch_get_main_queue()) {
             self.btnProfile.setImage(user.profileImage, forState: .Normal)
         }
+    }
+    
+    private func questionsUpdate(questions: [Question]) {
+        //self.activityIndicator.stopAnimating()
     }
     
     func userFinishedOnboarding(data: AnyObject?) {

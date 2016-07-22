@@ -11,6 +11,7 @@ import ALCameraViewController
 import Alamofire
 import SwiftyJSON
 import SAConfettiView
+import Crashlytics
 
 class CreateViewController:
     UIViewController,
@@ -116,7 +117,9 @@ class CreateViewController:
         
         self.imgProfile.layer.cornerRadius = imgProfile.bounds.size.width / 2
         self.imgProfile.clipsToBounds = true
-        self.imgProfile.image = UserStore.user?.profileImage
+        self.imgProfile.kf_setImageWithURL(NSURL(string: (UserStore.user?.profileImageUrl)!)!)
+        
+        // = //UserStore.user?.profileImage
         self.lblUserName.text = UserStore.user?.userName
         
         self.scrollViewRight.addSubview(imageViewRight)
@@ -213,6 +216,8 @@ class CreateViewController:
                             if responseData["statusCode"] == 408 {
                                 print("cloudinary timedout")
                                 
+                                CLSLogv("error_imageupload_timedout %d %d", getVaList([1, 2]))
+                                
                                 UIView.animateWithDuration(0.6, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: ({
                                         if target == 0 {
                                             self.loaderLeftHeight.constant = 0
@@ -263,9 +268,9 @@ class CreateViewController:
                                         
                                         let view = ModalSaveQuestionSuccess.instantiateFromNib()
                                         let window = UIApplication.sharedApplication().delegate?.window!
-                                        let modal = PathDynamicModal.show(modalView: view, inView: window!)
+                                        let modal = PathDynamicModal.show(modalView: view, inView: window!, showConfetti: true)
                                         view.closeButtonHandler = {[weak modal] in
-                                            modal?.closeWithLeansRandom()
+                                            modal?.closeWithStraight()
                                             self.dismissViewControllerAnimated(true, completion: {
                                                 print("question/created")
                                                 App.Play.Stop()
@@ -274,7 +279,7 @@ class CreateViewController:
                                             return
                                         }
                                         modal.closedHandler = {
-                                            print("modal closed")
+                                            modal.closeWithStraight()
                                             self.dismissViewControllerAnimated(true, completion: {
                                                 print("question/created")
                                                 App.Play.Stop()
@@ -293,6 +298,36 @@ class CreateViewController:
             })
     }
     
+    func onboard() {
+        
+        if App.UI.createOnboarded {
+            return
+        }
+        
+        let view = ModalCreateOnboarding.instantiateFromNib()
+        // let window = UIApplication.sharedApplication().delegate?.window!
+        let modal = PathDynamicModal.show(modalView: view, inView: self.view, showConfetti: false)
+        
+        view.closeButtonHandler = {[weak modal] in
+            modal?.closeWithStraight()
+            
+            //self.dismissViewControllerAnimated(true, completion: {
+            ///    print("create onboarded")
+            //})
+            return
+        }
+        
+        modal.closedHandler = {
+            modal.closeWithStraight()
+            //self.dismissViewControllerAnimated(true, completion: {
+            //    print("create onboarded")
+            //})
+            return
+        }
+        
+        App.Store.saveCreateOnboarded()
+    }
+
     func crop(image originalImage: UIImage, targetScrollView: UIScrollView) -> UIImage {
         let scale = UIScreen.mainScreen().scale
         let posX = targetScrollView.contentOffset.x * scale
@@ -472,7 +507,9 @@ class CreateViewController:
         
         self.settedImageCount += 1
         
-        self.dismissViewControllerAnimated(true, completion:nil)
+        self.dismissViewControllerAnimated(true, completion: {
+            self.onboard()
+        })
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

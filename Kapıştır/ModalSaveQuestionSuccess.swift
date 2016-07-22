@@ -36,12 +36,11 @@ class ModalSaveQuestionSuccess: UIView {
     }
     
     private func configure() {
-        self.contentView.layer.cornerRadius = 5.0
+        self.contentView.layer.cornerRadius = 10.0
     }
     
     class func instantiateFromNib() -> ModalSaveQuestionSuccess {
         let view = UINib(nibName: "ModalSaveQuestionSuccess", bundle: nil).instantiateWithOwner(nil, options: nil).first as! ModalSaveQuestionSuccess
-        
         return view
     }
     

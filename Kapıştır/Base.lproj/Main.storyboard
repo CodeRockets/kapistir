@@ -643,9 +643,17 @@
                                 </constraints>
                                 <blurEffect style="light"/>
                             </visualEffectView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="1b5-Ye-gz1">
+                                <rect key="frame" x="172" y="318" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="7jN-Bh-1h0"/>
+                                    <constraint firstAttribute="width" constant="32" id="KcP-iO-vJf"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.8600714653" green="1" blue="0.92546743490000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="1b5-Ye-gz1" firstAttribute="centerY" secondItem="ajV-KO-5f9" secondAttribute="centerY" id="5lq-uI-0Ex"/>
                             <constraint firstItem="5k5-u9-gFC" firstAttribute="leading" secondItem="ajV-KO-5f9" secondAttribute="leading" id="Clz-Py-J9p"/>
                             <constraint firstItem="lum-6m-xqQ" firstAttribute="top" secondItem="81h-UX-G5s" secondAttribute="bottom" id="GuS-pg-7UJ"/>
                             <constraint firstItem="81h-UX-G5s" firstAttribute="top" secondItem="ajV-KO-5f9" secondAttribute="top" id="Ju3-eu-Yvp"/>
@@ -653,10 +661,12 @@
                             <constraint firstAttribute="trailing" secondItem="5k5-u9-gFC" secondAttribute="trailing" id="Z1D-46-aEJ"/>
                             <constraint firstItem="5k5-u9-gFC" firstAttribute="top" secondItem="ajV-KO-5f9" secondAttribute="top" id="cPd-6b-PSD"/>
                             <constraint firstAttribute="trailing" secondItem="81h-UX-G5s" secondAttribute="trailing" id="jzf-PF-VyP"/>
+                            <constraint firstItem="1b5-Ye-gz1" firstAttribute="centerX" secondItem="ajV-KO-5f9" secondAttribute="centerX" id="wpN-wO-rCH"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="1b5-Ye-gz1" id="6q3-f2-Svi"/>
                         <outlet property="btnProfile" destination="4Ed-Xx-N8v" id="hrH-oO-PP2"/>
                         <outlet property="viewToolbar" destination="5k5-u9-gFC" id="7Zd-NX-ia1"/>
                         <segue destination="YXB-eX-UcL" kind="show" identifier="gotoLogin" id="3ZG-g4-cRj"/>
