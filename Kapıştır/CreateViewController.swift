@@ -17,7 +17,8 @@ class CreateViewController:
     UIViewController,
     UIImagePickerControllerDelegate,
     UINavigationControllerDelegate,
-    UIScrollViewDelegate
+    UIScrollViewDelegate,
+    UIPopoverPresentationControllerDelegate
 {
     private var target = 0
     
@@ -305,23 +306,15 @@ class CreateViewController:
         }
         
         let view = ModalCreateOnboarding.instantiateFromNib()
-        // let window = UIApplication.sharedApplication().delegate?.window!
         let modal = PathDynamicModal.show(modalView: view, inView: self.view, showConfetti: false)
         
         view.closeButtonHandler = {[weak modal] in
             modal?.closeWithStraight()
-            
-            //self.dismissViewControllerAnimated(true, completion: {
-            ///    print("create onboarded")
-            //})
             return
         }
         
         modal.closedHandler = {
             modal.closeWithStraight()
-            //self.dismissViewControllerAnimated(true, completion: {
-            //    print("create onboarded")
-            //})
             return
         }
         

@@ -18,6 +18,10 @@ struct QuestionStore{
     
     static var currentQuestionIndex = 0
     
+    static var questionCount: Int {
+        return self._questions.count
+    }
+    
     private static var _questions = [Question]()
     
     private static var _callbacks = [Callback]()
@@ -83,7 +87,10 @@ struct QuestionStore{
         // if kapistir count = 0 and user tries to create kapistir
         // kapistir count must be checked
         
-        self._questions.insert(question, atIndex: self.currentQuestionIndex + 1)
+        let questionIndex = QuestionStore.questionCount > 0 ?
+            self.currentQuestionIndex + 1 : 0
+        
+        self._questions.insert(question, atIndex: questionIndex)
         self.publishUpdate()
     }
 }

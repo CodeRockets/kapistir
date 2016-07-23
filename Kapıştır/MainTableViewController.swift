@@ -75,9 +75,12 @@ class MainTableViewController: UITableViewController {
     
     func scrollToCreatedQuestion(payload: AnyObject?) {
         
+        let questionIndex = QuestionStore.questionCount > 1 ?
+            QuestionStore.currentQuestionIndex + 1 : 0
+        
         dispatch_async(dispatch_get_main_queue()) {
             self.tableView.scrollToRowAtIndexPath(
-                NSIndexPath(forRow: QuestionStore.currentQuestionIndex+1, inSection: 0),
+                NSIndexPath(forRow: questionIndex, inSection: 0),
                 atScrollPosition: .Top,
                 animated: true
             )

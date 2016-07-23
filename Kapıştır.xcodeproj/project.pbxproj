@@ -41,6 +41,7 @@
 		153C1EAB1CC9ED2A00CF94C3 /* UserQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153C1EAA1CC9ED2A00CF94C3 /* UserQuestionTableViewCell.swift */; };
 		154174901D42CBA3001C703D /* ModalCreateOnboarding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1541748F1D42CBA3001C703D /* ModalCreateOnboarding.xib */; };
 		154174921D42CFB9001C703D /* ModalCreateOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154174911D42CFB9001C703D /* ModalCreateOnboarding.swift */; };
+		154174941D42E13D001C703D /* OHCircleSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154174931D42E13D001C703D /* OHCircleSegue.swift */; };
 		157B9D071CA68B350026EFC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 157B9D061CA68B350026EFC1 /* .gitignore */; };
 		159FABEF1CBEEE540049941E /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FABEE1CBEEE540049941E /* Publisher.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 		153C1EAA1CC9ED2A00CF94C3 /* UserQuestionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		1541748F1D42CBA3001C703D /* ModalCreateOnboarding.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModalCreateOnboarding.xib; sourceTree = "<group>"; };
 		154174911D42CFB9001C703D /* ModalCreateOnboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalCreateOnboarding.swift; sourceTree = "<group>"; };
+		154174931D42E13D001C703D /* OHCircleSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OHCircleSegue.swift; path = "Kapıştır/OHCircleSegue.swift"; sourceTree = "<group>"; };
 		157B9D061CA68B350026EFC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		159FABEE1CBEEE540049941E /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		260E7C28E0B16BCC0D428CDB /* Pods-Kapıştır.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kapıştır.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kapıştır/Pods-Kapıştır.release.xcconfig"; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				1535A7031C99DF9300897674 /* UserStore.swift */,
 				159FABEE1CBEEE540049941E /* Publisher.swift */,
 				153C1EA41CC8161D00CF94C3 /* PathDynamicModal.swift */,
+				154174931D42E13D001C703D /* OHCircleSegue.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				159FABEF1CBEEE540049941E /* Publisher.swift in Sources */,
 				1535A7041C99DF9300897674 /* UserStore.swift in Sources */,
 				153C1EAB1CC9ED2A00CF94C3 /* UserQuestionTableViewCell.swift in Sources */,
+				154174941D42E13D001C703D /* OHCircleSegue.swift in Sources */,
 				1535A7001C99857700897674 /* UserProfileViewController.swift in Sources */,
 				1535A6E51C9541E600897674 /* MainTableViewController.swift in Sources */,
 				153C1EA11CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift in Sources */,

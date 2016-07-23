@@ -81,4 +81,8 @@ class MainViewController: UIViewController {
     @IBAction func gotoProfile(sender: AnyObject) {
         self.performSegueWithIdentifier("gotoProfile", sender: self)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+    }
 }
