@@ -85,4 +85,12 @@ class MainViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
     }
+    
+    override func didReceiveMemoryWarning() {
+        print("memory warning!!!")
+        
+        
+        
+        super.didReceiveMemoryWarning()
+    }
 }

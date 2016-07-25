@@ -20,7 +20,7 @@ struct App {
         
         static var createOnboarded = false
         
-        static let DEBUG = 0
+        static let DEBUG = 1
         
         static let questionScrollDelay = UInt32(1300000)
         
@@ -135,8 +135,8 @@ struct App {
             
             print("app setting loaded \(App.Keys.requestHeaders)")
             
-             let cache = KingfisherManager.sharedManager.cache
-             cache.maxMemoryCost = 600*400*10
+             //let cache = KingfisherManager.sharedManager.cache
+             //cache.maxMemoryCost = 600*400*10
         }
         
         static func saveUserOnboarded() {

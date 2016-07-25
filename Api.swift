@@ -68,6 +68,8 @@ struct Api {
         let urlsA = batch.map { NSURL(string: $0.optionA)! }
         let urls = urlsA + batch.map { NSURL(string: $0.optionB)! }
         
+        print(urls)
+        
         let prefetcher = ImagePrefetcher(urls: urls, optionsInfo: nil, progressBlock: nil, completionHandler: {
             (skippedResources, failedResources, completedResources) -> () in
 
