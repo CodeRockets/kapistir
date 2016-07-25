@@ -691,15 +691,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPB-ib-HsB" userLabel="view Left">
-                                <rect key="frame" x="0.0" y="60" width="188" height="563"/>
+                                <rect key="frame" x="0.0" y="60" width="187.5" height="563"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYe-Pl-2EO">
-                                        <rect key="frame" x="0.0" y="0.0" width="188" height="563"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="563"/>
                                     </scrollView>
                                     <visualEffectView opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oFL-Bx-LVP" userLabel="loaderLeft">
-                                        <rect key="frame" x="0.0" y="541" width="188" height="22"/>
+                                        <rect key="frame" x="0.0" y="541" width="187.5" height="22"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KHw-Rj-QGM">
-                                            <rect key="frame" x="0.0" y="0.0" width="188" height="22"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="22"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <constraints>
@@ -708,7 +708,7 @@
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yükleniyor %40" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOc-KD-QHS" userLabel="loadingRatioLeft">
-                                        <rect key="frame" x="0.0" y="517" width="188" height="21"/>
+                                        <rect key="frame" x="0.0" y="517" width="187.5" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="dxb-tP-5xT"/>
                                         </constraints>
@@ -723,11 +723,41 @@
                                             <action selector="addImageLeft:" destination="Rwj-YY-zko" eventType="touchUpInside" id="84y-zz-GYY"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9Y-XR-x6P">
+                                        <rect key="frame" x="8" y="8" width="28" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Otn-F5-7gw"/>
+                                            <constraint firstAttribute="width" constant="28" id="alC-CJ-zOh"/>
+                                        </constraints>
+                                        <state key="normal" title="+">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rightZoomIn:" destination="Rwj-YY-zko" eventType="touchUpInside" id="loP-JS-x4z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6GF-XU-Hnt">
+                                        <rect key="frame" x="152" y="8" width="28" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="28" id="ArD-5G-Srz"/>
+                                            <constraint firstAttribute="height" constant="30" id="nvY-bV-dkU"/>
+                                        </constraints>
+                                        <state key="normal" title="-">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rightZommOut:" destination="Rwj-YY-zko" eventType="touchUpInside" id="PPV-BD-130"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="kYe-Pl-2EO" firstAttribute="height" secondItem="bPB-ib-HsB" secondAttribute="height" id="6N2-Me-6ui"/>
                                     <constraint firstAttribute="bottom" secondItem="oFL-Bx-LVP" secondAttribute="bottom" id="FRN-4K-Ryy"/>
+                                    <constraint firstItem="6GF-XU-Hnt" firstAttribute="top" secondItem="bPB-ib-HsB" secondAttribute="top" constant="8" id="JA5-ji-79h"/>
+                                    <constraint firstAttribute="trailing" secondItem="6GF-XU-Hnt" secondAttribute="trailing" constant="8" id="L84-9w-NR1"/>
                                     <constraint firstItem="kYe-Pl-2EO" firstAttribute="centerY" secondItem="bPB-ib-HsB" secondAttribute="centerY" id="Qr6-3n-8T3"/>
                                     <constraint firstItem="kYe-Pl-2EO" firstAttribute="width" secondItem="bPB-ib-HsB" secondAttribute="width" id="RZZ-sg-oIF"/>
                                     <constraint firstItem="eOc-KD-QHS" firstAttribute="leading" secondItem="bPB-ib-HsB" secondAttribute="leading" id="UGa-7d-rUR"/>
@@ -735,6 +765,8 @@
                                     <constraint firstAttribute="trailing" secondItem="eOc-KD-QHS" secondAttribute="trailing" id="ZkM-mP-L0h"/>
                                     <constraint firstItem="oFL-Bx-LVP" firstAttribute="leading" secondItem="bPB-ib-HsB" secondAttribute="leading" id="asC-Vl-jim"/>
                                     <constraint firstItem="Tr9-eB-v0F" firstAttribute="centerY" secondItem="bPB-ib-HsB" secondAttribute="centerY" id="f1q-Kz-Jd3"/>
+                                    <constraint firstItem="g9Y-XR-x6P" firstAttribute="leading" secondItem="bPB-ib-HsB" secondAttribute="leading" constant="8" id="i1t-SC-s7f"/>
+                                    <constraint firstItem="g9Y-XR-x6P" firstAttribute="top" secondItem="bPB-ib-HsB" secondAttribute="top" constant="8" id="wab-Tk-6uL"/>
                                     <constraint firstAttribute="trailing" secondItem="oFL-Bx-LVP" secondAttribute="trailing" id="xBy-4x-lOZ"/>
                                     <constraint firstItem="Tr9-eB-v0F" firstAttribute="centerX" secondItem="bPB-ib-HsB" secondAttribute="centerX" id="yos-FC-8dR"/>
                                     <constraint firstAttribute="bottom" secondItem="eOc-KD-QHS" secondAttribute="bottom" constant="25" id="z1L-b1-kFC"/>
@@ -809,7 +841,7 @@
                                 <rect key="frame" x="188" y="60" width="187" height="563"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="gcs-Ir-LjF">
-                                        <rect key="frame" x="0.0" y="0.0" width="187" height="563"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="563"/>
                                         <color key="backgroundColor" red="0.88699622856196869" green="0.98849507045517815" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </scrollView>
                                     <visualEffectView opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fts-f3-b8T" userLabel="loaderRight">
@@ -839,13 +871,45 @@
                                             <action selector="addImageRight:" destination="Rwj-YY-zko" eventType="touchUpInside" id="SH5-RU-QP7"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYc-WW-rOg">
+                                        <rect key="frame" x="8" y="8" width="28" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="28" id="DKv-GV-Hmu"/>
+                                            <constraint firstAttribute="height" constant="30" id="w1w-en-NWW"/>
+                                        </constraints>
+                                        <state key="normal" title="+">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="leftZoomOut:" destination="Rwj-YY-zko" eventType="touchUpInside" id="IqO-wT-m1g"/>
+                                            <action selector="rightZoomIn:" destination="Rwj-YY-zko" eventType="touchUpInside" id="ztc-TC-fMe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCH-Xu-Lze">
+                                        <rect key="frame" x="151" y="8" width="28" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="3M3-bJ-a2Q"/>
+                                            <constraint firstAttribute="width" constant="28" id="QqF-tR-ouk"/>
+                                        </constraints>
+                                        <state key="normal" title="-">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="leftZoomIn:" destination="Rwj-YY-zko" eventType="touchUpInside" id="DK5-C9-KL4"/>
+                                            <action selector="rightZoomIn:" destination="Rwj-YY-zko" eventType="touchUpInside" id="bMb-gB-WCa"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="fhF-dN-hz7" secondAttribute="trailing" id="3LW-to-R4S"/>
                                     <constraint firstAttribute="bottom" secondItem="fts-f3-b8T" secondAttribute="bottom" id="4MO-Cs-5DN"/>
                                     <constraint firstAttribute="bottom" secondItem="fhF-dN-hz7" secondAttribute="bottom" constant="25" id="5k1-Jj-zB8"/>
                                     <constraint firstItem="ft7-eA-fKZ" firstAttribute="centerY" secondItem="TpH-u1-Gj2" secondAttribute="centerY" id="8x0-CX-Gki"/>
+                                    <constraint firstItem="qYc-WW-rOg" firstAttribute="top" secondItem="TpH-u1-Gj2" secondAttribute="top" constant="8" id="90a-MT-uM4"/>
                                     <constraint firstItem="gcs-Ir-LjF" firstAttribute="centerX" secondItem="TpH-u1-Gj2" secondAttribute="centerX" id="9h0-pg-TLk"/>
+                                    <constraint firstItem="KCH-Xu-Lze" firstAttribute="top" secondItem="TpH-u1-Gj2" secondAttribute="top" constant="8" id="Dao-Kz-wjb"/>
                                     <constraint firstItem="ft7-eA-fKZ" firstAttribute="centerX" secondItem="TpH-u1-Gj2" secondAttribute="centerX" id="Ihi-OQ-fFT"/>
                                     <constraint firstItem="fhF-dN-hz7" firstAttribute="leading" secondItem="TpH-u1-Gj2" secondAttribute="leading" id="LXN-Y7-ONq"/>
                                     <constraint firstItem="fts-f3-b8T" firstAttribute="leading" secondItem="TpH-u1-Gj2" secondAttribute="leading" id="Ozp-Rq-wke"/>
@@ -853,6 +917,8 @@
                                     <constraint firstAttribute="trailing" secondItem="fts-f3-b8T" secondAttribute="trailing" id="gCZ-bs-gzW"/>
                                     <constraint firstItem="gcs-Ir-LjF" firstAttribute="centerY" secondItem="TpH-u1-Gj2" secondAttribute="centerY" id="lU0-tG-Ese"/>
                                     <constraint firstItem="gcs-Ir-LjF" firstAttribute="width" secondItem="TpH-u1-Gj2" secondAttribute="width" id="lbd-hs-XFp"/>
+                                    <constraint firstItem="qYc-WW-rOg" firstAttribute="leading" secondItem="TpH-u1-Gj2" secondAttribute="leading" constant="8" id="spy-3X-qc0"/>
+                                    <constraint firstAttribute="trailing" secondItem="KCH-Xu-Lze" secondAttribute="trailing" constant="8" id="voU-ZB-fdd"/>
                                 </constraints>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0UL-0B-OFW">
@@ -943,6 +1009,10 @@
                         <outlet property="btnAddImageLeft" destination="Tr9-eB-v0F" id="0MX-Gr-Zpl"/>
                         <outlet property="btnAddImageRight" destination="ft7-eA-fKZ" id="dY1-U8-hNA"/>
                         <outlet property="btnSend" destination="IOC-eS-E4B" id="Rtx-z2-rsw"/>
+                        <outlet property="btnZoomLeft" destination="g9Y-XR-x6P" id="dLD-Md-sav"/>
+                        <outlet property="btnZoomOutLeft" destination="6GF-XU-Hnt" id="uzC-zk-Zkx"/>
+                        <outlet property="btnZoomOutRight" destination="KCH-Xu-Lze" id="2BG-SF-3DI"/>
+                        <outlet property="btnZoomRight" destination="qYc-WW-rOg" id="bhI-Px-QrK"/>
                         <outlet property="imgProfile" destination="GYE-xY-wS8" id="AXx-Oc-CHB"/>
                         <outlet property="indWorking" destination="ZBs-I8-W5u" id="A9n-e3-Yca"/>
                         <outlet property="lblLoaderLeft" destination="eOc-KD-QHS" id="Lma-bZ-tqm"/>

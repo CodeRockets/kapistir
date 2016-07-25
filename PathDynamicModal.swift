@@ -45,9 +45,8 @@ class PathDynamicModal: NSObject, UIGestureRecognizerDelegate {
     /* internal functions */
     
     class func show(modalView view: UIView, inView: UIView, showConfetti: Bool) -> PathDynamicModal {
-        let modal = PathDynamicModal()
-        
-        modal.showConfetti = showConfetti
+
+        let modal = PathDynamicModal(showConfetti: showConfetti)
         
         modal.show(modalView: view, inView: inView)
         
@@ -84,9 +83,9 @@ class PathDynamicModal: NSObject, UIGestureRecognizerDelegate {
         self.close(horizontalOffset: rand)
     }
     
-    override init() {
+    init(showConfetti: Bool) {
         super.init()
-        self.setup()
+        self.setup(showConfetti)
     }
     
     
@@ -96,7 +95,7 @@ class PathDynamicModal: NSObject, UIGestureRecognizerDelegate {
     
     var showConfetti = false
     
-    private func setup() {
+    private func setup(showConfetti: Bool) {
         self.animator = UIDynamicAnimator(referenceView: self.backgroundView)
         
         self.tap = UITapGestureRecognizer(target: self, action: #selector(PathDynamicModal.handleBackgroundView(_:)))
@@ -110,8 +109,8 @@ class PathDynamicModal: NSObject, UIGestureRecognizerDelegate {
         self.backgroundView.addGestureRecognizer(self.tap)
         self.backgroundView.addGestureRecognizer(self.pan)
         
-        if self.showConfetti {
-        self.confettiView = SAConfettiView(frame: self.backgroundView.bounds)
+        if showConfetti {
+            self.confettiView = SAConfettiView(frame: self.backgroundView.bounds)
             self.backgroundView.addSubview(confettiView!)
         }
     }

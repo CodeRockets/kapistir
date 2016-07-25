@@ -90,7 +90,7 @@ extension Question {
         // api reponse'dan gelen json ile instance oluştur
         
         let id = response["id"] as! String
-        let optionA = (response["option_a"] as! String)
+        let optionA = response["option_a"] as! String
         let optionB = response["option_b"] as! String
         
         let optionACount = response["option_a_count"] as! Int

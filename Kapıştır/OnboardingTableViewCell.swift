@@ -10,7 +10,6 @@ import UIKit
 
 class OnboardingTableViewCell: UITableViewCell {
 
-    
     @IBOutlet weak var lblTitle: UILabel!
     
     @IBOutlet weak var lblText: UILabel!
@@ -24,8 +23,6 @@ class OnboardingTableViewCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-
 }

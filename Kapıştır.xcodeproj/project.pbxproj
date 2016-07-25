@@ -44,6 +44,7 @@
 		154174941D42E13D001C703D /* OHCircleSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154174931D42E13D001C703D /* OHCircleSegue.swift */; };
 		157B9D071CA68B350026EFC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 157B9D061CA68B350026EFC1 /* .gitignore */; };
 		159FABEF1CBEEE540049941E /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FABEE1CBEEE540049941E /* Publisher.swift */; };
+		15B88F421D450452001856E6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F411D450452001856E6 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		154174931D42E13D001C703D /* OHCircleSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OHCircleSegue.swift; path = "Kapıştır/OHCircleSegue.swift"; sourceTree = "<group>"; };
 		157B9D061CA68B350026EFC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		159FABEE1CBEEE540049941E /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
+		15B88F411D450452001856E6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		260E7C28E0B16BCC0D428CDB /* Pods-Kapıştır.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kapıştır.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kapıştır/Pods-Kapıştır.release.xcconfig"; sourceTree = "<group>"; };
 		52CEC117A2914D3AA6942F8E /* Pods_Kap_s_t_r.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kap_s_t_r.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71ECC96EEDDF5986E840999 /* Pods-Kapıştır.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kapıştır.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kapıştır/Pods-Kapıştır.debug.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 		1535A69F1C953E8800897674 = {
 			isa = PBXGroup;
 			children = (
+				15B88F411D450452001856E6 /* README.md */,
 				157B9D061CA68B350026EFC1 /* .gitignore */,
 				1535A6F51C98CBD100897674 /* FBSDKCoreKit.framework */,
 				1535A6F61C98CBD200897674 /* FBSDKLoginKit.framework */,
@@ -471,6 +474,7 @@
 				1535A6F21C95C31000897674 /* RoundedImageButton.swift in Sources */,
 				1535A7081C9A1E6E00897674 /* CreateViewController.swift in Sources */,
 				153C1EA91CC9820900CF94C3 /* UserQuestionsTableViewController.swift in Sources */,
+				15B88F421D450452001856E6 /* README.md in Sources */,
 				1535A7061C99E23C00897674 /* User.swift in Sources */,
 				159FABEF1CBEEE540049941E /* Publisher.swift in Sources */,
 				1535A7041C99DF9300897674 /* UserStore.swift in Sources */,

@@ -22,6 +22,8 @@ struct Api {
             return
         }
         
+        print("getting a batch...")
+        
         self.gettingBatch = true
         
         var retQuestions = [Question]()
@@ -45,19 +47,12 @@ struct Api {
                     
                     let rows = json["data"]["rows"].arrayObject
                     
-                    if rows?.count == 0 {
-                        // no questions left in service
-                        // App.UI.noQuestionsLeftMessage()
+                    for questionData in rows! {
+                        let question = Question.fromApiResponse(questionData as! NSDictionary)
+                        retQuestions.append(question)
                     }
-                    //else{
-                        for questionData in rows! {
-                            // print("question: \(questionData)")
-                            let question = Question.fromApiResponse(questionData as! NSDictionary)
-                            retQuestions.append(question)
-                        }
                         
-                        fetchBatchImages(retQuestions, errorCallback: errorCallback, successCallback: successCallback)
-                    //}
+                    fetchBatchImages(retQuestions, errorCallback: errorCallback, successCallback: successCallback)
                     
                     break
                 case .Failure(_):

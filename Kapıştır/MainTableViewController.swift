@@ -161,17 +161,22 @@ class MainTableViewController: UITableViewController {
         }
         
         //QuestionStore.currentQuestionIndex = indexPath.row
-        print("current question index \(indexPath.row)")
+        print("current question index \(indexPath.row) \(self.currentQuestion?.answer)")
         
-        if let _ = self.currentQuestion?.answer {
+        
+        if let currentQuestion = self.currentQuestion {
             
-        } else{
-            
-            if let currentQuestion = self.currentQuestion {
+            if currentQuestion.answer == nil {
                 Api.saveAnswer(currentQuestion, answer: .Skip, errorCallback: {}, successCallback: {})
             }
-            
+            else{
+                print("cant save answered question")
+            }
         }
+        else{
+            print("no current question")
+        }
+        
         
         self.currentQuestion = self.questions[indexPath.row]
         QuestionStore.setCurrentQuestion(self.currentQuestion!)

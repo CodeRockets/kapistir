@@ -43,6 +43,34 @@ class CreateViewController:
         tappedRight()
     }
     
+    @IBAction func rightZoomIn(sender: AnyObject) {
+        self.scrollViewLeft.setZoomScale(self.scrollViewLeft.zoomScale * 1.2, animated: true)
+    }
+    
+    
+    @IBAction func rightZommOut(sender: AnyObject) {
+        self.scrollViewLeft.setZoomScale(self.scrollViewLeft.zoomScale * 0.8, animated: true)
+    }
+    
+    @IBAction func leftZoomOut(sender: AnyObject) {
+        self.scrollViewRight.setZoomScale(self.scrollViewRight.zoomScale * 1.2, animated: true)
+    }
+    
+    
+    @IBAction func leftZoomIn(sender: AnyObject) {
+        self.scrollViewRight.setZoomScale(self.scrollViewRight.zoomScale * 0.8, animated: true)
+    }
+    
+    
+    @IBOutlet weak var btnZoomLeft: UIButton!
+    
+    @IBOutlet weak var btnZoomOutLeft: UIButton!
+    
+    @IBOutlet weak var btnZoomRight: UIButton!
+    
+    @IBOutlet weak var btnZoomOutRight: UIButton!
+    
+    
     private var working = false {
         didSet{
             if working {
@@ -141,6 +169,15 @@ class CreateViewController:
         self.setupActionSheet()
         
         self.working = false
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        let isNotDebug = App.UI.DEBUG != 1
+        
+        self.btnZoomLeft.hidden = isNotDebug
+        self.btnZoomOutLeft.hidden = isNotDebug
+        self.btnZoomRight.hidden = isNotDebug
+        self.btnZoomOutRight.hidden = isNotDebug
     }
     
     func uploadImage(image:UIImage, target: Int) {
@@ -299,6 +336,63 @@ class CreateViewController:
             })
     }
     
+    
+    func crop(image originalImage: UIImage, targetScrollView: UIScrollView) -> UIImage {
+        let scale = UIScreen.mainScreen().scale
+        
+        let posX = targetScrollView.contentOffset.x * scale
+        let posY = targetScrollView.contentOffset.y * scale
+        
+        let width = scale * targetScrollView.bounds.width // min( scale * targetScrollView.bounds.width, originalImage.scale * originalImage.size.width )
+        let height = scale * targetScrollView.bounds.height // min( scale * targetScrollView.bounds.height, originalImage.scale * originalImage.size.height )
+        
+        let rect: CGRect = CGRectMake(posX, posY, width, height)
+        
+        print("crop rect \(rect)")
+        
+        // Create bitmap image from context using the rect
+        let imageResized = resizeImage(originalImage, newWidth: width * targetScrollView.zoomScale)
+        
+        print("resized width: \(imageResized.size), image scale: \(imageResized.scale)")
+        
+        let imageCropped = CGImageCreateWithImageInRect(imageResized.CGImage, rect)!
+        // let imageCroppedResized = resizeImage( UIImage(CGImage: imageCropped), newWidth: width)
+        
+        // Create a new image based on the imageRef and rotate back to the original orientation
+        let image = UIImage(CGImage: imageCropped)
+        
+        print("cropped image \(image.size)")
+        
+        return image
+    }
+    
+    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+
+    func resizeImage(image: UIImage, newHeight: CGFloat) -> UIImage {
+        let scale = newHeight / image.size.height
+        let newWidth = image.size.width * scale
+        
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
+    
     func onboard() {
         
         if App.UI.createOnboarded {
@@ -320,43 +414,7 @@ class CreateViewController:
         
         App.Store.saveCreateOnboarded()
     }
-
-    func crop(image originalImage: UIImage, targetScrollView: UIScrollView) -> UIImage {
-        let scale = UIScreen.mainScreen().scale
-        let posX = targetScrollView.contentOffset.x * scale
-        let posY = targetScrollView.contentOffset.y * scale
-        let width = min( scale * targetScrollView.bounds.width, originalImage.scale * originalImage.size.width )
-        let height = min( scale * targetScrollView.bounds.height, originalImage.scale * originalImage.size.height )
-        
-        let rect: CGRect = CGRectMake(posX, posY, width, height)
-        
-        print("crop rect \(rect)")
-        
-        // Create bitmap image from context using the rect
-        let imageResized = resizeImage(originalImage, newWidth: width * targetScrollView.zoomScale )
-        
-        print("resized width: \(imageResized.size), image scale: \(imageResized.scale)")
-        
-        let imageCropped = CGImageCreateWithImageInRect(imageResized.CGImage, rect)!
-        // let imageCroppedResized = resizeImage( UIImage(CGImage: imageCropped), newWidth: width)
-        
-        // Create a new image based on the imageRef and rotate back to the original orientation
-        let image = UIImage(CGImage: imageCropped)
-        
-        return image
-    }
     
-    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
-    }
-
     private var imageViewLeft = UIImageView()
     
     private var imageLeft: UIImage? {
