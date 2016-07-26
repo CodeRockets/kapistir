@@ -549,9 +549,11 @@ class CreateViewController:
         print("didFinishPickingImage")
         
         if target == 0 {
-            self.imageRight = image
             self.btnAddImageRight.hidden = true
+            self.scrollViewRight.setZoomScale(1, animated: false)
+            self.imageRight = image
         } else{
+            self.scrollViewLeft.setZoomScale(1, animated: false)
             self.imageLeft = image
             self.btnAddImageLeft.hidden = true
         }

@@ -691,15 +691,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPB-ib-HsB" userLabel="view Left">
-                                <rect key="frame" x="0.0" y="60" width="187.5" height="563"/>
+                                <rect key="frame" x="0.0" y="60" width="188" height="563"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYe-Pl-2EO">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="563"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="188" height="563"/>
                                     </scrollView>
                                     <visualEffectView opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oFL-Bx-LVP" userLabel="loaderLeft">
-                                        <rect key="frame" x="0.0" y="541" width="187.5" height="22"/>
+                                        <rect key="frame" x="0.0" y="541" width="188" height="22"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KHw-Rj-QGM">
-                                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="22"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="188" height="22"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                         <constraints>
@@ -708,7 +708,7 @@
                                         <blurEffect style="dark"/>
                                     </visualEffectView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yükleniyor %40" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eOc-KD-QHS" userLabel="loadingRatioLeft">
-                                        <rect key="frame" x="0.0" y="517" width="187.5" height="21"/>
+                                        <rect key="frame" x="0.0" y="517" width="188" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="dxb-tP-5xT"/>
                                         </constraints>
@@ -841,7 +841,7 @@
                                 <rect key="frame" x="188" y="60" width="187" height="563"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="gcs-Ir-LjF">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="563"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="188" height="563"/>
                                         <color key="backgroundColor" red="0.88699622856196869" green="0.98849507045517815" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </scrollView>
                                     <visualEffectView opaque="NO" alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fts-f3-b8T" userLabel="loaderRight">
