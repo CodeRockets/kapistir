@@ -45,6 +45,7 @@
 		157B9D071CA68B350026EFC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 157B9D061CA68B350026EFC1 /* .gitignore */; };
 		159FABEF1CBEEE540049941E /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FABEE1CBEEE540049941E /* Publisher.swift */; };
 		15B88F421D450452001856E6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F411D450452001856E6 /* README.md */; };
+		15F8F6571D495A95007D88E0 /* DOFavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		157B9D061CA68B350026EFC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		159FABEE1CBEEE540049941E /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		15B88F411D450452001856E6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DOFavoriteButton.swift; path = "Kapıştır/DOFavoriteButton.swift"; sourceTree = "<group>"; };
 		260E7C28E0B16BCC0D428CDB /* Pods-Kapıştır.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kapıştır.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kapıştır/Pods-Kapıştır.release.xcconfig"; sourceTree = "<group>"; };
 		52CEC117A2914D3AA6942F8E /* Pods_Kap_s_t_r.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kap_s_t_r.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B71ECC96EEDDF5986E840999 /* Pods-Kapıştır.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kapıştır.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Kapıştır/Pods-Kapıştır.debug.xcconfig"; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				159FABEE1CBEEE540049941E /* Publisher.swift */,
 				153C1EA41CC8161D00CF94C3 /* PathDynamicModal.swift */,
 				154174931D42E13D001C703D /* OHCircleSegue.swift */,
+				15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				1535A6AC1C953E8800897674 /* AppDelegate.swift in Sources */,
 				1535A6EE1C95657700897674 /* OnboardingTableViewCell.swift in Sources */,
 				1535A6E71C95424700897674 /* QuestionTableViewCell.swift in Sources */,
+				15F8F6571D495A95007D88E0 /* DOFavoriteButton.swift in Sources */,
 				153C1EA51CC8161D00CF94C3 /* PathDynamicModal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

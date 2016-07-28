@@ -52,6 +52,8 @@ class Question {
     
     var isAnswered: Bool = false
     
+    var isFollowed: Bool = false
+    
     // var imageLeft: UIImage?
     // var imageRight: UIImage?
     

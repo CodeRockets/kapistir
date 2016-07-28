@@ -271,4 +271,70 @@ struct Api {
         }
 
     }
+    
+    static func updateFollowQuestion(question: Question, errorCallback: ()-> Void, successCallback: ()->Void) {
+        
+        let params: [String: AnyObject] = [
+            "app": 1,
+            "user_id": UserStore.user?.userId ?? "",
+            "follow": question.isFollowed
+        ]
+        
+        print("fetch params: \(params)")
+        
+        Alamofire.request(
+            .GET,
+            App.URLs.getUserQuestions,
+            parameters: params,
+            headers: App.Keys.requestHeaders)
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    let json = JSON(data)
+                    
+                    print("follow question success \(json)")
+                    
+                    successCallback()
+                    
+                    break
+                case .Failure(_):
+                    App.UI.showServerError(completion: nil)
+                    errorCallback()
+                }
+        }
+    }
+    
+    
+    static func reportQuestion(question: Question, errorCallback: ()-> Void, successCallback: ()->Void) {
+        
+        let params: [String: AnyObject] = [
+            "app": 1,
+            "user_id": UserStore.user?.userId ?? "",
+            "reportType": "1"
+        ]
+        
+        print("fetch params: \(params)")
+        
+        Alamofire.request(
+            .GET,
+            App.URLs.getUserQuestions,
+            parameters: params,
+            headers: App.Keys.requestHeaders)
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    let json = JSON(data)
+                    
+                    print("follow question success \(json)")
+                    
+                    successCallback()
+                    
+                    break
+                case .Failure(_):
+                    App.UI.showServerError(completion: nil)
+                    errorCallback()
+                }
+        }
+    }
+
 }

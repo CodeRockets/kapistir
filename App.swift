@@ -20,9 +20,11 @@ struct App {
         
         static var createOnboarded = false
         
-        static let DEBUG = 0
+        static let DEBUG = 1
         
         static let questionScrollDelay = UInt32(1300000)
+        
+        static let colorButtonFollow = UIColor(red: 176/255, green: 193/255, blue: 206/255, alpha: 1.0)
         
         static func showServerError(completion completionCallback: (()->Void)?) {
             let alert = UIAlertController(
@@ -52,7 +54,7 @@ struct App {
             App.UI.getTopMostViewController().presentViewController(alert, animated: true, completion: nil)
         }
         
-        private static func getTopMostViewController() -> UIViewController {
+        static func getTopMostViewController() -> UIViewController {
             var topController = UIApplication.sharedApplication().keyWindow?.rootViewController
             
             while let presentedViewController = topController!.presentedViewController {
@@ -91,6 +93,9 @@ struct App {
         static var saveQuestion = "question"
         static var saveAnswer = "answer"
         static var getUserQuestions = "user/questions"
+        
+        static var followQuestion = "question/follow"
+        static var reportQuestion = "question/report"
     }
     
     struct Keys {

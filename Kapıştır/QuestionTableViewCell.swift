@@ -14,6 +14,60 @@ class QuestionTableViewCell: UITableViewCell {
     
     var question: Question!
     
+    private var actionDetails: UIAlertController!
+
+    @IBOutlet weak var btnFollow: UIButton! {
+        didSet{
+            let img = UIImage(named: "heart")?.imageWithRenderingMode(.AlwaysTemplate)
+            self.btnFollow.setImage(img, forState: .Normal)
+            self.btnFollow.tintColor = App.UI.colorButtonFollow
+        }
+    }
+    
+    @IBAction func btnFollow(sender: AnyObject) {
+        print("follow question")
+        
+        UIView.animateWithDuration(0.1,
+            animations: {
+                let transformScale = CGAffineTransformMakeScale(0.6, 0.6)
+                //let transformShake = CGAffineTransformMakeRotation(CGFloat(0.3))
+                self.btnFollow.transform = transformScale //CGAffineTransformConcat(transformScale, transformShake)
+            },
+            completion: { finish in
+                self.question.isFollowed = !self.question.isFollowed
+                self.btnFollow.tintColor = self.question.isFollowed ?
+                    UIColor.redColor() : App.UI.colorButtonFollow
+                
+                
+                UIView.animateWithDuration(0.3,
+                    delay: 0.0,
+                    usingSpringWithDamping: 0.2,
+                    initialSpringVelocity: 10.0,
+                    options: [.CurveEaseInOut, .AllowUserInteraction],
+                    animations: ({
+                        self.btnFollow.transform = CGAffineTransformIdentity
+                    }),
+                    completion: nil)
+            })
+    }
+    
+    
+    @IBOutlet weak var btnDetails: UIButton! {
+        didSet{
+            let img = UIImage(named: "details")?.imageWithRenderingMode(.AlwaysTemplate)
+            self.btnDetails.setImage(img, forState: .Normal)
+            self.btnDetails.tintColor = App.UI.colorButtonFollow
+        }
+    }
+    
+    
+    @IBAction func showDetails(sender: AnyObject) {
+        print("show details")
+        
+        App.UI.getTopMostViewController()
+              .presentViewController(self.actionDetails, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var ratioLeftBottom: NSLayoutConstraint!
     
     @IBOutlet weak var ratioRightBottom: NSLayoutConstraint!
@@ -23,6 +77,8 @@ class QuestionTableViewCell: UITableViewCell {
     @IBOutlet weak var ratioRight: UILabel!
     
     @IBOutlet weak var lblQuestion: UILabel!
+    
+    @IBOutlet weak var viewFooter: UIView!
     
     @IBOutlet weak var viewLeft: UIView!
     
@@ -68,6 +124,34 @@ class QuestionTableViewCell: UITableViewCell {
         
         self.imgLeft.addGestureRecognizer(tapGestureRecoginzerLeft)
         self.imgRight.addGestureRecognizer(tapGestureRecoginzerRight)
+        
+        self.setupDetailsActionsheet()
+    }
+    
+    func setupDetailsActionsheet() {
+        self.actionDetails = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        let actionReport = UIAlertAction(title: "Şikayet Et", style: .Destructive, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            print("şikayet et")
+        })
+        
+        let actionShareFb = UIAlertAction(title: "Facebook'ta paylaş", style: .Default) { (alert: UIAlertAction!) -> Void in
+            print("fb paylaş")
+        }
+        
+        let actionShareTwitter = UIAlertAction(title: "Tweet gönder", style: .Default) { (alert: UIAlertAction!) -> Void in
+            
+            print("Twit gönder")
+        }
+        
+        let actionDissmiss = UIAlertAction(title: "İptal", style: .Cancel, handler: nil)
+        
+        self.actionDetails.addAction(actionReport)
+        self.actionDetails.addAction(actionShareFb)
+        self.actionDetails.addAction(actionShareTwitter)
+        self.actionDetails.addAction(actionDissmiss)
     }
     
     func tappedLeft(gesture: UITapGestureRecognizer ) {
@@ -222,6 +306,8 @@ class QuestionTableViewCell: UITableViewCell {
             cell.chkLeft.checkState = .Unchecked
             cell.chkRight.checkState = .Unchecked
         }
+        
+        cell.btnFollow.tintColor = question.isFollowed ? UIColor.redColor() : App.UI.colorButtonFollow
         
         cell.lblInfo.text = "☆ " + String(question.totalAnswerCount) + " Oy" //+ "   ◎ " + String(question.skipCount)
         cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
