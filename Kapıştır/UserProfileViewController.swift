@@ -9,7 +9,9 @@
 import UIKit
 
 class UserProfileViewController: UIViewController {
-
+    
+    @IBOutlet weak var segmentView: UISegmentedControl!
+    
     @IBOutlet weak var imProfileTop: NSLayoutConstraint!
     
     @IBOutlet weak var imgProfile: RoundedImageButton!
@@ -17,16 +19,80 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var imgProfileBack: UIImageView!
     
     @IBOutlet weak var lblUserName: UILabel!
+
+    @IBAction func segmentChanged(sender: UISegmentedControl) {
+        let tabIndex = sender.selectedSegmentIndex
+        print("\(tabIndex)")
+        self.setFeedState(tabIndex)
+    }
+    
+    @IBOutlet weak var containerViewMyKapistirs: UIView!
+    
+    var myKapistirsTableViewController: UserQuestionsTableViewController!
+    
+    @IBOutlet weak var containerViewFollows: UIView!
+    
+    var followedKapistirsTableViewController: UserQuestionsTableViewController!
     
     @IBAction func logOut(sender: AnyObject) {
         UserStore.updateUser(nil)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func setFeedState(tabIndex: Int) {
+        
+        self.lblNoKapistir.hidden = true
+        
+        if tabIndex == 0 {
+            self.containerViewMyKapistirs.hidden = false
+            self.containerViewFollows.hidden = true
+            self.myKapistirsTableViewController.loadFeed()
+        }
+        
+        if tabIndex == 1 {
+            self.containerViewFollows.hidden = false
+            self.containerViewMyKapistirs.hidden = true
+            self.followedKapistirsTableViewController.loadFeed()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Publisher.subscibe("user/userQuestionsLoaded", callback: userQuestionsLoaded)
+        Publisher.subscibe("user/followedQuestionsLoaded", callback: followedQuestionsLoaded)
+
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
+        // user kapistirs tab
+        let userKapistirs = storyBoard.instantiateViewControllerWithIdentifier("UserQuestionsTableViewController") as! UserQuestionsTableViewController
+        
+        self.addChildViewController(userKapistirs)
+        userKapistirs.view.frame = CGRectMake(0, 0, self.containerViewMyKapistirs.frame.size.width, self.containerViewMyKapistirs.frame.size.height);
+        
+        self.containerViewMyKapistirs.addSubview(userKapistirs.view)
+        userKapistirs.didMoveToParentViewController(self)
+        
+        self.myKapistirsTableViewController = userKapistirs
+        
+        // followed kapistirs
+        let followedKapistirs = storyBoard.instantiateViewControllerWithIdentifier("UserQuestionsTableViewController") as! UserQuestionsTableViewController
+        
+        followedKapistirs.type = "followed"
+        
+        // DEBUG
+        // followedKapistirs.tableView.backgroundColor = UIColor.redColor()
+        // !DEBUG
+        
+        self.addChildViewController(followedKapistirs)
+        followedKapistirs.view.frame = CGRectMake(0, 0, self.containerViewFollows.frame.size.width, self.containerViewFollows.frame.size.height);
+        
+        self.containerViewFollows.addSubview(followedKapistirs.view)
+        followedKapistirs.didMoveToParentViewController(self)
+        
+        self.followedKapistirsTableViewController = followedKapistirs
+        
+        self.setFeedState(0)
     }
     
     @IBAction func close(sender: AnyObject) {
@@ -37,7 +103,31 @@ class UserProfileViewController: UIViewController {
     
     func userQuestionsLoaded(userQuestionsCount: AnyObject?)  {
         print("userQuestionsCount \( userQuestionsCount as! Int )")
-        self.lblNoKapistir.hidden = (userQuestionsCount as! Int) != 0
+        
+        let count = userQuestionsCount as! Int
+        
+        if count == 0 {
+            self.lblNoKapistir.text = "Eklenmiş kapıştır yok!"
+            self.lblNoKapistir.hidden = false
+        }
+        else{
+            self.lblNoKapistir.hidden = true
+        }
+    }
+    
+    func followedQuestionsLoaded(followedQuestionsCount: AnyObject?) {
+                
+        let count = followedQuestionsCount as! Int
+
+        print("followed questions count \(count)")
+
+        if count == 0 {
+            self.lblNoKapistir.text = "Takipte kapıştır yok. ♥︎'e tıklayarak takip edebilirsin."
+            self.lblNoKapistir.hidden = false
+        }
+        else{
+            self.lblNoKapistir.hidden = true
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

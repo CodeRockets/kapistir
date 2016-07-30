@@ -45,6 +45,7 @@
 		157B9D071CA68B350026EFC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 157B9D061CA68B350026EFC1 /* .gitignore */; };
 		159FABEF1CBEEE540049941E /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FABEE1CBEEE540049941E /* Publisher.swift */; };
 		15B88F421D450452001856E6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F411D450452001856E6 /* README.md */; };
+		15C0A9991D4C7B2C0013408B /* KPTableViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15C0A9981D4C7B2C0013408B /* KPTableViews.storyboard */; };
 		15F8F6571D495A95007D88E0 /* DOFavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		157B9D061CA68B350026EFC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		159FABEE1CBEEE540049941E /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		15B88F411D450452001856E6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		15C0A9981D4C7B2C0013408B /* KPTableViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = KPTableViews.storyboard; sourceTree = "<group>"; };
 		15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DOFavoriteButton.swift; path = "Kapıştır/DOFavoriteButton.swift"; sourceTree = "<group>"; };
 		260E7C28E0B16BCC0D428CDB /* Pods-Kapıştır.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kapıştır.release.xcconfig"; path = "Pods/Target Support Files/Pods-Kapıştır/Pods-Kapıştır.release.xcconfig"; sourceTree = "<group>"; };
 		52CEC117A2914D3AA6942F8E /* Pods_Kap_s_t_r.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kap_s_t_r.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +193,7 @@
 				153C1EA01CC6E80100CF94C3 /* ModalSaveQuestionSuccess.swift */,
 				1541748F1D42CBA3001C703D /* ModalCreateOnboarding.xib */,
 				154174911D42CFB9001C703D /* ModalCreateOnboarding.swift */,
+				15C0A9981D4C7B2C0013408B /* KPTableViews.storyboard */,
 			);
 			name = Main;
 			path = "Kapıştır";
@@ -380,6 +383,7 @@
 				153C1EA31CC811BC00CF94C3 /* ModalSaveQuestionSuccess.xib in Resources */,
 				1535A6B11C953E8800897674 /* Main.storyboard in Resources */,
 				154174901D42CBA3001C703D /* ModalCreateOnboarding.xib in Resources */,
+				15C0A9991D4C7B2C0013408B /* KPTableViews.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

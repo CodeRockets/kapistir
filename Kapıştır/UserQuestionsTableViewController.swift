@@ -15,29 +15,55 @@ class UserQuestionsTableViewController: UITableViewController {
     
     var loadingNotification: MBProgressHUD?
     
+    var type = "user" // user | followed
+    
+    var feedLoaded = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        loadingNotification!.mode = MBProgressHUDMode.Indeterminate
-        loadingNotification!.opacity = 0.5
+    }
+    
+    func loadFeed() {
         
-        Api.getUserQuestions(UserStore.user!, errorCallback: {
-            // error
-            print("getUserQuestions error")
-            }, successCallback: { questions in
+        if !self.feedLoaded {
+            loadingNotification = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            loadingNotification!.mode = MBProgressHUDMode.Indeterminate
+            loadingNotification!.opacity = 0.5
+        }
+        
+        if self.type == "user" {
+        
+            Api.getUserQuestions(UserStore.user!,
+                errorCallback: {
+                // error
+                print("getUserQuestions error")
+                },
+                successCallback: { questions in
                 
-                print("got user questions \(questions.count)")
+                    print("got user questions \(questions.count)")
                 
-                self.userQuestions = questions
+                    self.userQuestions = questions
                 
-                Publisher.publish("user/userQuestionsLoaded", data: questions.count)
+                    Publisher.publish("user/userQuestionsLoaded", data: questions.count)
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
-                    self.tableView.reloadData()
-                }
+                    dispatch_async(dispatch_get_main_queue()) {
+                        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                        self.tableView.reloadData()
+                        self.feedLoaded = true
+                    }
             })
+        }
+        
+        if self.type == "followed" {
+            
+            Publisher.publish("user/followedQuestionsLoaded", data: 0 /*questions.count*/)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                self.tableView.reloadData()
+                self.feedLoaded = true
+            }
+        }
     }
 
     // MARK: - Table view data source
