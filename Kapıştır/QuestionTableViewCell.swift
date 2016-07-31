@@ -30,13 +30,13 @@ class QuestionTableViewCell: UITableViewCell {
     @IBAction func btnFollow(sender: AnyObject) {
         print("follow question")
         
-        if !self.question.isFollowed {
-            Api.updateFollowQuestion(self.question, errorCallback: {
-                    //
-                }, successCallback: {
-                    //
-                })
-        }
+
+        self.question.isFollowed = !self.question.isFollowed
+        Api.updateFollowQuestion(self.question, errorCallback: {
+                //
+            }, successCallback: {
+                //
+            })
         
         UIView.animateWithDuration(0.1,
             animations: {
@@ -45,7 +45,6 @@ class QuestionTableViewCell: UITableViewCell {
                 self.btnFollow.transform = transformScale //CGAffineTransformConcat(transformScale, transformShake)
             },
             completion: { finish in
-                self.question.isFollowed = !self.question.isFollowed
                 self.btnFollow.tintColor = self.question.isFollowed ?
                     UIColor.redColor() : App.UI.colorButtonFollow
                 

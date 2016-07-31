@@ -286,7 +286,8 @@ struct Api {
         let params: [String: AnyObject] = [
             "user_id": UserStore.user?.userId ?? "",
             "question_id": question.id,
-            "client_id" : 1
+            "client_id": 1,
+            "unfavorite": question.isFollowed ? "false" : "true"
         ]
         
         print("follow params: \(params)")
