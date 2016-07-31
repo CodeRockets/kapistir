@@ -16,6 +16,8 @@ class QuestionTableViewCell: UITableViewCell {
     var question: Question!
     
     private var actionDetails: UIAlertController!
+    
+    private var actionReportAbuse: UIAlertController!
 
     @IBOutlet weak var btnFollow: UIButton! {
         didSet{
@@ -30,9 +32,9 @@ class QuestionTableViewCell: UITableViewCell {
         
         if !self.question.isFollowed {
             Api.updateFollowQuestion(self.question, errorCallback: {
-                
+                    //
                 }, successCallback: {
-                    
+                    //
                 })
         }
         
@@ -155,6 +157,33 @@ class QuestionTableViewCell: UITableViewCell {
         self.viewRight.addSubview(expandableRight)
     }
     
+    func setupReportAbuseActionsheet() {
+        self.actionReportAbuse = UIAlertController(
+            title: "Şikayet",
+            message: "Bu kapıştır'ı uygunsuz içerik sebebiyle şikayet etmek istediğinize emin misiniz?",
+            preferredStyle: .Alert)
+        
+        self.actionReportAbuse.addAction(UIAlertAction(title: "Evet", style: .Default, handler: { (action: UIAlertAction!) in
+            
+            //report abuse
+            Api.reportQuestion(self.question, errorCallback: {
+                //
+                }, successCallback: {
+                    //
+                    let successAlert = UIAlertController(title: "Başarılı", message: "Şikayetiniz alınmıştır. Teşekkür ederiz.", preferredStyle: .Alert)
+                    
+                    successAlert.addAction(UIAlertAction(title: "Tamam", style: .Default, handler: nil))
+                    
+                    App.UI.getTopMostViewController().presentViewController(successAlert, animated: true, completion: nil)
+                })
+        }))
+        
+        self.actionReportAbuse.addAction(UIAlertAction(title: "İptal", style: .Cancel, handler: { (action: UIAlertAction!) in
+            
+            // cancel
+        }))
+    }
+    
     func setupDetailsActionsheet() {
         self.actionDetails = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
@@ -162,6 +191,8 @@ class QuestionTableViewCell: UITableViewCell {
             (alert: UIAlertAction!) -> Void in
             
             print("şikayet et")
+            App.UI.getTopMostViewController().presentViewController(self.actionReportAbuse, animated: true, completion: nil)
+
         })
         
         let actionShareFb = UIAlertAction(title: "Facebook'ta paylaş", style: .Default) { (alert: UIAlertAction!) -> Void in
@@ -179,6 +210,8 @@ class QuestionTableViewCell: UITableViewCell {
         self.actionDetails.addAction(actionShareFb)
         self.actionDetails.addAction(actionShareTwitter)
         self.actionDetails.addAction(actionDissmiss)
+        
+        self.setupReportAbuseActionsheet()
     }
     
     func tappedLeft(gesture: UITapGestureRecognizer ) {

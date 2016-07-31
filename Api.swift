@@ -317,16 +317,16 @@ struct Api {
     static func reportQuestion(question: Question, errorCallback: ()-> Void, successCallback: ()->Void) {
         
         let params: [String: AnyObject] = [
-            "app": 1,
             "user_id": UserStore.user?.userId ?? "",
-            "reportType": "1"
+            "question_id": question.id,
+            "client_id" : 1
         ]
         
         print("fetch params: \(params)")
         
         Alamofire.request(
-            .GET,
-            App.URLs.getUserQuestions,
+            .POST,
+            App.URLs.reportQuestion,
             parameters: params,
             headers: App.Keys.requestHeaders)
             .responseJSON { response in
@@ -334,7 +334,7 @@ struct Api {
                 case .Success(let data):
                     let json = JSON(data)
                     
-                    print("follow question success \(json)")
+                    print("report question success \(json)")
                     
                     successCallback()
                     

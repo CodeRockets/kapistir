@@ -95,7 +95,7 @@ struct App {
         static var getUserQuestions = "user/questions"
         
         static var followQuestion = "favorite"
-        static var reportQuestion = "question/report"
+        static var reportQuestion = "reportabuse"
     }
     
     struct Keys {
@@ -126,6 +126,7 @@ struct App {
             App.URLs.saveAnswer = backendEndpoint! + App.URLs.saveAnswer
             App.URLs.getUserQuestions = backendEndpoint! + App.URLs.getUserQuestions
             App.URLs.followQuestion = backendEndpoint! + App.URLs.followQuestion
+            App.URLs.reportQuestion = backendEndpoint! + App.URLs.reportQuestion
             
             App.Keys.requestHeaders = [
                 "x-voter-client-id":     App.Keys.clientId,
