@@ -224,7 +224,7 @@ struct Api {
         }
     }
     
-    static func getUserQuestions(user: User, errorCallback: ()-> Void, successCallback: ([Question])->Void) {
+    static func getUserQuestions(user: User, errorCallback: ()-> Void, successCallback: (questions:[Question], followed: [Question])->Void) {
         
         //GET /v1/user/questions
         
@@ -232,6 +232,7 @@ struct Api {
         //Api.getBatch(errorCallback, successCallback: successCallback)
         
         var retQuestions = [Question]()
+        var retFollowed = [Question]()
         
         let params: [String: AnyObject] = [
             "app": 1,
@@ -251,17 +252,25 @@ struct Api {
                 case .Success(let data):
                     let json = JSON(data)
                     
-                    let rows = json["data"]["rows"].arrayObject
+                    print("\(json)")
+                    
+                    let rows = json["data"]["questions"]["rows"].arrayObject
                     
                     for questionData in rows! {
-                        print("question: \(questionData)")
                         let question = Question.fromApiResponse(questionData as! NSDictionary)
                         retQuestions.append(question)
                     }
                     
-                    successCallback(retQuestions)
+                    let followedQuestionsArray = json["data"]["favorites"]["rows"].arrayObject
                     
-                    fetchBatchImages(retQuestions, errorCallback: errorCallback, successCallback: { _ in})
+                    for questionData in followedQuestionsArray! {
+                        let question = Question.fromApiResponse(questionData as! NSDictionary)
+                        retFollowed.append(question)
+                    }
+                    
+                    successCallback(questions: retQuestions, followed: retFollowed)
+                    
+                    // fetchBatchImages(retQuestions, errorCallback: errorCallback, successCallback: { _ in})
                     
                     break
                 case .Failure(_):
@@ -275,16 +284,16 @@ struct Api {
     static func updateFollowQuestion(question: Question, errorCallback: ()-> Void, successCallback: ()->Void) {
         
         let params: [String: AnyObject] = [
-            "app": 1,
             "user_id": UserStore.user?.userId ?? "",
-            "follow": question.isFollowed
+            "question_id": question.id,
+            "client_id" : 1
         ]
         
-        print("fetch params: \(params)")
+        print("follow params: \(params)")
         
         Alamofire.request(
-            .GET,
-            App.URLs.getUserQuestions,
+            .POST,
+            App.URLs.followQuestion,
             parameters: params,
             headers: App.Keys.requestHeaders)
             .responseJSON { response in

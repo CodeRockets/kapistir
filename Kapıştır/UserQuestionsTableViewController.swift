@@ -31,39 +31,36 @@ class UserQuestionsTableViewController: UITableViewController {
             loadingNotification!.opacity = 0.5
         }
         
-        if self.type == "user" {
-        
-            Api.getUserQuestions(UserStore.user!,
-                errorCallback: {
-                // error
+        Api.getUserQuestions(UserStore.user!,
+            errorCallback: {
                 print("getUserQuestions error")
-                },
-                successCallback: { questions in
+            },
+            successCallback: { (questions: [Question], followed: [Question]) in
+            
                 
+                if self.type == "user" {
                     print("got user questions \(questions.count)")
-                
+                    
                     self.userQuestions = questions
-                
+                    
                     Publisher.publish("user/userQuestionsLoaded", data: questions.count)
+                }
                 
-                    dispatch_async(dispatch_get_main_queue()) {
-                        MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
-                        self.tableView.reloadData()
-                        self.feedLoaded = true
-                    }
+                if self.type == "followed" {
+                    
+                    print("got followed questions \(followed.count)")
+                    
+                    self.userQuestions = followed
+                    
+                    Publisher.publish("user/followedQuestionsLoaded", data: followed.count)
+                }
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                    self.tableView.reloadData()
+                    self.feedLoaded = true
+                }
             })
-        }
-        
-        if self.type == "followed" {
-            
-            Publisher.publish("user/followedQuestionsLoaded", data: 0 /*questions.count*/)
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
-                self.tableView.reloadData()
-                self.feedLoaded = true
-            }
-        }
     }
 
     // MARK: - Table view data source

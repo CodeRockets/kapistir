@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (3.3.1)
   - ALCameraViewController (1.1.7)
+  - AZExpandableIconListView (0.1.1)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
     - ChameleonFramework/Default
@@ -17,6 +18,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 3.3)
   - ALCameraViewController
+  - AZExpandableIconListView
   - ChameleonFramework/Swift
   - Crashlytics
   - DynamicColor (~> 2.4.0)
@@ -39,6 +41,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   ALCameraViewController: 15bd245a247cff0f8a038c349ac2bbe79152b686
+  AZExpandableIconListView: e4340352595d6afdf953b4fa64c1271eb0f58e58
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   DynamicColor: 2f3fd61053684667bad9f03045dcf9a2a5a007ea

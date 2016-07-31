@@ -43,7 +43,9 @@ class UserQuestionTableViewCell: UITableViewCell {
     }
     
     static func configureTableCell(question: Question, inout cell: UserQuestionTableViewCell)  {
-        cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) in
+        cell.imgLeft.kf_setImageWithURL(
+        NSURL(string: question.optionA)!,
+        placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) in
             if error == nil {
                 /*dispatch_async(dispatch_get_main_queue()) {
                     if let avgColor = UIColor(averageColorFromImage: cell.imgLeft.image) {
@@ -54,7 +56,9 @@ class UserQuestionTableViewCell: UITableViewCell {
             }
         }
         
-        cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!, placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) in
+        cell.imgRight.kf_setImageWithURL(
+            NSURL(string: question.optionB)!,
+            placeholderImage: nil, optionsInfo: nil) { (image, error, cacheType, imageURL) in
             if error == nil {
                 /*dispatch_async(dispatch_get_main_queue()) {
                     if let avgColor = UIColor(averageColorFromImage: cell.imgRight.image) {

@@ -9,6 +9,7 @@
 import UIKit
 import ChameleonFramework
 import M13Checkbox
+import AZExpandableIconListView
 
 class QuestionTableViewCell: UITableViewCell {
     
@@ -26,6 +27,14 @@ class QuestionTableViewCell: UITableViewCell {
     
     @IBAction func btnFollow(sender: AnyObject) {
         print("follow question")
+        
+        if !self.question.isFollowed {
+            Api.updateFollowQuestion(self.question, errorCallback: {
+                
+                }, successCallback: {
+                    
+                })
+        }
         
         UIView.animateWithDuration(0.1,
             animations: {
@@ -126,6 +135,24 @@ class QuestionTableViewCell: UITableViewCell {
         self.imgRight.addGestureRecognizer(tapGestureRecoginzerRight)
         
         self.setupDetailsActionsheet()
+        self.setupFriendLists()
+    }
+    
+    func setupFriendLists() {
+        
+        let image1 = (UserStore.user?.profileImage)! //UIImage(named: "star")!
+        
+        let expandableLeft = AZExpandableIconListView(frame: CGRectMake(4, UIScreen.mainScreen().bounds.size.height - 170, UIScreen.mainScreen().bounds.size.width/2-8, 44), images: [image1, image1, image1, image1, image1, image1, image1, image1], align: .Left)
+        
+        let expandableRight = AZExpandableIconListView(
+            frame: CGRectMake(4, UIScreen.mainScreen().bounds.size.height - 170, UIScreen.mainScreen().bounds.size.width/2-8, 44),
+            images: [image1, image1, image1],
+            align: .Right)
+        
+        expandableRight.align = .Right
+        
+        self.viewLeft.addSubview(expandableLeft)
+        self.viewRight.addSubview(expandableRight)
     }
     
     func setupDetailsActionsheet() {

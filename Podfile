@@ -15,6 +15,7 @@ target 'Kapıştır' do
     pod "SAConfettiView"
     pod 'Fabric'
     pod 'Crashlytics'
+    pod 'AZExpandableIconListView'
 end
 
 target 'KapıştırTests' do

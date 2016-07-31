@@ -43,12 +43,14 @@ class UserProfileViewController: UIViewController {
         
         self.lblNoKapistir.hidden = true
         
+        // user questions
         if tabIndex == 0 {
             self.containerViewMyKapistirs.hidden = false
             self.containerViewFollows.hidden = true
             self.myKapistirsTableViewController.loadFeed()
         }
         
+        // followed questions
         if tabIndex == 1 {
             self.containerViewFollows.hidden = false
             self.containerViewMyKapistirs.hidden = true
@@ -118,7 +120,7 @@ class UserProfileViewController: UIViewController {
     func followedQuestionsLoaded(followedQuestionsCount: AnyObject?) {
                 
         let count = followedQuestionsCount as! Int
-
+        
         print("followed questions count \(count)")
 
         if count == 0 {
