@@ -43,6 +43,7 @@
 		154174921D42CFB9001C703D /* ModalCreateOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154174911D42CFB9001C703D /* ModalCreateOnboarding.swift */; };
 		154174941D42E13D001C703D /* OHCircleSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154174931D42E13D001C703D /* OHCircleSegue.swift */; };
 		157B9D071CA68B350026EFC1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 157B9D061CA68B350026EFC1 /* .gitignore */; };
+		158C84F81D50E001007AEDDD /* KapistirImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C84F71D50E001007AEDDD /* KapistirImageGenerator.swift */; };
 		159FABEF1CBEEE540049941E /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FABEE1CBEEE540049941E /* Publisher.swift */; };
 		15B88F421D450452001856E6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F411D450452001856E6 /* README.md */; };
 		15C0A9991D4C7B2C0013408B /* KPTableViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15C0A9981D4C7B2C0013408B /* KPTableViews.storyboard */; };
@@ -109,6 +110,7 @@
 		154174911D42CFB9001C703D /* ModalCreateOnboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalCreateOnboarding.swift; sourceTree = "<group>"; };
 		154174931D42E13D001C703D /* OHCircleSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OHCircleSegue.swift; path = "Kapıştır/OHCircleSegue.swift"; sourceTree = "<group>"; };
 		157B9D061CA68B350026EFC1 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		158C84F71D50E001007AEDDD /* KapistirImageGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KapistirImageGenerator.swift; sourceTree = "<group>"; };
 		159FABEE1CBEEE540049941E /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		15B88F411D450452001856E6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		15C0A9981D4C7B2C0013408B /* KPTableViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = KPTableViews.storyboard; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				153C1EA41CC8161D00CF94C3 /* PathDynamicModal.swift */,
 				154174931D42E13D001C703D /* OHCircleSegue.swift */,
 				15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */,
+				158C84F71D50E001007AEDDD /* KapistirImageGenerator.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				1535A6F41C98C51700897674 /* MainViewController.swift in Sources */,
 				1535A6B41C953E8800897674 /* Kap_s_t_r.xcdatamodeld in Sources */,
 				1535A6E31C95405C00897674 /* Question.swift in Sources */,
+				158C84F81D50E001007AEDDD /* KapistirImageGenerator.swift in Sources */,
 				154174921D42CFB9001C703D /* ModalCreateOnboarding.swift in Sources */,
 				1535A6F01C95866D00897674 /* QuestionStore.swift in Sources */,
 				1535A6E11C953EFB00897674 /* Api.swift in Sources */,

@@ -196,6 +196,16 @@ class QuestionTableViewCell: UITableViewCell {
         
         let actionShareFb = UIAlertAction(title: "Facebook'ta paylaş", style: .Default) { (alert: UIAlertAction!) -> Void in
             print("fb paylaş")
+            
+            let generator = KapistirImageGenerator(
+                leftRect: self.imgLeft.bounds,
+                rightRect: self.imgRight.bounds,
+                leftImage: self.imgLeft.image!,
+                rightImage: self.imgRight.image!,
+                answer: self.question.answer)
+            
+            generator.generateImage()
+            
         }
         
         let actionShareTwitter = UIAlertAction(title: "Tweet gönder", style: .Default) { (alert: UIAlertAction!) -> Void in

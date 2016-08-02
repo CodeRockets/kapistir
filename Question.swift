@@ -9,33 +9,6 @@
 import Foundation
 import UIKit
 
-/*
-api response
-{
-    "id": "4d4e2e20-d8ce-11e5-a366-81d5b1bd3d08",
-    "question_text": "Referandum tutacak mı?",
-    "question_image": "",
-    "user_id": "user_id",
-    "app": 0,
-    "option_a": "evet",
-    "option_b": "hayir",
-    "option_a_count": 0,
-    "option_b_count": 0,
-    "skip_count": 0,
-    "created_at": "2016-02-21T19:07:07.000Z",
-    "updated_at": "2016-02-21T19:07:07.000Z",
-    "is_deleted": true
-}
-
-//var questionText: String?
-//var questionImageUrl: String?
-//var userId: String?
-//var app: Int?
-//var createdAt: NSDate?
-//var updatedAt: NSDate?
-//var isDeleted: Bool?
-*/
-
 class Question {
     
     var id: String
@@ -53,9 +26,6 @@ class Question {
     var isAnswered: Bool = false
     
     var isFollowed: Bool = false
-    
-    // var imageLeft: UIImage?
-    // var imageRight: UIImage?
     
     var totalAnswerCount: Int {
         return optionACount + optionBCount
@@ -82,8 +52,6 @@ class Question {
         self.skipCount = skipCount
         self.askerName = askerName
         self.askerProfileImage = askerProfileImage
-        
-        // print("asker name : \(askerName), \(ratioA), \(ratioB)")
     }
 }
 
