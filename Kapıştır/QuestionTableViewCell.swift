@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ChameleonFramework
 import M13Checkbox
 import AZExpandableIconListView
 
@@ -64,7 +63,7 @@ class QuestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var btnDetails: UIButton! {
         didSet{
-            let img = UIImage(named: "details")?.imageWithRenderingMode(.AlwaysTemplate)
+            let img = UIImage(named: "details2")?.imageWithRenderingMode(.AlwaysTemplate)
             self.btnDetails.setImage(img, forState: .Normal)
             self.btnDetails.tintColor = App.UI.colorButtonFollow
         }
@@ -140,20 +139,7 @@ class QuestionTableViewCell: UITableViewCell {
     }
     
     func setupFriendLists() {
-        
-        let image1 = (UserStore.user?.profileImage)! //UIImage(named: "star")!
-        
-        let expandableLeft = AZExpandableIconListView(frame: CGRectMake(4, UIScreen.mainScreen().bounds.size.height - 170, UIScreen.mainScreen().bounds.size.width/2-8, 44), images: [image1, image1, image1, image1, image1, image1, image1, image1], align: .Left)
-        
-        let expandableRight = AZExpandableIconListView(
-            frame: CGRectMake(4, UIScreen.mainScreen().bounds.size.height - 170, UIScreen.mainScreen().bounds.size.width/2-8, 44),
-            images: [image1, image1, image1],
-            align: .Right)
-        
-        expandableRight.align = .Right
-        
-        self.viewLeft.addSubview(expandableLeft)
-        self.viewRight.addSubview(expandableRight)
+
     }
     
     func setupReportAbuseActionsheet() {
@@ -204,8 +190,10 @@ class QuestionTableViewCell: UITableViewCell {
                 rightImage: self.imgRight.image!,
                 answer: self.question.answer)
             
-            generator.generateImage()
+            let kapistirImage = generator.generateImage()
             
+            let share = ShareManager(kapistirImage: kapistirImage)
+            share.facebook()
         }
         
         let actionShareTwitter = UIAlertAction(title: "Tweet gönder", style: .Default) { (alert: UIAlertAction!) -> Void in

@@ -6,6 +6,8 @@
 //  Copyright © 2016 Evren Yortuçboylu. All rights reserved.
 //
 
+import Foundation
+
 class Publisher: NSObject {
 
     typealias Callback = (AnyObject?)-> Void

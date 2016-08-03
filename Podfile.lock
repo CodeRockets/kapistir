@@ -1,14 +1,34 @@
 PODS:
   - Alamofire (3.3.1)
-  - ALCameraViewController (1.1.7)
   - AZExpandableIconListView (0.1.1)
-  - ChameleonFramework/Default (2.1.0)
-  - ChameleonFramework/Swift (2.1.0):
-    - ChameleonFramework/Default
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
   - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
-  - DynamicColor (2.4.0)
   - Fabric (1.6.7)
+  - FacebookCore (0.1.1):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.14)
+  - FacebookLogin (0.1.1):
+    - Bolts (~> 1.8)
+    - FacebookCore
+    - FBSDKCoreKit (~> 4.14)
+    - FBSDKLoginKit (~> 4.14)
+  - FacebookShare (0.1.1):
+    - Bolts (~> 1.8)
+    - FacebookCore
+    - FBSDKCoreKit (~> 4.14)
+    - FBSDKShareKit (~> 4.14)
+  - FBSDKCoreKit (4.14.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.14.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.14.0):
+    - FBSDKCoreKit
   - Kingfisher (2.1.0)
   - M13Checkbox (2.1.2)
   - MBProgressHUD (0.9.2)
@@ -17,12 +37,12 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 3.3)
-  - ALCameraViewController
   - AZExpandableIconListView
-  - ChameleonFramework/Swift
   - Crashlytics
-  - DynamicColor (~> 2.4.0)
   - Fabric
+  - FacebookCore
+  - FacebookLogin
+  - FacebookShare
   - Kingfisher (~> 2.1)
   - M13Checkbox
   - MBProgressHUD (~> 0.9.2)
@@ -40,16 +60,22 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
-  ALCameraViewController: 15bd245a247cff0f8a038c349ac2bbe79152b686
   AZExpandableIconListView: e4340352595d6afdf953b4fa64c1271eb0f58e58
-  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
-  DynamicColor: 2f3fd61053684667bad9f03045dcf9a2a5a007ea
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  FacebookCore: 14f27add6888c27470d42a100374e6361f4e0f79
+  FacebookLogin: 748f4e621e874da3e0bf63bccf6fd1542c786a1b
+  FacebookShare: ea0370ca0b914eccc42a753abcd937265c17b030
+  FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
+  FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
+  FBSDKShareKit: e8e5d4ccef69b41132fe33acda26db1e33143e33
   Kingfisher: 3ac09acad75a25ab22f6d7cef3de10d61dd4792d
   M13Checkbox: fbc53145e3ca8ecd1c444a76439bdc0ddb17b008
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SAConfettiView: c87031a2280659261b730fce3669fb10e73636ee
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: d428cf738d051ca66e8fc1eab899cb90a8f77f6f
+
+COCOAPODS: 1.0.1

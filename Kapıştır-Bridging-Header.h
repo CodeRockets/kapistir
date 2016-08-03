@@ -9,8 +9,9 @@
 #ifndef Kap_s_t_r_Bridging_Header_h
 #define Kap_s_t_r_Bridging_Header_h
 
+/*
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-
-
+#import <FBSDKShareKit/FBSDKShareKit.h>
+*/
 #endif /* Kap_s_t_r_Bridging_Header_h */

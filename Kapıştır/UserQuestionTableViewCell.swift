@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import ChameleonFramework
 import Kingfisher
-import DynamicColor
 
 class UserQuestionTableViewCell: UITableViewCell {
 

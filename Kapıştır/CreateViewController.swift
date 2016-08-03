@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ALCameraViewController
 import Alamofire
 import SwiftyJSON
 import SAConfettiView

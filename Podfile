@@ -4,18 +4,18 @@
  use_frameworks!
 
 target 'Kapıştır' do
-    pod 'ChameleonFramework/Swift'
     pod 'Kingfisher', '~> 2.1'
-    pod 'ALCameraViewController'
     pod 'MBProgressHUD', '~> 0.9.2'
     pod 'Alamofire', '~> 3.3'
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-    pod 'DynamicColor', '~> 2.4.0'
     pod 'M13Checkbox'
     pod "SAConfettiView"
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'AZExpandableIconListView'
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
+    pod 'FacebookShare'
 end
 
 target 'KapıştırTests' do

@@ -9,10 +9,12 @@
 import UIKit
 import CoreData
 import Kingfisher
+import FacebookCore
+import FacebookLogin
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate, LoginButtonDelegate {
     
-    var loginView : FBSDKLoginButton = FBSDKLoginButton()
+    var loginView: LoginButton!
     
     @IBOutlet weak var lblTitle: UILabel!
     
@@ -30,12 +32,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         super.viewDidLoad()
         
         let xPos = (self.view.bounds.size.width - 200)/2
-        loginView.frame = CGRectMake(xPos, 210, 200, 40)
+        let loginFrame = CGRectMake(xPos, 210, 200, 40)
+        
+        self.loginView = LoginButton(frame: loginFrame, readPermissions: [.PublicProfile, .Email, .UserFriends])
+
+        loginView.delegate = self
         
         self.view.addSubview(loginView)
-        loginView.readPermissions = ["public_profile", "email", "user_friends", "user_birthday"]
-        
-        loginView.delegate = self
         
         // UserStore.registerUpdateCallback(userSaved)
     }
@@ -44,45 +47,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         super.viewDidLayoutSubviews()
     }
     
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        
-        print("Login button result: \(result)")
-        
-        self.view.layoutIfNeeded()
-       
-        if error != nil {
-            //handle error
-            
-            print("fb login error")
-            
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.hidden = true
-            self.loginView.hidden = false
-            self.btnCancel.hidden = false
-            
-        } else {
-            
-            if let _ = FBSDKAccessToken.currentAccessToken() {
-                returnUserData()
-            }
-            else{
-                print("fb login cancelled")
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.hidden = true
-                self.loginView.hidden = false
-                self.btnCancel.hidden = false
-            }
-            
-        }
+    func loginButton(loginButton: LoginButton!, didCompleteWithResult result: LoginResult!, error: NSError!) {
+            //
     }
     
     func returnUserData() {
-        let token = FBSDKAccessToken.currentAccessToken()?.tokenString
+        let token = AccessToken.current!.authenticationToken
         
         lblTitle.text = "Başarılı!"
         lblText.text = "Kayıt tamamlanıyor!"
         
-        Api.saveUser(token!,
+        Api.saveUser(token,
             errorCallback: { () -> Void in
                 // hata
                 print("user save error")
@@ -99,7 +74,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
             })
     }
     
-    func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {
+    func loginButtonWillLogin(loginButton: LoginButton!) -> Bool {
         
         self.activityIndicator.startAnimating()
         self.activityIndicator.hidden = false
@@ -109,7 +84,43 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, UITextFie
         return true
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+    func loginButtonDidCompleteLogin(loginButton: LoginButton, result: LoginResult) {
+        print("Login button result: \(result)")
+        
+        self.view.layoutIfNeeded()
+        
+        switch result {
+        case .Cancelled:
+            print("fb login error")
+            
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.hidden = true
+            self.loginView.hidden = false
+            self.btnCancel.hidden = false
+            
+            break
+        case .Failed(let error):
+            print("fb login error \(error)")
+
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.hidden = true
+            self.loginView.hidden = false
+            self.btnCancel.hidden = false
+            
+            break
+        case .Success(let grantedPermissions, let declinedPermissions, let token):
+            
+            self.activityIndicator.hidden = false
+            self.loginView.hidden = true
+            self.btnCancel.hidden = true
+            
+            returnUserData()
+            
+            break
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: LoginButton) {
         //
     }
 }

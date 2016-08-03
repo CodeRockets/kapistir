@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import Crashlytics
 import Fabric
+import FacebookCore
+import FacebookLogin
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,12 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //App launch code
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        //Optionally add to ensure your credentials are valid:
-        FBSDKLoginManager.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:NSError!) -> Void in
-            //
-        }
         
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        //Optionally add to ensure your credentials are valid:
+        //.renewSystemCredentials { (result:ACAccountCredentialRenewResult, error:NSError!) -> Void in
+            //
+        //}
+       
         Fabric.with([Crashlytics.self])
         
         App.Store.loadAppSettings()
@@ -37,16 +41,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Even though the Facebook SDK can make this determinitaion on its own,
         //let's make sure that the facebook SDK only sees urls intended for it,
         //facebook has enough info already!
-        let isFacebookURL = url.scheme.hasPrefix("fb\(FBSDKSettings.appID())") && url.host == "authorize"
+        let isFacebookURL = url.scheme.hasPrefix("fb\(SDKSettings.appId)") && url.host == "authorize"
         if isFacebookURL {
-            return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+            return ApplicationDelegate.shared.application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
         }
         return false
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
         //App activation code
-        FBSDKAppEvents.activateApp()
+        
+        AppEvent.init(name: "activated")
     }
     
     func applicationWillResignActive(application: UIApplication) {
