@@ -63,7 +63,7 @@ class QuestionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var btnDetails: UIButton! {
         didSet{
-            let img = UIImage(named: "details2")?.imageWithRenderingMode(.AlwaysTemplate)
+            let img = UIImage(named: "details")?.imageWithRenderingMode(.AlwaysTemplate)
             self.btnDetails.setImage(img, forState: .Normal)
             self.btnDetails.tintColor = App.UI.colorButtonFollow
         }
@@ -193,12 +193,26 @@ class QuestionTableViewCell: UITableViewCell {
             let kapistirImage = generator.generateImage()
             
             let share = ShareManager(kapistirImage: kapistirImage)
+            //share.facebook()
             share.facebook()
         }
         
         let actionShareTwitter = UIAlertAction(title: "Tweet gönder", style: .Default) { (alert: UIAlertAction!) -> Void in
             
             print("Twit gönder")
+            
+            let generator = KapistirImageGenerator(
+                leftRect: self.imgLeft.bounds,
+                rightRect: self.imgRight.bounds,
+                leftImage: self.imgLeft.image!,
+                rightImage: self.imgRight.image!,
+                answer: self.question.answer)
+            
+            let kapistirImage = generator.generateImage()
+            
+            let share = ShareManager(kapistirImage: kapistirImage)
+            //share.facebook()
+            share.twitter()
         }
         
         let actionDissmiss = UIAlertAction(title: "İptal", style: .Cancel, handler: nil)

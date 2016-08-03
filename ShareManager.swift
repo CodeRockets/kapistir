@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import FacebookCore
 import FacebookShare
+import Social
 
 class ShareManager: NSObject {
     
@@ -19,7 +20,7 @@ class ShareManager: NSObject {
         self.kapistirImage = kapistirImage
     }
     
-    func facebook() {
+    func facebookNative() {
         
         do{
             let photo = Photo(image: self.kapistirImage, userGenerated: true)
@@ -38,5 +39,21 @@ class ShareManager: NSObject {
         catch(let error){
             print("hata: \(error)")
         }
+    }
+    
+    func facebook() {
+        let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        vc.setInitialText("#kapıştır")
+        vc.addImage(self.kapistirImage)
+        // vc.addURL(NSURL(string: "http://www.google.com"))
+        App.UI.getTopMostViewController().presentViewController(vc, animated: true, completion: nil)
+    }
+    
+    func twitter() {
+        let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+        vc.setInitialText("#kapıştır")
+        vc.addImage(self.kapistirImage)
+        // vc.addURL(NSURL(string: "http://www.google.com"))
+        App.UI.getTopMostViewController().presentViewController(vc, animated: true, completion: nil)
     }
 }

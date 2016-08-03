@@ -207,7 +207,7 @@
                                                         <constraint firstAttribute="width" constant="24" id="9i3-Qp-fAd"/>
                                                         <constraint firstAttribute="height" constant="24" id="YOy-M1-drt"/>
                                                     </constraints>
-                                                    <state key="normal" image="details2"/>
+                                                    <state key="normal" image="details"/>
                                                     <connections>
                                                         <action selector="showDetails:" destination="n8e-xs-p0j" eventType="touchUpInside" id="hvw-ky-cy4"/>
                                                     </connections>
@@ -1171,7 +1171,7 @@
     </scenes>
     <resources>
         <image name="cancel" width="128" height="128"/>
-        <image name="details2" width="128" height="128"/>
+        <image name="details" width="128" height="128"/>
         <image name="heart" width="128" height="128"/>
         <image name="logo_2" width="48" height="48"/>
         <image name="plus2" width="128" height="128"/>
