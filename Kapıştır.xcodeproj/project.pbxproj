@@ -44,6 +44,7 @@
 		159FABEF1CBEEE540049941E /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159FABEE1CBEEE540049941E /* Publisher.swift */; };
 		15B88F421D450452001856E6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 15B88F411D450452001856E6 /* README.md */; };
 		15C0A9991D4C7B2C0013408B /* KPTableViews.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15C0A9981D4C7B2C0013408B /* KPTableViews.storyboard */; };
+		15E0D8511D5CCDD70041FB01 /* UIImageViewAligned.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E0D8501D5CCDD70041FB01 /* UIImageViewAligned.m */; };
 		15F8F6571D495A95007D88E0 /* DOFavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */; };
 		1701CB01E1ED3277729308C8 /* Pods_Kap_s_t_rUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FAA3E346AB8C79E2F3B270 /* Pods_Kap_s_t_rUITests.framework */; };
 		96875AD61640E0644D4900AC /* Pods_Kap_s_t_r.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0765F9A3D5BFBC0D6013196D /* Pods_Kap_s_t_r.framework */; };
@@ -115,6 +116,8 @@
 		159FABEE1CBEEE540049941E /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		15B88F411D450452001856E6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		15C0A9981D4C7B2C0013408B /* KPTableViews.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = KPTableViews.storyboard; sourceTree = "<group>"; };
+		15E0D84F1D5CCDD70041FB01 /* UIImageViewAligned.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageViewAligned.h; sourceTree = "<group>"; };
+		15E0D8501D5CCDD70041FB01 /* UIImageViewAligned.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageViewAligned.m; sourceTree = "<group>"; };
 		15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DOFavoriteButton.swift; path = "Kapıştır/DOFavoriteButton.swift"; sourceTree = "<group>"; };
 		173111C3E688A9CEED72E3CD /* Pods-KapıştırUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KapıştırUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KapıştırUITests/Pods-KapıştırUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		38FAA3E346AB8C79E2F3B270 /* Pods_Kap_s_t_rUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kap_s_t_rUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,6 +252,8 @@
 				1535A6BA1C953E8800897674 /* Info.plist */,
 				1535A6B71C953E8800897674 /* LaunchScreen.storyboard */,
 				1535A6B21C953E8800897674 /* Kap_s_t_r.xcdatamodeld */,
+				15E0D84F1D5CCDD70041FB01 /* UIImageViewAligned.h */,
+				15E0D8501D5CCDD70041FB01 /* UIImageViewAligned.m */,
 				1535A6FC1C98CD3800897674 /* Kapıştır-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
@@ -573,6 +578,7 @@
 				1535A7081C9A1E6E00897674 /* CreateViewController.swift in Sources */,
 				153C1EA91CC9820900CF94C3 /* UserQuestionsTableViewController.swift in Sources */,
 				15B88F421D450452001856E6 /* README.md in Sources */,
+				15E0D8511D5CCDD70041FB01 /* UIImageViewAligned.m in Sources */,
 				1535A7061C99E23C00897674 /* User.swift in Sources */,
 				158C84FA1D512EFC007AEDDD /* ShareManager.swift in Sources */,
 				159FABEF1CBEEE540049941E /* Publisher.swift in Sources */,

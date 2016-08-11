@@ -14,4 +14,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 */
+
+#import "UIImageViewAligned.h"
+
 #endif /* Kap_s_t_r_Bridging_Header_h */
