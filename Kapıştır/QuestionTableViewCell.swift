@@ -9,6 +9,7 @@
 import UIKit
 import M13Checkbox
 import AZExpandableIconListView
+import Kingfisher
 
 class QuestionTableViewCell: UITableViewCell {
     
@@ -110,6 +111,10 @@ class QuestionTableViewCell: UITableViewCell {
     @IBOutlet weak var viewVotesLeftHeightConst: NSLayoutConstraint!
     
     @IBOutlet weak var viewVotesRightHeightConst: NSLayoutConstraint!
+    
+    @IBOutlet weak var avatarViewLeft: MDGroupAvatarView!
+    
+    @IBOutlet weak var avatarViewRight: MDGroupAvatarView!
     
     @IBOutlet weak var chkLeft: M13Checkbox! {
         didSet{
@@ -275,6 +280,8 @@ class QuestionTableViewCell: UITableViewCell {
         
         self.ratioLeft.hidden = false
         self.ratioRight.hidden = false
+        self.avatarViewRight.hidden = false
+        self.avatarViewLeft.hidden = false
         
         let heightA = 40 + (self.viewLeft.frame.size.height-40) * CGFloat(question.ratioA)
         let heightB = 40 + (self.viewRight.frame.size.height-40) * CGFloat(question.ratioB)
@@ -325,6 +332,8 @@ class QuestionTableViewCell: UITableViewCell {
         cell.lblQuestion.text = question.askerName
         cell.imgProfileImage.kf_setImageWithURL(NSURL(string: question.askerProfileImage!)!)
         
+        QuestionTableViewCell.loadFriends(cell)
+        
         if question.isAnswered == true {
             
             let heightA = 40 + (cell.viewLeft.frame.size.height-40) * CGFloat(question.ratioA)
@@ -360,6 +369,9 @@ class QuestionTableViewCell: UITableViewCell {
                 cell.chkRight.checkState = .Checked
             }
         
+            cell.avatarViewLeft.hidden = false
+            cell.avatarViewRight.hidden = false
+            
         }
         else{
             cell.viewVotesRightHeightConst.constant = 0
@@ -376,6 +388,9 @@ class QuestionTableViewCell: UITableViewCell {
             
             cell.chkLeft.checkState = .Unchecked
             cell.chkRight.checkState = .Unchecked
+            
+            cell.avatarViewLeft.hidden = true
+            cell.avatarViewRight.hidden = true
         }
         
         cell.btnFollow.tintColor = question.isFollowed ? UIColor.redColor() : App.UI.colorButtonFollow
@@ -383,5 +398,76 @@ class QuestionTableViewCell: UITableViewCell {
         cell.lblInfo.text = "☆ " + String(question.totalAnswerCount) + " Oy" //+ "   ◎ " + String(question.skipCount)
         cell.imgLeft.kf_setImageWithURL(NSURL(string: question.optionA)!)
         cell.imgRight.kf_setImageWithURL(NSURL(string: question.optionB)!)
+    }
+    
+    static func loadFriends(cell: QuestionTableViewCell) {
+        
+        // left friends
+        let urlsLeft = cell.question.friends?
+            .filter({ (friend) -> Bool in
+                return friend.userVotedOption == .Left
+            })
+            .map({ (friend) -> NSURL in
+                return NSURL(string: friend.profileImageUrl)!
+            })
+    
+        let urlsRight = cell.question.friends?
+            .filter({ (friend) -> Bool in
+                return friend.userVotedOption == .Right
+            })
+            .map({ (friend) -> NSURL in
+                return NSURL(string: friend.profileImageUrl)!
+            })
+        
+        print("urlsLeft \(urlsLeft)")
+        print("urlsRight \(urlsRight)")
+
+        let resourcesLeft = urlsLeft!.map ({ (url) -> Resource in
+            return Resource(downloadURL: url)
+        })
+        
+        let resourcesRight = urlsRight!.map({ (url) -> Resource in
+            return Resource(downloadURL: url)
+        })
+        
+        print("resourcesLeft \(resourcesLeft)")
+        print("resourcesRight \(resourcesRight)")
+        
+        if resourcesLeft.count > 0 {
+            getFriendImagesFromCache(resourcesLeft, index: 0, images: []) { (images) in
+                print("left images getted from cache \(images)")
+
+                cell.avatarViewLeft.setAvatarImages(images, realTotal: images.count)
+            }
+        }else{
+            cell.avatarViewLeft.setAvatarImages([], realTotal: 0)
+        }
+        
+        if resourcesRight.count > 0 {
+            getFriendImagesFromCache(resourcesRight, index: 0, images: []) { (images) in
+                print("right images getted from cache \(images)")
+            
+                cell.avatarViewRight.setAvatarImages(images, realTotal: images.count)
+            }
+        }else{
+            cell.avatarViewRight.setAvatarImages([], realTotal: 0)
+        }
+    }
+    
+    static func getFriendImagesFromCache(resources: [Resource], index: Int=0, images: [UIImage]=[], callback: ( [UIImage] )-> Void) {
+        
+        var collectedImages = images
+        let currentResource = resources[index]
+        
+        ImageCache.defaultCache.retrieveImageForKey(currentResource.cacheKey, options: nil, completionHandler: { (image, _) in
+            collectedImages.append(image!)
+            
+            if resources.count == index + 1 {
+                callback(collectedImages)
+            }
+            else{
+                self.getFriendImagesFromCache(resources, index: index+1, images: collectedImages, callback: callback)
+            }
+        })
     }
 }

@@ -70,26 +70,39 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rL-Ym-ger" customClass="MDGroupAvatarView" customModule="Kapıs_tır" customModuleProvider="target">
+                                                    <rect key="frame" x="167" y="229" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="ASW-NM-3g5"/>
+                                                        <constraint firstAttribute="width" constant="32" id="c7i-AD-nRI"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="xd2-Rl-mme" secondAttribute="trailing" id="3sv-y2-ohN"/>
+                                                <constraint firstAttribute="bottom" secondItem="7rL-Ym-ger" secondAttribute="bottom" constant="8" id="6L5-g2-c2F"/>
                                                 <constraint firstAttribute="bottom" secondItem="YKd-St-nWS" secondAttribute="bottom" id="AcC-3y-pfZ"/>
                                                 <constraint firstAttribute="height" constant="448" id="B1i-Dz-Jye"/>
                                                 <constraint firstAttribute="bottom" secondItem="Zau-gO-zzb" secondAttribute="bottom" constant="30" id="E8n-kY-QMU"/>
                                                 <constraint firstAttribute="bottom" secondItem="xd2-Rl-mme" secondAttribute="bottom" id="Gcc-3p-ySv"/>
+                                                <constraint firstAttribute="trailing" secondItem="7rL-Ym-ger" secondAttribute="trailing" constant="8" id="Itf-tQ-fn1"/>
                                                 <constraint firstItem="Zau-gO-zzb" firstAttribute="leading" secondItem="PwW-Y5-h7p" secondAttribute="leading" constant="8" id="Kcn-ac-vkF"/>
+                                                <constraint firstItem="7rL-Ym-ger" firstAttribute="centerX" secondItem="PwW-Y5-h7p" secondAttribute="centerX" id="OAI-Bu-QaB"/>
                                                 <constraint firstItem="jq3-d8-MA4" firstAttribute="centerY" secondItem="PwW-Y5-h7p" secondAttribute="centerY" id="R8B-z5-7SD"/>
                                                 <constraint firstItem="jq3-d8-MA4" firstAttribute="centerX" secondItem="PwW-Y5-h7p" secondAttribute="centerX" id="cZS-bc-Occ"/>
                                                 <constraint firstItem="YKd-St-nWS" firstAttribute="leading" secondItem="PwW-Y5-h7p" secondAttribute="leading" id="hV0-DP-ubA"/>
                                                 <constraint firstItem="xd2-Rl-mme" firstAttribute="top" secondItem="PwW-Y5-h7p" secondAttribute="top" id="kxA-h2-2Nw"/>
                                                 <constraint firstAttribute="trailing" secondItem="Zau-gO-zzb" secondAttribute="trailing" constant="8" id="m3f-e3-Kqu"/>
+                                                <constraint firstAttribute="trailing" secondItem="7rL-Ym-ger" secondAttribute="trailing" id="rSu-73-3Na"/>
                                                 <constraint firstAttribute="trailing" secondItem="YKd-St-nWS" secondAttribute="trailing" id="rcD-Ek-Prh"/>
                                                 <constraint firstItem="xd2-Rl-mme" firstAttribute="leading" secondItem="PwW-Y5-h7p" secondAttribute="leading" id="tTm-eg-ea1"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="B1i-Dz-Jye"/>
+                                                    <exclude reference="OAI-Bu-QaB"/>
+                                                    <exclude reference="rSu-73-3Na"/>
                                                 </mask>
                                             </variation>
                                         </view>
@@ -141,6 +154,13 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9dW-CJ-qCF" customClass="MDGroupAvatarView" customModule="Kapıs_tır" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="229" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="6Sm-Zs-hQJ"/>
+                                                        <constraint firstAttribute="width" constant="32" id="Tpf-wl-9IN"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -149,14 +169,24 @@
                                                 <constraint firstItem="wyT-ju-Gy4" firstAttribute="top" secondItem="f0N-CD-iGh" secondAttribute="top" id="40a-xI-4NF"/>
                                                 <constraint firstItem="fJv-o0-imk" firstAttribute="leading" secondItem="f0N-CD-iGh" secondAttribute="leading" id="7RW-hg-4wf"/>
                                                 <constraint firstAttribute="bottom" secondItem="fJv-o0-imk" secondAttribute="bottom" id="E5r-Jx-e7a"/>
+                                                <constraint firstItem="9dW-CJ-qCF" firstAttribute="leading" secondItem="f0N-CD-iGh" secondAttribute="leading" constant="8" id="FhT-0v-G8t"/>
                                                 <constraint firstAttribute="bottom" secondItem="nk7-AU-ubO" secondAttribute="bottom" constant="30" id="H97-tc-7Ln"/>
+                                                <constraint firstItem="9dW-CJ-qCF" firstAttribute="centerX" secondItem="f0N-CD-iGh" secondAttribute="centerX" id="JQg-zh-TzG"/>
                                                 <constraint firstAttribute="trailing" secondItem="nk7-AU-ubO" secondAttribute="trailing" constant="8" id="VtF-oj-XNy"/>
+                                                <constraint firstAttribute="bottom" secondItem="9dW-CJ-qCF" secondAttribute="bottom" constant="8" id="YV1-2d-nGH"/>
                                                 <constraint firstAttribute="trailing" secondItem="fJv-o0-imk" secondAttribute="trailing" id="cCT-ma-S8f"/>
+                                                <constraint firstItem="9dW-CJ-qCF" firstAttribute="leading" secondItem="f0N-CD-iGh" secondAttribute="leading" id="cK2-Fg-wir"/>
                                                 <constraint firstItem="ePT-lD-Axd" firstAttribute="centerX" secondItem="f0N-CD-iGh" secondAttribute="centerX" id="gQZ-ex-rWg"/>
                                                 <constraint firstItem="ePT-lD-Axd" firstAttribute="centerY" secondItem="f0N-CD-iGh" secondAttribute="centerY" id="h2n-9X-2J6"/>
                                                 <constraint firstAttribute="bottom" secondItem="wyT-ju-Gy4" secondAttribute="bottom" id="pGi-lc-7Ba"/>
                                                 <constraint firstItem="wyT-ju-Gy4" firstAttribute="leading" secondItem="f0N-CD-iGh" secondAttribute="leading" id="pVF-1O-u0Q"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="JQg-zh-TzG"/>
+                                                    <exclude reference="cK2-Fg-wir"/>
+                                                </mask>
+                                            </variation>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-SA-X4Y" userLabel="View Footer">
                                             <rect key="frame" x="0.0" y="330" width="414" height="44"/>
@@ -258,6 +288,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="avatarViewLeft" destination="9dW-CJ-qCF" id="d25-rN-FYR"/>
+                                    <outlet property="avatarViewRight" destination="7rL-Ym-ger" id="uOS-c5-GfN"/>
                                     <outlet property="btnDetails" destination="Rnp-nS-Lxa" id="B6b-tu-cE0"/>
                                     <outlet property="btnFollow" destination="khA-m3-Dpk" id="n1y-ge-zK2"/>
                                     <outlet property="chkLeft" destination="ePT-lD-Axd" id="J27-wh-EGJ"/>

@@ -90,7 +90,8 @@ class UserStore{
                 profileImageUrl: defaults.valueForKey("profileImageUrl") as! String,
                 facebookId: defaults.valueForKey("facebookId") as! String,
                 profileImage: profileImage,
-                questions: [Question]()
+                questions: [Question](),
+                userVotedOption: nil
             )
             
             print("loading user local \(self._user)")

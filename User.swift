@@ -20,6 +20,8 @@ struct User {
     
     var questions = [Question]()
     
+    var userVotedOption: Answer?
+    
     //var facebookToken: String
     // var score: Int = 0
 }

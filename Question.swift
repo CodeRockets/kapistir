@@ -27,6 +27,8 @@ class Question {
     
     var isFollowed: Bool = false
     
+    var friends: [User]?
+    
     var totalAnswerCount: Int {
         return optionACount + optionBCount
     }
@@ -43,7 +45,10 @@ class Question {
         return totalAnswerCount > 0 ? Double(skipCount) / Double(totalAnswerCount) : 0
     }
     
-    init(id: String, optionA: String, optionB: String, optionACount:Int, optionBCount:Int, skipCount: Int, askerName: String?, askerProfileImage: String?){
+    init(id: String, optionA: String, optionB: String,
+         optionACount:Int, optionBCount:Int, skipCount: Int,
+         askerName: String?, askerProfileImage: String?, friends: [User]?)
+    {
         self.id = id
         self.optionA = optionA
         self.optionB = optionB
@@ -52,6 +57,7 @@ class Question {
         self.skipCount = skipCount
         self.askerName = askerName
         self.askerProfileImage = askerProfileImage
+        self.friends = friends
     }
 }
 
@@ -70,9 +76,23 @@ extension Question {
         let askerName = response["asker_name"] as? String
         let askerProfileImage = response["asker_profile_img"] as? String
         
+        var friends = [User]()
+        
+        if let friendsJson = response["friends"] as? [AnyObject] {
+            for j in friendsJson {
+            
+                let userName = j["name"] as! String
+                let userId = j["facebook_id"] as! String
+                let profileImage = j["profile_img"] as! String
+                let option = Answer(rawValue: j["option"] as! String)
+            
+                friends.append(User(userName: userName, userId: userId, profileImageUrl: profileImage, facebookId: userId, profileImage: nil, questions: [], userVotedOption: option))
+            }
+        }
+
         let question = Question(
             id: id, optionA: optionA, optionB: optionB, optionACount: optionACount, optionBCount: optionBCount, skipCount: skipCount,
-            askerName: askerName, askerProfileImage: askerProfileImage
+            askerName: askerName, askerProfileImage: askerProfileImage, friends: friends
         )
         
         return question

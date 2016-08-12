@@ -20,7 +20,7 @@ struct App {
         
         static var createOnboarded = false
         
-        static let DEBUG = 0
+        static let DEBUG = 1
         
         static let questionScrollDelay = UInt32(1300000)
         

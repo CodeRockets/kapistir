@@ -45,6 +45,8 @@ struct Api {
                     
                     let json = JSON(data)
                     
+                    print("\(json)")
+                    
                     let rows = json["data"]["rows"].arrayObject
                     
                     for questionData in rows! {
@@ -66,7 +68,17 @@ struct Api {
     static func fetchBatchImages(batch: [Question], errorCallback: ()->Void, successCallback: ([Question])-> Void) {
         
         let urlsA = batch.map { NSURL(string: $0.optionA)! }
-        let urls = urlsA + batch.map { NSURL(string: $0.optionB)! }
+        let urlsB = batch.map { NSURL(string: $0.optionB)! }
+        
+        var profileImages = [NSURL]()
+        
+        for q in batch{
+            for f in q.friends! {
+                profileImages.append(NSURL(string: f.profileImageUrl)!)
+            }
+        }
+        
+        let urls = urlsA + urlsB + profileImages
         
         print(urls)
         
@@ -109,7 +121,8 @@ struct Api {
                         profileImageUrl: json["data"]["profile_img"].stringValue,
                         facebookId: json["data"]["facebook_id"].stringValue,
                         profileImage: nil,
-                        questions: [Question]()
+                        questions: [Question](),
+                        userVotedOption: nil
                     )
                     
                     successCallback(loggedUser: user)
@@ -203,11 +216,9 @@ struct Api {
                             optionBCount: 0,
                             skipCount: 0,
                             askerName: UserStore.user!.userName,
-                            askerProfileImage: UserStore.user!.profileImageUrl
+                            askerProfileImage: UserStore.user!.profileImageUrl,
+                            friends: []
                         )
-                        
-                        // question.imageLeft = images.0
-                        // question.imageRight = images.1
                         
                         successCallback(question: question)
                     }

@@ -33,6 +33,9 @@ PODS:
   - M13Checkbox (2.1.2)
   - MBProgressHUD (0.9.2)
   - SAConfettiView (0.1.8)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
@@ -47,6 +50,7 @@ DEPENDENCIES:
   - M13Checkbox
   - MBProgressHUD (~> 0.9.2)
   - SAConfettiView
+  - SDWebImage
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -74,8 +78,9 @@ SPEC CHECKSUMS:
   M13Checkbox: fbc53145e3ca8ecd1c444a76439bdc0ddb17b008
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   SAConfettiView: c87031a2280659261b730fce3669fb10e73636ee
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: d428cf738d051ca66e8fc1eab899cb90a8f77f6f
+PODFILE CHECKSUM: 59ac463ef4b760b29be2fe0e3f5eea3ce943918a
 
 COCOAPODS: 1.0.1

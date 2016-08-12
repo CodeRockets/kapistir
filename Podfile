@@ -16,6 +16,7 @@ target 'Kapıştır' do
     pod 'FacebookCore'
     pod 'FacebookLogin'
     pod 'FacebookShare'
+    pod 'SDWebImage'
 end
 
 target 'KapıştırTests' do
