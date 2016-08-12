@@ -28,6 +28,8 @@ class UserProfileViewController: UIViewController {
     
     @IBOutlet weak var containerViewMyKapistirs: UIView!
     
+    var tabIndex = 0
+    
     var myKapistirsTableViewController: UserQuestionsTableViewController!
     
     @IBOutlet weak var containerViewFollows: UIView!
@@ -39,7 +41,30 @@ class UserProfileViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBOutlet weak var btnToggleEditFeed: UIButton! {
+        didSet{
+            let img = UIImage(named: "pen-15-128")?.imageWithRenderingMode(.AlwaysTemplate)
+            self.btnToggleEditFeed.setImage(img, forState: .Normal)
+            self.btnToggleEditFeed.tintColor = UIColor.blackColor()
+        }
+    }
+    
+    @IBAction func toggleEditFeed(sender: AnyObject) {
+        if tabIndex == 0 {
+            let editing = self.myKapistirsTableViewController.editing
+            self.myKapistirsTableViewController.setEditing(!editing, animated: true)
+            self.btnToggleEditFeed.tintColor = !editing ? UIColor.redColor() : UIColor.blackColor()
+        }
+        else if tabIndex == 1 {
+            let editing = self.followedKapistirsTableViewController.editing
+            self.followedKapistirsTableViewController.setEditing(!editing, animated: true)
+            self.btnToggleEditFeed.tintColor = !editing ? UIColor.redColor() : UIColor.blackColor()
+        }
+    }
+    
     func setFeedState(tabIndex: Int) {
+        
+        self.tabIndex = tabIndex
         
         self.lblNoKapistir.hidden = true
         
@@ -48,6 +73,8 @@ class UserProfileViewController: UIViewController {
             self.containerViewMyKapistirs.hidden = false
             self.containerViewFollows.hidden = true
             self.myKapistirsTableViewController.loadFeed()
+            
+            self.btnToggleEditFeed.tintColor = self.myKapistirsTableViewController.editing ? UIColor.redColor() : UIColor.blackColor()
         }
         
         // followed questions
@@ -55,7 +82,10 @@ class UserProfileViewController: UIViewController {
             self.containerViewFollows.hidden = false
             self.containerViewMyKapistirs.hidden = true
             self.followedKapistirsTableViewController.loadFeed()
+            
+            self.btnToggleEditFeed.tintColor = self.followedKapistirsTableViewController.editing ? UIColor.redColor() : UIColor.blackColor()
         }
+        
     }
     
     override func viewDidLoad() {
@@ -81,10 +111,6 @@ class UserProfileViewController: UIViewController {
         let followedKapistirs = storyBoard.instantiateViewControllerWithIdentifier("UserQuestionsTableViewController") as! UserQuestionsTableViewController
         
         followedKapistirs.type = "followed"
-        
-        // DEBUG
-        // followedKapistirs.tableView.backgroundColor = UIColor.redColor()
-        // !DEBUG
         
         self.addChildViewController(followedKapistirs)
         followedKapistirs.view.frame = CGRectMake(0, 0, self.containerViewFollows.frame.size.width, self.containerViewFollows.frame.size.height);
