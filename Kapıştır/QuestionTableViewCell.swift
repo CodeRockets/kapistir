@@ -11,7 +11,7 @@ import M13Checkbox
 import AZExpandableIconListView
 import Kingfisher
 
-class QuestionTableViewCell: UITableViewCell {
+class QuestionTableViewCell: UITableViewCell, UIPopoverPresentationControllerDelegate {
     
     var question: Question!
     
@@ -140,11 +140,30 @@ class QuestionTableViewCell: UITableViewCell {
         self.imgRight.addGestureRecognizer(tapGestureRecoginzerRight)
         
         self.setupDetailsActionsheet()
-        self.setupFriendLists()
+        
+        // show friend list on avatar view tap
+        let avatarViewLeftGR = UITapGestureRecognizer(target: self, action: #selector(self.showFriendListLeft))
+        let avatarViewRightGR = UITapGestureRecognizer(target: self, action: #selector(self.showFriendListRight))
+        
+        self.avatarViewLeft.addGestureRecognizer(avatarViewLeftGR)
+        self.avatarViewRight.addGestureRecognizer(avatarViewRightGR)
     }
     
-    func setupFriendLists() {
-
+    func showFriendListLeft() {
+        
+        Publisher.publish("question/showFriendsList", data: self)
+    }
+    
+    func showFriendListRight() {
+        let friendsRight = self.question.friends?
+            .filter({ (friend) -> Bool in
+                return friend.userVotedOption == .Right
+            })
+        
+        self.showFriendList(friendsRight!)
+    }
+    
+    func showFriendList(users: [User]) {
     }
     
     func setupReportAbuseActionsheet() {

@@ -16,6 +16,7 @@ class Publisher: NSObject {
     
     static func publish(message:String, data:AnyObject?) {
         if let callbacks = channels[message] {
+            print("publish \(message) : \(data)")
             let _ = callbacks.map({ $0(data) })
         }
     }

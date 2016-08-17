@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class MainTableViewController: UITableViewController {
+class MainTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
    
     var table_onboarded = true // App.UI.onboarded
     
@@ -67,6 +67,24 @@ class MainTableViewController: UITableViewController {
         }
         
         Publisher.subscibe("question/created", callback: scrollToCreatedQuestion)
+        
+        Publisher.subscibe("question/showFriendsList", callback: {
+            msg in
+            
+            
+            if let cell = msg as? QuestionTableViewCell {
+            
+                // left friends
+                let friendsLeft = cell.question.friends?
+                    .filter({ (friend) -> Bool in
+                        return friend.userVotedOption == .Left
+                    })
+            
+                print("friends left \(friendsLeft)")
+            
+                self.showFriendsList(friendsLeft!)
+            }
+        })
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -102,6 +120,30 @@ class MainTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    func showFriendsList(users: [User]) {
+        let storyBoard = UIStoryboard(name: "UserList", bundle: nil)
+        let userListViewControllerLeft = storyBoard.instantiateViewControllerWithIdentifier("UserListTableViewController") as! UserListTableViewController
+        
+        userListViewControllerLeft.users = users
+        userListViewControllerLeft.modalPresentationStyle = .Popover
+        userListViewControllerLeft.preferredContentSize = CGSizeMake((UIApplication.sharedApplication().keyWindow?.bounds.size.width)! / 2,
+                                                                     (UIApplication.sharedApplication().keyWindow?.bounds.size.height)! / 4)
+        
+        let currentCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forItem: QuestionStore.currentQuestionIndex, inSection: 0)) as! QuestionTableViewCell
+        
+        let popover = userListViewControllerLeft.popoverPresentationController!
+        popover.delegate = self
+        popover.permittedArrowDirections = .Down
+        popover.sourceView = currentCell.avatarViewLeft
+        popover.sourceRect = currentCell.avatarViewLeft.bounds
+        
+        self.presentViewController(userListViewControllerLeft, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
     }
     
     // MARK: - Table view data source
