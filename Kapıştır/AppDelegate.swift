@@ -34,6 +34,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         App.Store.loadAppSettings()
         UserStore.loadUserLocal()
         
+        if UserStore.user != nil {
+            Api.refreshToken()
+        }
+        
         return true
     }
     

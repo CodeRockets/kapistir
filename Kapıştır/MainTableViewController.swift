@@ -8,6 +8,8 @@
 
 import UIKit
 import MBProgressHUD
+import FacebookCore
+import FacebookLogin
 
 class MainTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
    
@@ -68,7 +70,7 @@ class MainTableViewController: UITableViewController, UIPopoverPresentationContr
         
         Publisher.subscibe("question/created", callback: scrollToCreatedQuestion)
         
-        Publisher.subscibe("question/showFriendsList", callback: {
+        Publisher.subscibe("question/showFriendsListLeft", callback: {
             msg in
             
             
@@ -79,12 +81,27 @@ class MainTableViewController: UITableViewController, UIPopoverPresentationContr
                     .filter({ (friend) -> Bool in
                         return friend.userVotedOption == .Left
                     })
-            
-                print("friends left \(friendsLeft)")
-            
-                self.showFriendsList(friendsLeft!)
+                
+                self.showFriendsList(friendsLeft!, avatarView: cell.avatarViewLeft)
             }
         })
+        
+        Publisher.subscibe("question/showFriendsListRight", callback: {
+            msg in
+            
+            
+            if let cell = msg as? QuestionTableViewCell {
+                
+                // left friends
+                let friendsRight = cell.question.friends?
+                    .filter({ (friend) -> Bool in
+                        return friend.userVotedOption == .Right
+                    })
+                
+                self.showFriendsList(friendsRight!, avatarView: cell.avatarViewRight)
+            }
+        })
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -122,7 +139,7 @@ class MainTableViewController: UITableViewController, UIPopoverPresentationContr
         }
     }
     
-    func showFriendsList(users: [User]) {
+    func showFriendsList(users: [User], avatarView: MDGroupAvatarView) {
         let storyBoard = UIStoryboard(name: "UserList", bundle: nil)
         let userListViewControllerLeft = storyBoard.instantiateViewControllerWithIdentifier("UserListTableViewController") as! UserListTableViewController
         
@@ -136,8 +153,8 @@ class MainTableViewController: UITableViewController, UIPopoverPresentationContr
         let popover = userListViewControllerLeft.popoverPresentationController!
         popover.delegate = self
         popover.permittedArrowDirections = .Down
-        popover.sourceView = currentCell.avatarViewLeft
-        popover.sourceRect = currentCell.avatarViewLeft.bounds
+        popover.sourceView = avatarView
+        popover.sourceRect = avatarView.bounds
         
         self.presentViewController(userListViewControllerLeft, animated: true, completion: nil)
     }

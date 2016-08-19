@@ -11,6 +11,8 @@ import Alamofire
 import SwiftyJSON
 import SAConfettiView
 import Crashlytics
+import FacebookCore
+import FacebookLogin
 
 class CreateViewController:
     UIViewController,
@@ -285,7 +287,7 @@ class CreateViewController:
                                 
                                 // image yüklemeleri tamamlandı
                                 // soruyu kaydet
-                                
+                                                                
                                 Api.saveQuestion(
                                     imageUrls: (self.uploadedImageUrls[1]!, self.uploadedImageUrls[0]!),
                                     images: (self.images[1]!, self.images[0]!),

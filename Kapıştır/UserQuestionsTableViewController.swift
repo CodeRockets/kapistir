@@ -40,7 +40,7 @@ class UserQuestionsTableViewController: UITableViewController {
             
                 
                 if self.type == "user" {
-                    print("got user questions \(questions.count)")
+                    print("got user questions \(questions)")
                     
                     self.userQuestions = questions
                     
@@ -49,7 +49,7 @@ class UserQuestionsTableViewController: UITableViewController {
                 
                 if self.type == "followed" {
                     
-                    print("got followed questions \(followed.count)")
+                    print("got followed questions \(followed)")
                     
                     self.userQuestions = followed
                     

@@ -150,20 +150,11 @@ class QuestionTableViewCell: UITableViewCell, UIPopoverPresentationControllerDel
     }
     
     func showFriendListLeft() {
-        
-        Publisher.publish("question/showFriendsList", data: self)
+        Publisher.publish("question/showFriendsListLeft", data: self)
     }
     
     func showFriendListRight() {
-        let friendsRight = self.question.friends?
-            .filter({ (friend) -> Bool in
-                return friend.userVotedOption == .Right
-            })
-        
-        self.showFriendList(friendsRight!)
-    }
-    
-    func showFriendList(users: [User]) {
+        Publisher.publish("question/showFriendsListRight", data: self)
     }
     
     func setupReportAbuseActionsheet() {

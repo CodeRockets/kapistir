@@ -15,6 +15,9 @@ class UserListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorStyle = .None
     }
 
     // MARK: - Table view data source

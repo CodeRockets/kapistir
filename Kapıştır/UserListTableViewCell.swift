@@ -16,13 +16,13 @@ class UserListTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.imgProfile.clipsToBounds = true
+        self.imgProfile.layer.cornerRadius = self.imgProfile.bounds.size.width / 2
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

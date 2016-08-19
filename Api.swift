@@ -10,6 +10,8 @@ import Foundation
 import Kingfisher
 import Alamofire
 import SwiftyJSON
+import FacebookCore
+import FacebookLogin
 
 struct Api {
     
@@ -133,6 +135,20 @@ struct Api {
                     errorCallback()
                 }
             }
+    }
+    
+    static func refreshToken() {
+        // token güncelle, gönder
+        AccessToken.refreshCurrentToken { (token, err) in
+            print("güncellenmil fb token \(token)")
+            
+            Api.saveUser(token!.authenticationToken, errorCallback: {
+                    print("fb token güncelleme hatası")
+                }, successCallback: { (loggedUser) in
+                    //
+                    print("güncellenmiş fb token kaydedildi")
+                })
+        }
     }
     
     static func saveAnswer(question: Question, answer: Answer, errorCallback: ()-> Void, successCallback: ()-> Void) {
