@@ -119,7 +119,11 @@ class UserQuestionsTableViewController: UITableViewController {
             }
             
             if self.type == "user" {
-                // delete user-created kapıştır
+                Api.deleteQuestion(question, errorCallback: {
+                    //
+                    }, successCallback: {
+                        print("kapıştır silindi")
+                    })
             }
             
             self.userQuestions.removeAtIndex(indexPath.row)

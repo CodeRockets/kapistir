@@ -341,6 +341,35 @@ struct Api {
         }
     }
     
+    static func deleteQuestion(question: Question, errorCallback: ()-> Void, successCallback: ()-> Void) {
+        
+        let params: [String: AnyObject] = [
+            "user_id": UserStore.user?.userId ?? "",
+            "question_id": question.id,
+            "client_id" : 1
+        ]
+        
+        Alamofire.request(
+            .POST,
+            App.URLs.deleteQuestion,
+            parameters: params,
+            headers: App.Keys.requestHeaders)
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    let json = JSON(data)
+                    
+                    print("delete question success \(json)")
+                    
+                    successCallback()
+                    
+                    break
+                case .Failure(_):
+                    App.UI.showServerError(completion: nil)
+                    errorCallback()
+                }
+        }
+    }
     
     static func reportQuestion(question: Question, errorCallback: ()-> Void, successCallback: ()->Void) {
         
