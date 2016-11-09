@@ -11,10 +11,28 @@ import CoreData
 import Kingfisher
 import FacebookCore
 import FacebookLogin
+import M13Checkbox
 
 class LoginViewController: UIViewController, UITextFieldDelegate, LoginButtonDelegate {
     
     var loginView: LoginButton!
+    
+    @IBOutlet weak var chkOnay: M13Checkbox!
+    
+    
+    @IBAction func onayChecked(sender: AnyObject) {
+        
+        print("\(self.chkOnay.checkState)")
+        
+        if self.chkOnay.checkState == .Checked {
+            self.loginView.hidden = false
+        }
+        else{
+            self.loginView.hidden = true
+        }
+    }
+    
+    @IBOutlet weak var viewBottom: UIView!
     
     @IBOutlet weak var lblTitle: UILabel!
     
@@ -32,7 +50,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, LoginButtonDel
         super.viewDidLoad()
         
         let xPos = (self.view.bounds.size.width - 200)/2
-        let loginFrame = CGRectMake(xPos, 210, 200, 40)
+        let loginFrame = CGRectMake(xPos, 320, 200, 40)
         
         self.loginView = LoginButton(frame: loginFrame, readPermissions: [.PublicProfile, .Email, .UserFriends])
 
@@ -40,7 +58,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, LoginButtonDel
         
         self.view.addSubview(loginView)
         
-        // UserStore.registerUpdateCallback(userSaved)
+        self.loginView.hidden = true
+        
+        self.activityIndicator.hidden = true
     }
     
     override func viewDidLayoutSubviews() {
@@ -75,7 +95,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, LoginButtonDel
     }
     
     func loginButtonWillLogin(loginButton: LoginButton!) -> Bool {
-        
         self.activityIndicator.startAnimating()
         self.activityIndicator.hidden = false
         self.loginView.hidden = true

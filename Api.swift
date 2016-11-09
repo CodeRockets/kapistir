@@ -232,6 +232,7 @@ struct Api {
                             optionBCount: 0,
                             skipCount: 0,
                             askerName: UserStore.user!.userName,
+                            askerUserId: UserStore.user!.userId,
                             askerProfileImage: UserStore.user!.profileImageUrl,
                             friends: []
                         )
@@ -403,4 +404,38 @@ struct Api {
         }
     }
 
+    
+    static func banUser(question: Question, errorCallback: ()-> Void, successCallback: ()->Void) {
+        
+        let params: [String: AnyObject] = [
+            "user_id": UserStore.user?.userId ?? App.Keys.installation,
+            "ban_user_id": question.askerUserId!,
+            "client_id" : 1
+        ]
+        
+        print("fetch params: \(params)")
+        
+        Alamofire.request(
+            .POST,
+            App.URLs.banUser,
+            parameters: params,
+            headers: App.Keys.requestHeaders)
+            .responseJSON { response in
+                switch response.result {
+                case .Success(let data):
+                    let json = JSON(data)
+                    
+                    print("block user success \(json)")
+                    
+                    successCallback()
+                    
+                    break
+                case .Failure(_):
+                    App.UI.showServerError(completion: nil)
+                    errorCallback()
+                }
+        }
+    }
+
+    
 }

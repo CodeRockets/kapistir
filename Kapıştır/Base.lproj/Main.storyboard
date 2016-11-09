@@ -1170,7 +1170,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vp4-Pu-DdY">
-                                <rect key="frame" x="172" y="280" width="30" height="30"/>
+                                <rect key="frame" x="173" y="416" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="eYT-sA-8Z3"/>
                                     <constraint firstAttribute="width" constant="30" id="jTi-Au-Oqn"/>
@@ -1187,31 +1187,105 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="baj-Ah-mVM">
-                                <rect key="frame" x="171" y="222" width="32" height="32"/>
+                                <rect key="frame" x="171" y="316" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="gfM-cP-eVh"/>
                                     <constraint firstAttribute="width" constant="32" id="jU5-Bh-UBJ"/>
                                 </constraints>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="flZ-9a-yzx">
+                                <rect key="frame" x="69" y="206" width="102" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="Nd6-f1-gwB"/>
+                                    <constraint firstAttribute="height" constant="29" id="XIq-Bz-WGF"/>
+                                    <constraint firstAttribute="width" constant="102" id="XwA-xa-581"/>
+                                </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Kullanıcı sözleşmesi">
+                                            <attributes>
+                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="12" name="HelveticaNeue-Light"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="XIq-Bz-WGF"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <segue destination="aRT-FI-sMM" kind="show" id="Znr-9N-it3"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5b-uz-Oad" customClass="M13Checkbox" customModule="M13Checkbox">
+                                <rect key="frame" x="29" y="206" width="32" height="32"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="6b1-Sz-xDN"/>
+                                    <constraint firstAttribute="width" constant="32" id="cUB-E4-MGD"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="checkmarkLineWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="boxLineWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="secondaryTintColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="secondaryCheckmarkTintColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hideBox" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="_IBStateChangeAnimation" value="Fill"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onayChecked:" destination="YXB-eX-UcL" eventType="valueChanged" id="fxo-Fa-U3u"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="'ni kabul ediyorum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXf-Ll-ZJ4">
+                                <rect key="frame" x="174" y="211" width="175" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="OwY-fu-NaB"/>
+                                    <constraint firstAttribute="height" constant="21" id="aIe-Wh-uxR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="vp4-Pu-DdY" firstAttribute="top" secondItem="1vJ-Q4-BJ0" secondAttribute="bottom" constant="104" id="7BU-Qa-UbW"/>
+                            <constraint firstItem="vp4-Pu-DdY" firstAttribute="top" secondItem="1vJ-Q4-BJ0" secondAttribute="bottom" constant="240" id="7BU-Qa-UbW"/>
+                            <constraint firstItem="s5b-uz-Oad" firstAttribute="top" secondItem="1vJ-Q4-BJ0" secondAttribute="bottom" constant="30" id="AuZ-wE-M52"/>
+                            <constraint firstItem="flZ-9a-yzx" firstAttribute="top" secondItem="1vJ-Q4-BJ0" secondAttribute="bottom" constant="30" id="F1r-Oc-BtW"/>
                             <constraint firstItem="6r8-bd-ycw" firstAttribute="leading" secondItem="vjE-yI-RsA" secondAttribute="leadingMargin" id="PwT-Ma-fve"/>
                             <constraint firstAttribute="trailing" secondItem="1vJ-Q4-BJ0" secondAttribute="trailing" constant="16" id="Rw6-I4-8uW"/>
                             <constraint firstItem="1vJ-Q4-BJ0" firstAttribute="top" secondItem="6r8-bd-ycw" secondAttribute="bottom" constant="8" id="YaN-gJ-g1A"/>
+                            <constraint firstItem="iXf-Ll-ZJ4" firstAttribute="leading" secondItem="flZ-9a-yzx" secondAttribute="trailing" constant="3" id="Ylc-Lh-KLm"/>
                             <constraint firstItem="6r8-bd-ycw" firstAttribute="trailing" secondItem="vjE-yI-RsA" secondAttribute="trailingMargin" id="Yxl-aU-OZV"/>
+                            <constraint firstItem="s5b-uz-Oad" firstAttribute="leading" secondItem="vjE-yI-RsA" secondAttribute="leading" constant="29" id="jT8-re-KMl"/>
                             <constraint firstItem="vp4-Pu-DdY" firstAttribute="centerX" secondItem="vjE-yI-RsA" secondAttribute="centerX" id="lz1-tR-7tF"/>
                             <constraint firstItem="1vJ-Q4-BJ0" firstAttribute="leading" secondItem="vjE-yI-RsA" secondAttribute="leading" constant="16" id="o4x-MM-pvs"/>
+                            <constraint firstItem="flZ-9a-yzx" firstAttribute="leading" secondItem="s5b-uz-Oad" secondAttribute="trailing" constant="8" id="oc2-O6-6iM"/>
                             <constraint firstItem="baj-Ah-mVM" firstAttribute="centerX" secondItem="vjE-yI-RsA" secondAttribute="centerX" id="qMg-Rg-KWe"/>
-                            <constraint firstItem="baj-Ah-mVM" firstAttribute="top" secondItem="1vJ-Q4-BJ0" secondAttribute="bottom" constant="46" id="sBb-Ss-vHf"/>
+                            <constraint firstItem="baj-Ah-mVM" firstAttribute="top" secondItem="1vJ-Q4-BJ0" secondAttribute="bottom" constant="140" id="sBb-Ss-vHf"/>
                             <constraint firstItem="6r8-bd-ycw" firstAttribute="top" secondItem="IRn-A1-7iO" secondAttribute="bottom" constant="66" id="v2q-n9-VxP"/>
+                            <constraint firstItem="iXf-Ll-ZJ4" firstAttribute="top" secondItem="1vJ-Q4-BJ0" secondAttribute="bottom" constant="35" id="xpE-3N-yav"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="activityIndicator" destination="baj-Ah-mVM" id="bbi-sS-ezg"/>
                         <outlet property="btnCancel" destination="vp4-Pu-DdY" id="bHw-IA-eeF"/>
+                        <outlet property="chkOnay" destination="s5b-uz-Oad" id="loh-mO-aFc"/>
                         <outlet property="lblText" destination="1vJ-Q4-BJ0" id="znu-Oa-2uZ"/>
                         <outlet property="lblTitle" destination="6r8-bd-ycw" id="g7V-YN-SxJ"/>
                         <segue destination="jFb-ZH-pKM" kind="unwind" identifier="userDidLogin" unwindAction="userDidLogIn:" id="GXa-gx-9sP"/>
@@ -1221,6 +1295,126 @@
                 <exit id="jFb-ZH-pKM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="845.5" y="1059.5"/>
+        </scene>
+        <!--Eula View Controller-->
+        <scene sceneID="a73-5s-aWa">
+            <objects>
+                <viewController id="aRT-FI-sMM" customClass="EulaViewController" customModule="Kapıs_tır" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="n9z-4n-S6s"/>
+                        <viewControllerLayoutGuide type="bottom" id="7Dn-B3-i2P"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="78V-tB-8OM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="F3O-Ij-XB4">
+                                <rect key="frame" x="20" y="70" width="335" height="577"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">TEMEL KOŞULLAR 
+
+1. Kapıştır Hizmetini kullanabilmek için en az 13 yaşında olmanız gerekmektedir.
+
+2. Kapıştır Hizmeti aracılığıyla şiddet, çıplaklık, kısmen çıplaklık içeren, ayrımcı, yasalara aykırı, ihlal edici, pornografik veya müstehcen fotoğraflar ya da başka içerikler paylaşamazsınız.
+
+3. Hesabınız aracılığıyla gerçekleşen her tür hareketin sorumluluğu size aittir ve hesabınızı, takipçilerinizi, kullanıcı adınızı veya diğer hesap haklarınızı satmayacağınızı, aktarmayacağınızı, devretmeyeceğinizi ve kullanılmasına izin vermeyeceğinizi kabul edersiniz. İşverenleri veya müşterileri adına hesap oluşturmak için açık yetkiye sahip olan kişi veya işletmeler hariç olmak üzere, Kapıştır kendinizden başka herhangi biri adına hesap oluşturmanızı yasaklar ve siz de oluşturmayacağınızı kabul edersiniz.
+
+4. Kişi veya kuruluşlara hakaret etmemelisiniz, zorbalıkta bulunmamalısınız, rahatsız edici şekilde takip etmemelisiniz, suistimal, taciz, tehdit veya taklit etmemelisiniz ve korkutmamalısınız ve Kapıştır Hizmeti aracılığıyla size veya başka herhangi birine ait gizli bilgileri (kredi kartı bilgileri, sosyal güvenlik veya diğer ulusal kimlik numaraları, halka açık olmayan telefon numaraları veya halka açık olmayan e-posta adresleri dahil, ancak bunlarla sınırlı olmamak kaydıyla) paylaşmamalısınız.
+
+5. Kapıştır Hizmetini hiçbir yasa dışı veya yetkisiz amaçla kullanamazsınız. Kapıştır Hizmetini ve İçeriklerinizi (aşağıda belirtilmektedir) kullanırken telif hakkı yasaları dahil, ancak bununla sınırlı kalmamak kaydıyla yürürlükteki tüm yasa, yönetmelik ve düzenlemelere (federal, eyalet, yerel ve bölgesel) uymayı kabul edersiniz.
+
+6. Davranışlarınız ve Kapıştır Hizmetine gönderdiğiniz veya Kapıştır Hizmetinde paylaştığınız veya gösterdiğiniz tüm veriler, metinler, dosyalar, bilgiler, kullanıcı adları, görseller, grafikler, fotoğraflar, profiller, ses ve video klipleri, sesler, müzik eserleri, özgün çalışmalar, uygulamalar, bağlantılar ve diğer içerik ve malzemeler (birlikte "İçerik" olarak anılır) tamamen sizin sorumluluğunuzdadır.
+
+7. Kapıştır Hizmetini değiştiremez ve uyarlayamazsınız veya başka bir internet sitesini, Kapıştır Hizmetiyle veya Kapıştır'la ilişkili olduğuna dair yanlış izlenim verecek şekilde değiştiremezsiniz.
+
+8. Kapıştır'ın gizli API'sine Kapıştır tarafından izin verilen yöntemler dışında başka bir yöntemle erişemezsiniz.
+
+9. Kapıştır'dan önceden yazılı izin almadan, kullanıcı adınızda domain adları veya internet adresleri (URL) kullanamazsınız.
+
+10. Solucan, virüs, casus yazılım, zararlı yazılım veya diğer her türlü zarar verici veya engelleyici kodu aktarmak dahil, Kapıştır Hizmetini, sunucularını veya Kapıştır Hizmetine bağlı ağları engelleyemez veya kesintiye uğratamazsınız. Kapıştır sayfalarının kullanıcıların tarayıcılarında veya cihazlarında gösterilme ya da görüntülenme şeklini herhangi bir şekilde değiştiren veya engelleyen içerikler ya da kodlar ekleyemezsiniz.
+
+11. Otomatik cihaz, kod, bot, örümcek, böcek veya kazıyıcı kullanmak dahil, ancak bunlarla sınırlı olmamak kaydıyla, Kapıştır Hizmetinde yetkisiz yöntemlerle hesap oluşturamazsınız.
+
+12. Başka bir kullanıcının Kapıştır Hizmetini kullanmasını veya keyfini çıkarmasını kısıtlamaya çalışmamalısınız ve bu Kullanım Koşullarının veya diğer Kapıştır koşullarının ihlal edilmesini teşvik etmemelisiniz ve buna olanak vermemelisiniz.
+
+13. Bu Kullanım Koşullarının ihlali, Kapıştır'ın tamamen kendi takdirine bağlı olarak, Kapıştır hesabınızın kapatılmasıyla sonuçlanabilir. Kapıştır Hizmetinde paylaştığınız İçeriklerin Kapıştır'ın sorumluluğunda olmadığını ve olamayacağını ve Kapıştır Hizmetini kullanırken karşı karşıya kalabileceğiniz risklerin tamamen sizin sorumluluğunuzda olduğunu kabul edersiniz. İşbu Kullanım Koşullarının özünü veya metnini herhangi bir şekilde ihlal etmeniz ya da Kapıştır'ı bir risk veya başka bir muhtemel hukuki yaptırıma maruz bırakmanız durumunda, Kapıştır Hizmetini size sunmaya kısmi olarak ya da bütünüyle son verebiliriz.
+
+
+
+GENEL ŞARTLAR 
+
+1. Kapıştır Hizmetini veya Kapıştır Hizmetine erişiminizi herhangi bir nedenle, bildirimde bulunmaksızın istediğimiz zaman ve size karşı sorumlu olmadan değiştirme veya sonlandırma hakkımız saklıdır.
+
+2. Hesabınız kapatıldıktan sonra, işbu Kullanım Koşullarında size verilen tüm lisansların ve diğer hakların geçerliliği derhal sona erer.
+
+3. İşbu Kullanım Koşullarını zaman zaman tamamen kendi takdirimize bağlı olarak değiştirme ("Güncellenmiş Koşullar") hakkımız saklıdır. Yasal veya idari nedenlerle değişiklik yapmadığımız sürece, Güncellenmiş Koşullar yürürlüğe girmeden makul bir süre önce bildirimde bulunuruz. Güncellenmiş Koşulları Kapıştır Hizmetinde yayınlayarak size bildirebileceğimizi ve Güncellenmiş Koşulların yürürlüğe girdiği tarihten sonra Kapıştır Hizmetini kullanmanızın (veya makul olarak belirttiğimiz başka bir davranışta bulunmanızın) Güncellenmiş Koşulları kabul ettiğiniz anlamına geleceğini kabul edersiniz. Bu yüzden, Kapıştır Hizmetini kullanmadan önce işbu Kullanım Koşullarını ve tüm Güncellenmiş Koşulları gözden geçirmelisiniz.Güncellenmiş Koşullar yayınlandığı tarihte veya Güncellenmiş Koşullarda belirtilen daha sonraki bir tarihte yürürlüğe girer ve o tarih itibariyle Kapıştır Hizmeti kullanımınız için geçerli olur. Güncellenmiş Koşulların yürürlüğe girmesinden önce ortaya çıkan anlaşmazlıklar, işbu Kullanım Koşullarına tabi olacaktır.
+
+4. Herhangi birinin Kapıştır Hizmetine erişmesini istediğimiz zaman herhangi bir nedenle reddetme hakkımız saklıdır.
+
+5. Herhangi bir kullanıcı adının kullanılması hakkını herhangi bir nedenle geri alma hakkımız saklıdır.
+
+6. İşbu Kullanım Koşullarını ihlal ettiğini tamamen kendi takdirimize bağlı olarak belirlediğimiz İçerikleri veya İçeriklerin bulunduğu hesapları kaldırabiliriz, düzenleyebiliriz, engelleyebiliriz ve/veya izleyebiliriz, ancak bu yönde herhangi bir yükümlülüğümüz yoktur.
+
+7. Kapıştır Hizmetinin diğer kullanıcılarıyla çevrimiçi veya çevrimdışı etkileşimleriniz tamamen sizin sorumluluğunuzdadır. Kapıştır'ın kullanıcıların davranışlarından sorumlu veya yükümlü olmadığını kabul edersiniz. Kapıştır'ın sizin ve diğer kullanıcıların arasındaki anlaşmazlıkları izleme veya bunlara müdahale etme hakkı saklıdır, ancak bu yönde herhangi bir yükümlülüğü yoktur. İçerikleri veya her türlü kişisel ya da diğer bilgileri gönderirken veya paylaşırken dahil olmak üzere, başkalarıyla etkileşimde bulunurken sağduyulu davranın.
+
+8. Kapıştır Hizmeti veya Kapıştır Hizmetinden aldığınız iletişimlerden üçüncü taraf internet sitelerine veya özelliklerine bağlantılar verilebilir. Kapıştır Hizmetindeki görüntülerde veya yorumlarda da üçüncü taraf internet sitelerine veya özelliklerine bağlantılar bulunabilir. Kapıştır Hizmetinde ayrıca bizim kontrol etmediğimiz, sahip olmadığımız ve desteklemediğimiz üçüncü taraf içerikleri de bulunmaktadır. Kapıştır Hizmetindeki işlevler Kapıştır Hizmetiyle üçüncü taraf internet siteleri veya özellikleri arasında etkileşimler olmasına izin verebilir. Buna Kapıştır Hizmetini ve Kapıştır Hizmetindeki profilinizi üçüncü taraf internet sitelerine veya özelliklerine bağlayan uygulamalar dahildir. Örneğin, Kapıştır Hizmetinde bulunan bir özellik, Kapıştır Hizmetinden İçerik paylaşmanıza veya İçeriklerinizi bir üçüncü tarafla paylaşmanıza olanak sağlayabilir ve bunlar söz konusu üçüncü tarafın hizmetinde veya uygulamasında herkese açık olarak paylaşılabilir. Bu işlevi kullanmak için genellikle hesabınıza üçüncü taraf hizmetinden giriş yapmanız gerekir ve bu işlemi yaparken karşı karşıya kalabileceğiniz riskler tamamen sizin sorumluluğunuzda olacaktır. Kapıştır'ın bu üçüncü taraf internet hizmetleri veya içerikleri üzerinde kontrolü yoktur. Kapıştır'ın bu tür üçüncü taraf hizmetlerinden veya özelliklerinden hiçbir şekilde sorumlu veya yükümlü olmadığını açıkça kabul edersiniz. Kapıştır HİZMETİ ARACILIĞIYLA BULDUĞUNUZ ÜÇÜNCÜ TARAFLARLA ARANIZDAKİ İLETİŞİM VE TİCARİ İŞLEMLER TAMAMEN SİZİNLE ÜÇÜNCÜ TARAFIN ARASINDADIR. Kapıştır Hizmetini veya Kapıştır Hizmetindeki profilinizi üçüncü taraf hizmetleriyle bağlayan uygulamaları (her biri "Uygulama" olarak anılır), tamamen kendi takdirinize bağlı olarak ve karşı karşıya kalabileceğiniz risklerin tüm sorumluluğunu alarak kullanmayı seçebilirsiniz ve söz konusu Uygulama Kapıştır Hizmetindeki profilinizle etkileşimde bulunabilir, bağlantı kurabilir veya profilinizdeki bilgileri toplayabilir ve/veya alabilir. Bu tür Uygulamaları kullanarak, aşağıdakileri kabul etmiş olursunuz: (i) Bilgi paylaşmak için bir Uygulama kullanırsanız, Kapıştır Hizmetindeki profilinizle ilgili bilgilerin paylaşılmasına izin verirsiniz, (ii) bir Uygulamayı kullanmanız, kimliğinizi belirleyen bilgilerin, Kapıştır bu bilgileri sağlamamış olsa bile, herkese açık biçimde ifşa edilmesine ve/veya sizinle ilişkilendirilmesine neden olabilir ve (iii) bir Uygulamayı kullanmanız tamamen sizin tercihinize bağlıdır ve bundan kaynaklanabilecek riskler tamamen sizin sorumluluğunuzdadır ve Kapıştır Taraflarını (aşağıda belirtilmektedir) Uygulamaya ilişkin hareketlerden doğacak zararlara karşı tazmin etmeniz gerekmektedir.
+
+9. Kapıştır Hizmetini kullanmanızdan kaynaklanan tüm veri ücretlerinden sorumlu olduğunuzu kabul edersiniz.
+
+10. Kullanıcı profilleri ve fotoğraflar dahil, ancak bunlarla sınırlı olmamak kaydıyla, Kapıştır Hizmetindeki içeriklerin otomatik yöntemlerle taranmasını, çekilmesini, ön belleğe alınmasını veya başka bir şekilde erişilmesini (Kapıştır'ın açık izniyle bir arama motoru tarafından kullanılan standart arama motoru protokollerinin veya teknolojilerinin bulması haricinde) yasaklarız.
+
+
+
+HAKLAR
+
+1. Kapıştır Hizmetinin bir bölümü reklam gelirleriyle desteklenmektedir ve Kapıştır Hizmetinde reklamlar ve tanıtımlar gösterilebilir. Kapıştır'ın bu tür reklam ve tanıtımları Kapıştır Hizmetine veya İçeriklerinize, İçeriklerinizin yanına veya İçeriklerinizle birlikte yerleştirebileceğini işbu belgede kabul edersiniz. Bu tür reklam ve tanıtımların şekli, üslubu ve kapsamı size bildirilmeden değiştirilebilir.
+
+2. Ücretli hizmetleri, sponsorlu içerikleri veya ticari iletişimleri her zaman belirtmeyebileceğimizi kabul edersiniz.
+
+3. Bu durumda: (i) Kapıştır Hizmetinde veya Kapıştır Hizmeti aracılığıyla paylaştığınız İçeriklerin sahibi olduğunuzu veya işbu Kullanım Koşullarında belirtilen hakları ve lisansları verme hakkına sahip olduğunuzu; (ii) Kapıştır Hizmetinde ve Kapıştır Hizmeti aracılığıyla İçeriklerinizin paylaşılmasının ve kullanılmasının, gizlilik hakları, kişilik hakları, telif hakları, ticari marka ve/veya diğer fikri mülkiyet hakları dahil, ancak bunlarla sınırlı olmamak kaydıyla, herhangi bir üçüncü tarafın haklarını irtikap veya ihlal etmeyeceğini; (iii) Kapıştır Hizmetinde veya Kapıştır Hizmeti aracılığıyla paylaştığınız İçerikler yüzünden ödenmesi gereken her tür telif ücretini, harçları ve diğer her tür bedeli ödemeyi kabul ettiğinizi ve (iv) bulunduğunuz yargı bölgesinde işbu Kullanım Koşullarını kabul etmek için yasal hak ve yetkiye sahip olduğunuzu beyan ve kabul edersiniz.
+
+4. Kapıştır Hizmetinde, Kapıştır'a ait veya Kapıştır tarafından lisanslı olan içerikler bulunur ("Kapıştır İçerikleri"). Kapıştır İçerikleri telif hakkı, ticari marka, patent, ticari sır ve diğer yasalar tarafından korunur ve sizinle Kapıştır arasında, Kapıştır İçeriklerinin ve Hizmetinin tüm hakları Kapıştır'a aittir. Kapıştır İçeriklerine dahil olan veya eşlik eden hiçbir telif hakkı, ticari marka, hizmet markası veya diğer mülkiyet hakları bildirilerini kaldırmayacak, değiştirmeyecek veya gizlemeyeceksiniz ve Kapıştır İçeriklerini yeniden kopyalamayacak, değiştirmeyecek, uyarlamayacak, türevlerini oluşturmayacak, çalmayacak/oynatmayacak, görüntülemeyecek, yayınlamayacak, dağıtmayacak, aktarmayacak, satmayacak, lisansını tahsis etmeyecek ve başka bir şekilde istismar etmeyeceksiniz.
+
+5. Kapıştır'ın amacı Kapıştır Hizmetinin olabildiğince kullanılabilir olmasını sağlamak olsa da, programlanmış bakım veya yükseltme, acil durum onarımları veya telekomünikasyon bağlantılarının ve/veya ekipmanının arızalanması nedenleri dahil, ancak bunlarla sınırlı olmamak kaydıyla, Kapıştır Hizmeti kesintiye uğrayabilir. Ayrıca Kapıştır'ın önceden bildirimde bulunmaksızın Kapıştır Hizmetindeki her türlü içeriği herhangi bir nedenle kaldırma hakkı saklıdır. Kapıştır Hizmetinden kaldırılan içerikler, bazı yasal yükümlülüklere uymak amacı dahil, ancak bununla sınırlı olmamak kaydıyla Kapıştır tarafından depolanmaya devam edebilir ancak geçerli bir mahkeme emri olmadan bu içerikler alınamayabilir. Buna bağlı olarak Kapıştır kendi İçeriklerinizi yedeklemenizi tavsiye eder. Başka bir deyişle, Kapıştır bir yedekleme hizmeti değildir ve Kapıştır Hizmetine İçerikleri yedeklemesi veya depolaması amacıyla güvenmeyeceğinizi kabul edersiniz. Kapıştır Hizmetlerinin değiştirilmesi, durdurulması ve sonlandırılması veya İçeriklerin kaybedilmesi durumunda Kapıştır'ın size karşı herhangi bir yükümlülüğü yoktur. Ayrıca İnternetin güvenlik ihlallerine tabi olabileceğini ve İçerik veya başka bilgileri göndermenin güvenli olmayabileceğini de kabul edersiniz.
+
+6. Kapıştır Hizmetinde paylaşılan İçeriklerden Kapıştır'ın sorumlu olmadığını ve bunları desteklemediğini kabul edersiniz. Kapıştır'ın herhangi bir İçeriği önceden tarama, izleme, düzenleme veya kaldırmaya dair herhangi bir yükümlülüğü bulunmamaktadır. İçeriklerinizin işbu Kullanım Koşullarını ihlal etmesi halinde, söz konusu İçeriklerin yasal sorumluluğu size aittir.
+
+7. Sizin ve Kapıştır'ın arasındaki hiçbir İçerik gizli ve tescilli olmayacaktır ve İçeriklerin hiçbir kullanımı veya ifşası için yükümlü olmayacağız. Kapıştır'la ilişkinizin gizli, güvene dayalı veya başka bir şekilde özel bir ilişki olmadığını ve herhangi bir İçerik göndermeye karar vermenizin, İçeriklerinize ilişkin olması dahil, Kapıştır'ı genel halka dahil olan insanlarınkinden farklı bir konuma yerleştirmediğini kabul eder ve onaylarsınız. İçeriklerinizin hiçbir bölümü Kapıştır tarafından hiçbir güvenlik yükümlülüğüne tabi olmayacaktır ve Kapıştır sunduğunuz İçeriklerin hiçbir kullanımı veya ifşası için yükümlü olmayacaktır.
+
+8. Kapıştır, özellikle talep ettiği ve bazı özel koşul, şart ve gereksinimlerin geçerli olabileceği içerikler, bilgiler, fikirler, öneriler veya diğer malzemeler dışında hiçbir içeriği, bilgiyi, fikri, öneriyi veya diğer malzemeyi kabul etmez veya dikkate almaz. Bunun nedeni, fikirlerinizin bizim bağımsız olarak geliştirdiğimiz veya geliştirmekte olduğumuz fikirlere benzer olması halinde herhangi bir yanlış anlaşılma olmasını önlemektir. Bu nedenle, Kapıştır talep edilmemiş malzemeleri veya fikirleri kabul etmemektedir ve bu şekilde aktarılan malzeme veya fikirler için sorumluluk almaz. İlkemize rağmen bize içerik, bilgi, fikir, öneri veya başka malzemeler göndermeyi seçmeniz halinde, Kapıştır'ın bu tür içerik, bilgi, fikir, öneri veya diğer malzemeleri, ürün ve hizmet geliştirme ve pazarlama dahil, ancak bunlarla sınırlı olmamak kaydıyla, herhangi bir amaç doğrultusunda size karşı hiçbir yükümlülüğü olmadan ve herhangi bir ödeme yapmadan kullanmakta serbest olduğunu kabul edersiniz.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3E-HG-yw5">
+                                <rect key="frame" x="20" y="30" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="HN5-Qf-2Mx"/>
+                                    <constraint firstAttribute="height" constant="32" id="l8M-oQ-5m5"/>
+                                </constraints>
+                                <state key="normal" image="cancel"/>
+                                <connections>
+                                    <action selector="close:" destination="aRT-FI-sMM" eventType="touchUpInside" id="bN4-Rq-Zg6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="v3E-HG-yw5" firstAttribute="top" secondItem="78V-tB-8OM" secondAttribute="top" constant="30" id="1np-al-vu8"/>
+                            <constraint firstItem="F3O-Ij-XB4" firstAttribute="top" secondItem="v3E-HG-yw5" secondAttribute="bottom" constant="8" id="LrF-Xt-4Gn"/>
+                            <constraint firstAttribute="trailing" secondItem="F3O-Ij-XB4" secondAttribute="trailing" constant="20" id="k0e-G6-cCY"/>
+                            <constraint firstItem="F3O-Ij-XB4" firstAttribute="leading" secondItem="78V-tB-8OM" secondAttribute="leading" constant="20" id="k6E-MD-MSL"/>
+                            <constraint firstItem="7Dn-B3-i2P" firstAttribute="top" secondItem="F3O-Ij-XB4" secondAttribute="bottom" constant="20" id="lkc-zn-yN6"/>
+                            <constraint firstItem="v3E-HG-yw5" firstAttribute="leading" secondItem="78V-tB-8OM" secondAttribute="leading" constant="20" id="zH0-yT-92Q"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="textView" destination="F3O-Ij-XB4" id="Bl8-Sd-mwF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="le2-H1-7cp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1304.5" y="1059.5"/>
         </scene>
     </scenes>
     <resources>

@@ -49,6 +49,7 @@
 		15E0D9361D6495750041FB01 /* UserList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15E0D9351D6495750041FB01 /* UserList.storyboard */; };
 		15E0D9381D64959E0041FB01 /* UserListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E0D9371D64959E0041FB01 /* UserListTableViewController.swift */; };
 		15E0D93A1D64961C0041FB01 /* UserListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E0D9391D64961C0041FB01 /* UserListTableViewCell.swift */; };
+		15E616971D82F52F00619665 /* EulaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E616961D82F52F00619665 /* EulaViewController.swift */; };
 		15F8F6571D495A95007D88E0 /* DOFavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */; };
 		1701CB01E1ED3277729308C8 /* Pods_Kap_s_t_rUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FAA3E346AB8C79E2F3B270 /* Pods_Kap_s_t_rUITests.framework */; };
 		96875AD61640E0644D4900AC /* Pods_Kap_s_t_r.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0765F9A3D5BFBC0D6013196D /* Pods_Kap_s_t_r.framework */; };
@@ -126,6 +127,7 @@
 		15E0D9351D6495750041FB01 /* UserList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UserList.storyboard; sourceTree = "<group>"; };
 		15E0D9371D64959E0041FB01 /* UserListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListTableViewController.swift; sourceTree = "<group>"; };
 		15E0D9391D64961C0041FB01 /* UserListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListTableViewCell.swift; sourceTree = "<group>"; };
+		15E616961D82F52F00619665 /* EulaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EulaViewController.swift; sourceTree = "<group>"; };
 		15F8F6561D495A95007D88E0 /* DOFavoriteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DOFavoriteButton.swift; path = "Kapıştır/DOFavoriteButton.swift"; sourceTree = "<group>"; };
 		173111C3E688A9CEED72E3CD /* Pods-KapıştırUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KapıştırUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KapıştırUITests/Pods-KapıştırUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		38FAA3E346AB8C79E2F3B270 /* Pods_Kap_s_t_rUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Kap_s_t_rUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,7 @@
 		1535A6AA1C953E8800897674 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				15E616961D82F52F00619665 /* EulaViewController.swift */,
 				1535A6F31C98C51700897674 /* MainViewController.swift */,
 				1535A6E41C9541E600897674 /* MainTableViewController.swift */,
 				1535A6E61C95424700897674 /* QuestionTableViewCell.swift */,
@@ -577,6 +580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E616971D82F52F00619665 /* EulaViewController.swift in Sources */,
 				1535A6FE1C98CDB800897674 /* LoginViewController.swift in Sources */,
 				1535A6DF1C953ED000897674 /* App.swift in Sources */,
 				1535A6F41C98C51700897674 /* MainViewController.swift in Sources */,
@@ -725,7 +729,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;

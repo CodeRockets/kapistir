@@ -18,6 +18,8 @@ class QuestionTableViewCell: UITableViewCell, UIPopoverPresentationControllerDel
     private var actionDetails: UIAlertController!
     
     private var actionReportAbuse: UIAlertController!
+    
+    private var actionBan: UIAlertController!
 
     @IBOutlet weak var btnFollow: UIButton! {
         didSet{
@@ -73,6 +75,8 @@ class QuestionTableViewCell: UITableViewCell, UIPopoverPresentationControllerDel
     
     @IBAction func showDetails(sender: AnyObject) {
         print("show details")
+        
+        self.setupDetailsActionsheet()
         
         App.UI.getTopMostViewController()
               .presentViewController(self.actionDetails, animated: true, completion: nil)
@@ -139,8 +143,6 @@ class QuestionTableViewCell: UITableViewCell, UIPopoverPresentationControllerDel
         self.imgLeft.addGestureRecognizer(tapGestureRecoginzerLeft)
         self.imgRight.addGestureRecognizer(tapGestureRecoginzerRight)
         
-        self.setupDetailsActionsheet()
-        
         // show friend list on avatar view tap
         let avatarViewLeftGR = UITapGestureRecognizer(target: self, action: #selector(self.showFriendListLeft))
         let avatarViewRightGR = UITapGestureRecognizer(target: self, action: #selector(self.showFriendListRight))
@@ -184,6 +186,32 @@ class QuestionTableViewCell: UITableViewCell, UIPopoverPresentationControllerDel
         }))
     }
     
+    func setupBanActionsheet() {
+        self.actionBan = UIAlertController(
+            title: "Kullanıcıyı Engelle",
+            message: self.question.askerName! + " kullanıcısını engellemek istediğinize emin misiniz?",
+            preferredStyle: .Alert)
+        
+        self.actionBan.addAction(UIAlertAction(title: "Evet", style: .Default, handler: { (action: UIAlertAction!) in
+            
+            // ban user
+            Api.banUser(self.question, errorCallback: {
+
+                }, successCallback: {
+                    //
+                    let successAlert = UIAlertController(title: "Başarılı", message: "Kullanıcı engellendi. Bundan sonra bu kullanıcının kapıştırlarını görmeyeceksiniz.", preferredStyle: .Alert)
+                    
+                    successAlert.addAction(UIAlertAction(title: "Tamam", style: .Default, handler: nil))
+                    
+                    App.UI.getTopMostViewController().presentViewController(successAlert, animated: true, completion: nil)
+            })
+        }))
+        
+        self.actionBan.addAction(UIAlertAction(title: "İptal", style: .Cancel, handler: { (action: UIAlertAction!) in
+            // cancel
+        }))
+    }
+    
     func setupDetailsActionsheet() {
         self.actionDetails = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
@@ -193,6 +221,15 @@ class QuestionTableViewCell: UITableViewCell, UIPopoverPresentationControllerDel
             print("şikayet et")
             App.UI.getTopMostViewController().presentViewController(self.actionReportAbuse, animated: true, completion: nil)
 
+        })
+        
+        
+        let actionBan = UIAlertAction(title: "Kullanıcıyı Engelle", style: .Destructive, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            print("engelle")
+            App.UI.getTopMostViewController().presentViewController(self.actionBan, animated: true, completion: nil)
+            
         })
         
         let actionShareFb = UIAlertAction(title: "Facebook'ta paylaş", style: .Default) { (alert: UIAlertAction!) -> Void in
@@ -232,12 +269,15 @@ class QuestionTableViewCell: UITableViewCell, UIPopoverPresentationControllerDel
         
         let actionDissmiss = UIAlertAction(title: "İptal", style: .Cancel, handler: nil)
         
-        self.actionDetails.addAction(actionReport)
         self.actionDetails.addAction(actionShareFb)
         self.actionDetails.addAction(actionShareTwitter)
+        
+        self.actionDetails.addAction(actionReport)
+        self.actionDetails.addAction(actionBan)
         self.actionDetails.addAction(actionDissmiss)
         
         self.setupReportAbuseActionsheet()
+        self.setupBanActionsheet()
     }
     
     func tappedLeft(gesture: UITapGestureRecognizer ) {

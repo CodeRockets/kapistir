@@ -19,6 +19,7 @@ class Question {
     var skipCount: Int
     
     var askerName: String?
+    var askerUserId: String?
     var askerProfileImage: String?
     
     var answer: Answer?
@@ -47,7 +48,7 @@ class Question {
     
     init(id: String, optionA: String, optionB: String,
          optionACount:Int, optionBCount:Int, skipCount: Int,
-         askerName: String?, askerProfileImage: String?, friends: [User]?)
+         askerName: String?, askerUserId: String?, askerProfileImage: String?, friends: [User]?)
     {
         self.id = id
         self.optionA = optionA
@@ -56,6 +57,7 @@ class Question {
         self.optionBCount = optionBCount
         self.skipCount = skipCount
         self.askerName = askerName
+        self.askerUserId = askerUserId
         self.askerProfileImage = askerProfileImage
         self.friends = friends
     }
@@ -75,6 +77,7 @@ extension Question {
         
         let askerName = response["asker_name"] as? String
         let askerProfileImage = response["asker_profile_img"] as? String
+        let askerUserId = response["user_id"] as? String
         
         var friends = [User]()
         
@@ -92,7 +95,7 @@ extension Question {
 
         let question = Question(
             id: id, optionA: optionA, optionB: optionB, optionACount: optionACount, optionBCount: optionBCount, skipCount: skipCount,
-            askerName: askerName, askerProfileImage: askerProfileImage, friends: friends
+            askerName: askerName, askerUserId: askerUserId, askerProfileImage: askerProfileImage, friends: friends
         )
         
         return question

@@ -97,6 +97,7 @@ struct App {
         static var followQuestion = "favorite"
         static var reportQuestion = "reportabuse"
         static var deleteQuestion = "question/delete"
+        static var banUser = "user/block"
     }
     
     struct Keys {
@@ -129,12 +130,15 @@ struct App {
             App.URLs.followQuestion = backendEndpoint! + App.URLs.followQuestion
             App.URLs.reportQuestion = backendEndpoint! + App.URLs.reportQuestion
             App.URLs.deleteQuestion = backendEndpoint! + App.URLs.deleteQuestion
+            App.URLs.banUser = backendEndpoint! + App.URLs.banUser
             
             App.Keys.requestHeaders = [
                 "x-voter-client-id":     App.Keys.clientId,
                 "x-voter-version":       App.Keys.version,
                 "x-voter-installation":  UIDevice.currentDevice().identifierForVendor!.UUIDString
             ]
+            
+            App.Keys.installation = UIDevice.currentDevice().identifierForVendor!.UUIDString
         
             App.UI.onboarded = true // NSUserDefaults.standardUserDefaults().valueForKey("onboarded") != nil
  
